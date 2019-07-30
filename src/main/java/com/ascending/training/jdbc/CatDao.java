@@ -1,18 +1,18 @@
 package com.ascending.training.jdbc;
 
-import com.ascending.training.model.Cats;
+import com.ascending.training.model.Cat;
 
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public class CatsDao {
+public class CatDao {
     static final String DB_URL = "jdbc:postgresql://localhost:5433/project_db";
     static final String USER = "admin";
     static final String PASS = "kkmacs213";
 
-    public List<Cats> getCats(){
-        List<Cats> cats = new ArrayList<>();
+    public List<Cat> getCats(){
+        List<Cat> cats = new ArrayList<>();
         Connection conn = null;
         Statement stmt = null;
         ResultSet rs = null;
@@ -33,10 +33,10 @@ public class CatsDao {
             while(rs.next()){
                 //Retrieve by column name
                 int id = rs.getInt("id");
-                String name = rs.getString("name");
+                String name = rs.getString("cat_name");
 
                 //Fill the object
-                Cats cat = new Cats();
+                Cat cat = new Cat();
                 cat.setId(id);
                 cat.setName(name);
                 cats.add(cat);
@@ -60,10 +60,10 @@ public class CatsDao {
         return cats;
     }
     public static void main(String[] args){
-        CatsDao catDao = new CatsDao();
-        List<Cats> cats = catDao.getCats();
+        CatDao catDao = new CatDao();
+        List<Cat> cats = catDao.getCats();
 
-        for(Cats cat : cats){
+        for(Cat cat : cats){
             System.out.println(cat.getName());
         }
     }

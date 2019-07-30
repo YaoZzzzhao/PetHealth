@@ -19,7 +19,7 @@ public class UsersDaoTest {
     public void getUsersTest(){
         UsersDao usersDao = new UsersDao();
         List<Users> users = usersDao.getUsers();
-        int expectedNumofUsers = 5;
+        int expectedNumofUsers = 1;
 
         for (Users user : users){
             System.out.print(user);

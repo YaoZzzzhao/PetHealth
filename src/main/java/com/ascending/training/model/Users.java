@@ -1,7 +1,7 @@
 package com.ascending.training.model;
 
 public class Users {
-    private long id;
+    private int id;
     private String fullname;
     private String password;
     private String email;
@@ -9,7 +9,7 @@ public class Users {
     private String pet_type;
     private int pet_num;
 
-    public long getId(){
+    public int getId(){
         return id;
     }
     public String getName(){
@@ -30,7 +30,9 @@ public class Users {
     public int getNum(){
         return pet_num;
     }
-    public void setId(long id){
+
+
+    public void setId(int id){
         this.id = id;
     }
     public void setName(String name){
