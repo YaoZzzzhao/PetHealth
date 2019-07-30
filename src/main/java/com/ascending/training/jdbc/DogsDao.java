@@ -33,6 +33,7 @@ public class DogsDao {
 
                 Dogs dog = new Dogs();
                 dog.setId(id);
+
                 dogs.add(dog);
             }
         }
@@ -52,14 +53,14 @@ public class DogsDao {
 
         return dogs;
     }
-//    public static void main(String[] args){
-//        DogsDao dogDao = new DogsDao();
-//        List<Dogs> dogs = dogDao.getDogs();
-//
-//        for(Dogs dog : dogs){
-//            System.out.println(department.getName());
-//        }
-//    }
+    public static void main(String[] args){
+        DogsDao dogDao = new DogsDao();
+        List<Dogs> dogs = dogDao.getDogs();
+
+        for(Dogs dog : dogs){
+            System.out.println(dog.getName());
+        }
+    }
 
 }
 

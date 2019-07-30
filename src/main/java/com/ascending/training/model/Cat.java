@@ -1,6 +1,6 @@
 package com.ascending.training.model;
 
-public class Cats {
+public class Cat {
     private int id;
     private int owner_id;
     private String cat_name;
@@ -91,5 +91,9 @@ public class Cats {
     public void setCalici(String i) {
 
         this.calici = i;
+    }
+
+    public String toString(){
+        return cat_name+calici+panleukopenia;
     }
 }

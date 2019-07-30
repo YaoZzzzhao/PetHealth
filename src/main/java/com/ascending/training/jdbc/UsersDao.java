@@ -10,7 +10,7 @@ import java.util.List;
 
 public class UsersDao {
 
-    private Logger logger = LoggerFactory.getLogger(this.getClass());
+//    private Logger logger = LoggerFactory.getLogger(this.getClass());
 
     static final String DB_URL = "jdbc:postgresql://localhost:5433/project_db";
     static final String USER = "admin";
@@ -31,13 +31,13 @@ public class UsersDao {
             System.out.println("Creating statement...");
             stmt = conn.createStatement();
             String sql;
-            sql = "SELECT * FROM users";
+            sql = "SELECT * FROM Users";
             rs = stmt.executeQuery(sql);
 
             //Step 4. Extract data from result set
             while(rs.next()){
                 //Retrieve by column name
-                long id = rs.getLong("id");
+                int id = rs.getInt("id");
                 String name = rs.getString("fullname");
 
                 //Fill the object
@@ -63,14 +63,14 @@ public class UsersDao {
             }
         }
 
-        logger.debug(String.format("printing user dao object size %d"),users.size());
+//        logger.debug(String.format("printing user dao object size %d"),users.size());
 
         return users;
 
     }
     public static void main(String[] args){
-        UsersDao userDao = new UsersDao();
-        List<UsersDao> users = UsersDao.getUsers();
+        UsersDao usersDao = new UsersDao();
+        List<Users> users = usersDao.getUsers();
 
         for(Users user : users){
             System.out.println(user.getName());
