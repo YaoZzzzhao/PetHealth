@@ -59,6 +59,7 @@ public class CatDao {
 
         return cats;
     }
+
     public static void main(String[] args){
         CatDao catDao = new CatDao();
         List<Cat> cats = catDao.getCats();
@@ -69,5 +70,7 @@ public class CatDao {
     }
 
 }
+
+
 
 

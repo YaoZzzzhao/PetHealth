@@ -1,5 +1,7 @@
 package com.ascending.training.model;
 
+import java.util.Objects;
+
 public class Users {
     private int id;
     private String fullname;
@@ -30,6 +32,26 @@ public class Users {
     public int getNum(){
         return pet_num;
     }
+
+
+
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Users users = (Users) o;
+        return id == users.id &&
+                fullname.equals(users.fullname);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, fullname);
+    }
+
+
+
 
 
     public void setId(int id){
