@@ -10,7 +10,7 @@ import java.util.List;
 
 public class UsersDao {
 
-//    private Logger logger = LoggerFactory.getLogger(this.getClass());
+    private Logger logger = LoggerFactory.getLogger(this.getClass());
 
     static final String DB_URL = "jdbc:postgresql://localhost:5433/project_db";
     static final String USER = "admin";
@@ -63,7 +63,13 @@ public class UsersDao {
             }
         }
 
-//        logger.debug(String.format("printing user dao object size %d"),users.size());
+        logger.trace("Trace - User size" + users.size());
+        logger.debug("Debug - User size" + users.size());
+        logger.info("Info - User size" + users.size());
+        logger.warn("Warn - User size" + users.size());
+        logger.error("Error - User size" + users.size());
+
+        logger.info("Exit the method getUsers");
 
         return users;
 

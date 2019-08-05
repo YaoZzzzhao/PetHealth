@@ -82,4 +82,12 @@ public class Dogs {
     public void setBordetella(String i) {
         this.bordetella = i;
     }
+
+    public int getDog_id() {
+        return dog_id;
+    }
+
+    public void setDog_id(int dog_id) {
+        this.dog_id = dog_id;
+    }
 }
