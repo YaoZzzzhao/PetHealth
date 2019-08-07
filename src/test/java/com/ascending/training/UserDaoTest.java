@@ -1,27 +1,27 @@
 package com.ascending.training;
 
-import com.ascending.training.jdbc.UsersDao;
-import com.ascending.training.model.Users;
+import com.ascending.training.jdbc.UserDao;
+import com.ascending.training.model.User;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
 import java.util.List;
 
-public class UsersDaoTest {
+public class UserDaoTest {
 
-    private UsersDao usersDao;
+    private UserDao usersDao;
 
     @Before
-    public void init(){ usersDao = new UsersDao();}
+    public void init(){ usersDao = new UserDao();}
 
     @Test
     public void getUsersTest(){
-        UsersDao usersDao = new UsersDao();
-        List<Users> users = usersDao.getUsers();
+        UserDao usersDao = new UserDao();
+        List<User> users = usersDao.getUsers();
         int expectedNumofUsers = 1;
 
-        for (Users user : users){
+        for (User user : users){
             System.out.print(user);
         }
 

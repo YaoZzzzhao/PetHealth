@@ -1,7 +1,7 @@
 package com.ascending.training;
 
-import com.ascending.training.jdbc.DogsDao;
-import com.ascending.training.model.Dogs;
+import com.ascending.training.jdbc.DogDao;
+import com.ascending.training.model.Dog;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -10,28 +10,28 @@ import org.slf4j.LoggerFactory;
 
 import java.util.List;
 
-public class DogsDaoTest {
+public class DogDaoTest {
 
-    private DogsDao dogsDao;
+    private DogDao dogsDao;
 
     @Before
     public void init(){
-        dogsDao = new DogsDao();
+        dogsDao = new DogDao();
     }
 
     @Test
     public void getIdofDogTest(){
-        DogsDao dogsDao = new DogsDao();
-        List<Dogs> dogs = dogsDao.getDogs();
+        DogDao dogsDao = new DogDao();
+        List<Dog> dogs = dogsDao.getDogs();
         int expectedIdofDog = 2;
 
-        for(Dogs dog : dogs) {
+        for(Dog dog : dogs) {
             System.out.print(dog);
         }
 
 //        logger.info("");
 
-        Dogs dog = dogs.get(0);
+        Dog dog = dogs.get(0);
         Assert.assertEquals(expectedIdofDog, dog.getId());
     }
 }

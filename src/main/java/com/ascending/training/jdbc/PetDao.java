@@ -1,19 +1,18 @@
 package com.ascending.training.jdbc;
 
-import com.ascending.training.model.Dogs;
-import com.ascending.training.model.Pets;
+import com.ascending.training.model.Pet;
 
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public class DogsDao {
+public class PetDao {
     static final String DB_URL = "jdbc:postgresql://localhost:5433/project_db";
     static final String USER = "admin";
     static final String PASS = "kkmacs213";
 
-    public List<Dogs> getDogs(){
-        List<Dogs> dogs = new ArrayList<>();
+    public List<Pet> getPets(){
+        List<Pet> pets = new ArrayList<>();
         Connection conn = null;
         Statement stmt = null;
         ResultSet rs = null;
@@ -21,20 +20,26 @@ public class DogsDao {
         try {
             System.out.println("Connecting to database...");
             conn = DriverManager.getConnection(DB_URL, USER, PASS);
+
             System.out.println("Creating statement...");
             stmt = conn.createStatement();
             String sql;
-            sql = "SELECT * FROM Dogs";
+            sql = "SELECT * FROM Pet";
             rs = stmt.executeQuery(sql);
 
             while(rs.next()){
                 int id = rs.getInt("id");
-                String name = rs.getString("name");
+                int owner_id = rs.getInt("owner_id");
+                String name = rs.getString("pet_name");
+                String type = rs.getString("type");
+                String color = rs.getString("color");
+                String breed = rs.getString("breed");
+                Long age = rs.getLong("age");
 
-                Dogs dog = new Dogs();
-                dog.setId(id);
-
-                dogs.add(dog);
+                Pet pet = new Pet();
+                pet.setId(id);
+                pet.setName(name);
+                pets.add(pet);
             }
         }
         catch(Exception e){
@@ -51,17 +56,16 @@ public class DogsDao {
             }
         }
 
-        return dogs;
+        return pets;
     }
     public static void main(String[] args){
-        DogsDao dogDao = new DogsDao();
-        List<Dogs> dogs = dogDao.getDogs();
+        PetDao petsDao = new PetDao();
+        List<Pet> pets = petsDao.getPets();
 
-        for(Dogs dog : dogs){
-            System.out.println(dog.getName());
+        for(Pet pet :pets ){
+            System.out.println(pet.getName());
         }
     }
 
 }
-
 

@@ -1,99 +1,112 @@
 package com.ascending.training.model;
 
-public class Cat {
-    private int id;
-    private int owner_id;
-    private String cat_name;
-    private String spay_neuter;
-    private String deworm;
-    private String panleukopenia;
-    private String rhinotracheitis;
-    private String calici;
-    private String rabies;
 
-    public int getId() {
-        return id;
+import javax.persistence.*;
+
+@Entity
+@Table(name = "cats")
+public class Cat {
+    @Id
+    @GeneratedValue(strategy= GenerationType.IDENTITY)
+    private int id;
+
+    @Column(name = "owner_id")
+    private int owner_id;
+
+    @Column(name = "cat_name")
+    private String cat_name;
+
+    @Column(name = "spay_neuter")
+    private char spay_neuter;
+
+    @Column(name ="deworm")
+    private char deworm;
+
+    @Column(name ="pan")
+    private char pan;
+
+    @Column(name = "rhi")
+    private char rhi;
+
+    @Column(name = "calici")
+    private char calici;
+
+    @Column(name = "rabies")
+    private char rabies;
+
+    public String getName() {
+        return cat_name;
+    }
+
+    public void setName(String cat_name) {
+        this.cat_name = cat_name;
     }
 
     public int getOwnerId() {
         return owner_id;
     }
 
-    public String getName() {
-        return cat_name;
+    public void setOwnerId(int owner_id) {
+        this.owner_id = owner_id;
     }
 
-    public String getSpayNeuter() {
-        return spay_neuter;
+    public int getId() {
+        return id;
     }
 
-    public String getRabies() {
-        return rabies;
+    public void setId(int id) {
+        this.id = id;
     }
 
-    public String getDeworm() {
+    public char getRhi() {
+        return rhi;
+    }
 
+    public void setRhi(char rhi) {
+        this.rhi = rhi;
+    }
+
+    public char getDeworm() {
         return deworm;
     }
 
-    public String getPanleukopenia() {
-
-        return panleukopenia;
+    public void setDeworm(char deworm) {
+        this.deworm = deworm;
     }
 
-    public String getRhinotracheitis() {
-        return rhinotracheitis;
+    public char getRabies() {
+        return rabies;
     }
 
-    public String getCalici() {
+    public void setRabies(char rabies) {
+        this.rabies = rabies;
+    }
 
+    public char getCalici() {
         return calici;
     }
 
-    public void setId(int i) {
-        this.id = i;
+    public void setCalici(char calici) {
+        this.calici = calici;
     }
 
-    public void setOwnerId(int i) {
-
-        this.owner_id = i;
+    public char getPan() {
+        return pan;
     }
 
-    public void setName(String i) {
-
-        this.cat_name = i;
+    public void setPan(char pan) {
+        this.pan = pan;
     }
 
-    public void setSpayNeuter(String i) {
-
-        this.spay_neuter = i;
+    public char getSpayNeuter() {
+        return spay_neuter;
     }
 
-    public void setRabies(String i) {
-        this.rabies = i;
+    public void setSpayNeuter(char spay_neuter) {
+        this.spay_neuter = spay_neuter;
     }
 
-    public void setDeworm(String i) {
-
-        this.deworm = i;
-    }
-
-    public void setPanleukopenia(String i) {
-
-        this.panleukopenia = i;
-    }
-
-    public void setRhinotracheitis(String i) {
-
-        this.rhinotracheitis = i;
-    }
-
-    public void setCalici(String i) {
-
-        this.calici = i;
-    }
-
-    public String toString(){
-        return cat_name+calici+panleukopenia;
-    }
+    //    public String toString(){
+//        return cat_name+calici+panleukopenia;
+//    }
 }

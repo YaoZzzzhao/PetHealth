@@ -1,16 +1,16 @@
-package com.ascending.training.jdbc;
+package com.ascending.training;
 
 
 import com.ascending.training.CatDaoTest;
-import com.ascending.training.DogsDaoTest;
-import com.ascending.training.PetsDaoTest;
-import com.ascending.training.UsersDaoTest;
+import com.ascending.training.DogDaoTest;
+import com.ascending.training.PetDaoTest;
+import com.ascending.training.UserDaoTest;
 import org.junit.runner.RunWith;
 import org.junit.runners.Suite;
 
 @RunWith(Suite.class)
 @Suite.SuiteClasses({
-        UsersDaoTest.class, PetsDaoTest.class, CatDaoTest.class, DogsDaoTest.class
+        UserDaoTest.class, PetDaoTest.class, CatDaoTest.class, DogDaoTest.class
 })
 
 public class TestAll {

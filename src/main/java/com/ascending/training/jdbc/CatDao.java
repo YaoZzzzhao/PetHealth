@@ -26,7 +26,7 @@ public class CatDao {
             System.out.println("Creating statement...");
             stmt = conn.createStatement();
             String sql;
-            sql = "SELECT * FROM Cats";
+            sql = "SELECT * FROM cats";
             rs = stmt.executeQuery(sql);
 
             //Step 4. Extract data from result set
@@ -60,13 +60,143 @@ public class CatDao {
         return cats;
     }
 
+    public int insertCat(Cat cat){
+//        List<Cat> cats = new ArrayList<>();
+        Connection conn = null;
+        Statement stmt = null;
+        int result = 0;
+
+        try {
+            //Step 2. Open a connection
+            System.out.println("Connecting to database...");
+            conn = DriverManager.getConnection(DB_URL, USER, PASS);
+
+            //Step 3. Execute a query
+            System.out.println("Inserting statement...");
+            stmt = conn.createStatement();
+            String sql;
+            sql = "insert into cats(id, owner_id, cat_name, spay_neuter, deworm, Panleukopenia, Rhinotracheitis, Calici, Rabies) values(" + cat.getId()+","+cat.getOwnerId()+",'"+cat.getName() +"',"+ "'"+cat.getSpayNeuter()+"',"+"'"+cat.getDeworm()+"'," +"'"+cat.getPan()+"'," +"'"+cat.getRhi()+"'," +"'"+cat.getCalici()+"'," +"'"+cat.getRabies()+"')";
+            result = stmt.executeUpdate(sql);
+
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+//        finally {
+//            //STEP 6: finally block used to close resources
+//            try {
+//                if (rs != null) rs.close();
+//                if (stmt != null) stmt.close();
+//                if (conn != null) conn.close();
+//            } catch (SQLException se) {
+//                se.printStackTrace();
+//            }
+//
+            return result;
+        }
+
+    public int updateCat(Cat cat){
+            Connection conn = null;
+            Statement stmt = null;
+            int result = 0;
+
+            try {
+                //Step 2. Open a connection
+                System.out.println("Connecting to database...");
+                conn = DriverManager.getConnection(DB_URL, USER, PASS);
+
+                //Step 3. Execute a query
+                System.out.println("Updating statement...");
+                stmt = conn.createStatement();
+                String sql;
+                sql = "update cats set id=cat.getId(), owner_id=cat.getOwnerId(), cat_name=cat.getName(), " +
+                        "spay_neuter=cat.getSpayNeuter(), deworm=cat.getDeworm(), Pan=cat.getPan()," +
+                        " Rhi=cat.getRhi(), Calici=cat.getCalici(), Rabies=cat.getRabies() " +
+                        "where id=cat.getId()";
+                result = stmt.executeUpdate(sql);
+
+
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+//            finally {
+//                //STEP 6: finally block used to close resources
+//                try {
+//                    if (rs != null) rs.close();
+//                    if (stmt != null) stmt.close();
+//                    if (conn != null) conn.close();
+//                } catch (SQLException se) {
+//                    se.printStackTrace();
+//                }
+
+                return result;
+            }
+
+
+
+
+    public int deleteCat(Cat cat){
+        Connection conn = null;
+        Statement stmt = null;
+        int result = 0;
+
+        try {
+            //Step 2. Open a connection
+            System.out.println("Connecting to database...");
+            conn = DriverManager.getConnection(DB_URL, USER, PASS);
+
+            //Step 3. Execute a query
+            System.out.println("Deleting statement...");
+            stmt = conn.createStatement();
+            String sql;
+            sql = "delete from cats where id = "+cat.getId()+";";
+            result = stmt.executeUpdate(sql);
+
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+//        finally {
+//            //STEP 6: finally block used to close resources
+//            try {
+//                if (rs != null) rs.close();
+//                if (stmt != null) stmt.close();
+//                if (conn != null) conn.close();
+//            } catch (SQLException se) {
+//                se.printStackTrace();
+//            }
+
+            return result;
+        }
+
+
+
+
+
     public static void main(String[] args){
         CatDao catDao = new CatDao();
-        List<Cat> cats = catDao.getCats();
+//        List<Cat> cats = catDao.getCats();
+//
+//        for(Cat cat : cats){
+//            System.out.println(cat.getName());
+//        }
 
-        for(Cat cat : cats){
-            System.out.println(cat.getName());
-        }
+
+        Cat jinmu = new Cat();
+
+//        jinmu.setOwnerId(1);
+//        jinmu.setName("Jinmu");
+//        jinmu.setDeworm('Y');
+//        jinmu.setPan('Y');
+//        jinmu.setRabies('N');
+//        jinmu.setRhi('Y');
+//        jinmu.setCalici('N');
+//        jinmu.setSpayNeuter('Y');
+//        catDao.insertCat(jinmu);
+
+        Cat del = new Cat();
+        del.setId(0);
+        catDao.deleteCat(del);
     }
 
 }

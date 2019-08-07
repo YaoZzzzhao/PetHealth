@@ -1,23 +1,24 @@
-insert into department (name, description, location) values
-('HR', 'Human Resource', 'Room 100, 450 N Washington Ave. Falls Church, VA'),
-('R&D', 'Research and Development', 'Room 101, 450 N Washington Ave. Falls Church, VA'),
-('Tech', 'Technical Support', 'Room 102, 450 N Washington Ave. Falls Church, VA'),
-('CS', 'Custom Service', 'Room 103, 450 N Washington Ave. Falls Church, VA')
+insert into
+	users(id, full_name, password, email, regis_date, pet_type, pet_num) values
+	(1, 'YaoZhao', 'kkmacs213', 'yaozhao95@gmail.com', '2019/06/21', 'CAT', 2);
+commit;
+
+insert into
+	pets(id, owner_id, pet_name, type, color, breed, age) values
+	(1,1,'Justin','CAT','white', 'Domestic Short Hair', 0.4),
+	(2,1,'Judd','CAT','black','Domestic Short Hair',0.4)
 ;
 commit;
 
-insert into employee (name, first_name, last_name, email, address, department_id) values
-('dwang', 'David', 'Wang', 'davey.wang@ascending.com', '123 Fairfax, VA 22030', 2),
-('rhang', 'Ryo', 'Hang', 'ryo.hang@ascending.com', '456 Vienna, VA 22030', 2),
-('gzhang', 'Gloria', 'Zhang', 'gloria.zhang@ascending.com', '789 Dunn Loring, VA 22030', 1),
-('xhuang', 'Xingyue', 'Huang', 'xingyue.Hang@ascending.com', '234 Merrifield, VA 22030', 3)
+insert into
+	cats(id, owner_id, cat_name, spay_neuter, deworm, Panleukopenia, Rhinotracheitis, Calici, Rabies) values
+	(1,1,'Justin','Y','Y','Y','N','N','Y'),
+	(2,1,'Judd','Y','Y','Y','N','N','Y')
 ;
 commit;
 
-insert into account (account_type, balance, employee_id) values
-('checking', 99999999.99, 1),
-('saving', 99999999.99, 2),
-('checking', 99999999.99, 3),
-('saving', 99999999.99, 4)
+insert into
+	dogs(dog_id, owner_id, dog_name, spay_neuter, Rabies,Distemper, Parvo, Adenovirus, Bordetella) values
+	(2,1,'Jinmu','Y','Y','Y','Y','Y')
 ;
 commit;

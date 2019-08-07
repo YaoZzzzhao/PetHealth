@@ -1,33 +1,33 @@
 package com.ascending.training;
 
-import com.ascending.training.jdbc.PetsDao;
-import com.ascending.training.model.Pets;
+import com.ascending.training.jdbc.PetDao;
+import com.ascending.training.model.Pet;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
 import java.util.List;
 
-public class PetsDaoTest {
+public class PetDaoTest {
 
-    private PetsDao petsDao;
+    private PetDao petsDao;
 
     @Before
     public void init(){
-        petsDao = new PetsDao();
+        petsDao = new PetDao();
     }
 
     @Test
     public void getPetNameTest(){
-        PetsDao petsDao = new PetsDao();
-        List<Pets> pets = petsDao.getPets();
+        PetDao petsDao = new PetDao();
+        List<Pet> pets = petsDao.getPets();
         String expectedNameofPet = "Judd";
 
-        for (Pets pet : pets){
+        for (Pet pet : pets){
             System.out.print(pet);
         }
 
-        Pets pet = pets.get(0);
+        Pet pet = pets.get(0);
         Assert.assertEquals(expectedNameofPet, pet.getName());
     }
 

@@ -1,6 +1,6 @@
 package com.ascending.training.jdbc;
 
-import com.ascending.training.model.Users;
+import com.ascending.training.model.User;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -8,7 +8,7 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public class UsersDao {
+public class UserDao {
 
     private Logger logger = LoggerFactory.getLogger(this.getClass());
 
@@ -16,8 +16,8 @@ public class UsersDao {
     static final String USER = "admin";
     static final String PASS = "kkmacs213";
 
-    public List<Users> getUsers(){
-        List<Users> users = new ArrayList<>();
+    public List<User> getUsers(){
+        List<User> users = new ArrayList<>();
         Connection conn = null;
         Statement stmt = null;
         ResultSet rs = null;
@@ -31,7 +31,7 @@ public class UsersDao {
             System.out.println("Creating statement...");
             stmt = conn.createStatement();
             String sql;
-            sql = "SELECT * FROM Users";
+            sql = "SELECT * FROM User";
             rs = stmt.executeQuery(sql);
 
             //Step 4. Extract data from result set
@@ -41,7 +41,7 @@ public class UsersDao {
                 String name = rs.getString("fullname");
 
                 //Fill the object
-                Users user = new Users();
+                User user = new User();
                 user.setId(id);
                 user.setName(name);
                 users.add(user);
@@ -75,10 +75,10 @@ public class UsersDao {
 
     }
     public static void main(String[] args){
-        UsersDao usersDao = new UsersDao();
-        List<Users> users = usersDao.getUsers();
+        UserDao usersDao = new UserDao();
+        List<User> users = usersDao.getUsers();
 
-        for(Users user : users){
+        for(User user : users){
             System.out.println(user.getName());
         }
     }

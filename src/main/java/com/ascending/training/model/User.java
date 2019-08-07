@@ -1,21 +1,41 @@
 package com.ascending.training.model;
 
+import javax.persistence.*;
 import java.util.Objects;
 
-public class Users {
+@Entity
+@Table(name = "users")
+
+public class User {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)     //按顺序自动产生id（只能自动产生integer）
     private int id;
-    private String fullname;
+
+    @Column(name = "full_name")
+    private String full_name;
+
+    @Column(name = "password")
     private String password;
+
+    @Column(name = "email")
     private String email;
+
+    @Column(name = "regis_date")
     private String regis_date;
+
+    @Column(name = "pet_type")
     private String pet_type;
+
+    @Column(name = "pet_num")
     private int pet_num;
+
+
 
     public int getId(){
         return id;
     }
     public String getName(){
-        return fullname;
+        return full_name;
     }
     public String getPwd(){
         return password;
@@ -40,14 +60,14 @@ public class Users {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        Users users = (Users) o;
+        User users = (User) o;
         return id == users.id &&
-                fullname.equals(users.fullname);
+                full_name.equals(users.full_name);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, fullname);
+        return Objects.hash(id, full_name);
     }
 
 
@@ -58,7 +78,7 @@ public class Users {
         this.id = id;
     }
     public void setName(String name){
-        this.fullname = name;
+        this.full_name = name;
     }
     public void setPwd(String i){
         this.password = i;

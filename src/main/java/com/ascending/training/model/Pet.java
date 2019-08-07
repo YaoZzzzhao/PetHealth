@@ -1,13 +1,35 @@
 package com.ascending.training.model;
 
-public class Pets {
+import javax.persistence.*;
+
+@Entity
+@Table(name = "pets")
+
+public class Pet {
+    @Id
+    @GeneratedValue(strategy= GenerationType.IDENTITY)
     private int id;
+
+    @Column(name = "owner_id")
     private int owner_id;
+
+    @Column(name = "pet_name")
     private String pet_name;
+
+    @Column(name = "type")
     private String type;
+
+    @Column(name = "color")
     private String color;
+
+    @Column(name = "breed")
     private String breed;
+
+    @Column(name = "age")
     private long age;
+
+
+
 
     public int getId(){
         return id;
@@ -26,7 +48,7 @@ public class Pets {
     public String getBreed(){
         return breed;
     }
-    public long age(){
+    public long getAge(){
         return age;
     }
     public void setId(int id){

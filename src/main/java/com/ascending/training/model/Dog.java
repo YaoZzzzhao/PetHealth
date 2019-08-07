@@ -1,14 +1,37 @@
 package com.ascending.training.model;
 
-public class Dogs {
+import javax.persistence.*;
+
+@Entity
+@Table(name = "dogs")
+
+public class Dog {
+    @Id
+    @GeneratedValue(strategy= GenerationType.IDENTITY)
     private int dog_id;
+
+    @Column(name = "owner_id")
     private int owner_id;
+
+    @Column(name = "dog_name")
     private String dog_name;
+
+    @Column(name = "spay_neuter")
     private String spay_neuter;
+
+    @Column(name = "rabies")
     private String rabies;
+
+    @Column(name = "distemper")
     private String distemper;
+
+    @Column(name = "parvo")
     private String parvo;
+
+    @Column(name= "adenovirus")
     private String adenovirus;
+
+    @Column(name = "bordetella")
     private String bordetella;
 
     public int getId() {
@@ -47,6 +70,9 @@ public class Dogs {
         return bordetella;
     }
 
+
+
+
     public void setId(int i) {
         this.dog_id = i;
     }
@@ -83,11 +109,11 @@ public class Dogs {
         this.bordetella = i;
     }
 
-    public int getDog_id() {
-        return dog_id;
-    }
+//    public int getDog_id() {
+//        return dog_id;
+//    }
 
-    public void setDog_id(int dog_id) {
-        this.dog_id = dog_id;
-    }
+//    public void setDog_id(int dog_id) {
+//        this.dog_id = dog_id;
+//    }
 }
