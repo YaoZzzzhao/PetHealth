@@ -7,8 +7,8 @@ import java.util.List;
 public interface DogDao {
     boolean save(Dog dog);
     boolean update(Dog dog);
-    boolean delete(int dogId);
+    boolean delete(long id);
 
     List<Dog> getDog();
-    Dog getDogById(int dogId);
+    Dog getDogById(long id);
 }

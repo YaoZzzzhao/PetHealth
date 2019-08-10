@@ -10,6 +10,6 @@ public interface PetDao {
     boolean delete(int petId);
 
     List<Pet> getPet();
-    Pet getPetById(int petId);
+    Pet getPetById(long petId);
 
 }

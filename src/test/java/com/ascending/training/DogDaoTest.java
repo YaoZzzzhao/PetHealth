@@ -2,6 +2,7 @@ package com.ascending.training;
 
 import com.ascending.training.jdbc.DogDao;
 import com.ascending.training.model.Dog;
+import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -12,17 +13,17 @@ import java.util.List;
 
 public class DogDaoTest {
 
-    private DogDao dogsDao;
+    private DogDao dogDao;
 
     @Before
     public void init(){
-        dogsDao = new DogDao();
+        dogDao = new DogDao();
     }
 
     @Test
     public void getIdofDogTest(){
-        DogDao dogsDao = new DogDao();
-        List<Dog> dogs = dogsDao.getDogs();
+        DogDao dogDao = new DogDao();
+        List<Dog> dogs = dogDao.getDogs();
         int expectedIdofDog = 2;
 
         for(Dog dog : dogs) {
@@ -33,5 +34,11 @@ public class DogDaoTest {
 
         Dog dog = dogs.get(0);
         Assert.assertEquals(expectedIdofDog, dog.getId());
+
+    }
+
+    @After
+    public void cleanUp(){
+        dogDao = null;
     }
 }

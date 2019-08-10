@@ -42,7 +42,7 @@ public class UserDao {
 
                 //Fill the object
                 User user = new User();
-                user.setId(id);
+//                user.setId(id);
                 user.setName(name);
                 users.add(user);
             }

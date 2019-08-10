@@ -14,7 +14,7 @@ create sequence user_id_seq start with 1;
 create sequence pet_id_seq start with 1;
 
 create table users(
-	id					serial not null,
+	id					SERIAL not null,
 	full_name			varchar(30) not null,
 	password			varchar(30) not null,
 	email				varchar(30),

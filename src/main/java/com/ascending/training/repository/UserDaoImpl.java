@@ -24,6 +24,7 @@ public class UserDaoImpl implements UserDao {
             session.save(user);
             transaction.commit();
         }
+
         catch(Exception e){
             isSuccess = false;
             if(transaction!=null) transaction.rollback();
@@ -79,7 +80,7 @@ public class UserDaoImpl implements UserDao {
             logger.error(e.getMessage());
         }
 
-//        logger.debug(String.format("The user %s was deleted.", user.toString()));
+        logger.debug(String.format("The user %s was deleted.", userId));
 
         return deletedCount >=1 ? true : false;             // Ternary Operaion:  value1 ? value2 : value3
     }

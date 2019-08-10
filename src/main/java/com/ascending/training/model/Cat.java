@@ -8,7 +8,7 @@ import javax.persistence.*;
 public class Cat {
     @Id
     @GeneratedValue(strategy= GenerationType.IDENTITY)
-    private int id;
+    private long id;
 
     @Column(name = "owner_id")
     private int owner_id;
@@ -50,11 +50,11 @@ public class Cat {
         this.owner_id = owner_id;
     }
 
-    public int getId() {
+    public long getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(long id) {
         this.id = id;
     }
 

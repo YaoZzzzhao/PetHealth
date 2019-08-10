@@ -37,7 +37,7 @@ public class PetDao {
                 Long age = rs.getLong("age");
 
                 Pet pet = new Pet();
-                pet.setId(id);
+//                pet.setId(id);
                 pet.setName(name);
                 pets.add(pet);
             }

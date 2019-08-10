@@ -8,10 +8,10 @@ import javax.persistence.*;
 public class Pet {
     @Id
     @GeneratedValue(strategy= GenerationType.IDENTITY)
-    private int id;
+    private long id;
 
     @Column(name = "owner_id")
-    private int owner_id;
+    private long owner_id;
 
     @Column(name = "pet_name")
     private String pet_name;
@@ -26,15 +26,15 @@ public class Pet {
     private String breed;
 
     @Column(name = "age")
-    private long age;
+    private int age;
 
 
 
 
-    public int getId(){
+    public long getId(){
         return id;
     }
-    public int getOwnerid(){
+    public long getOwnerid(){
         return owner_id;
     }
     public String getName(){
@@ -48,14 +48,17 @@ public class Pet {
     public String getBreed(){
         return breed;
     }
-    public long getAge(){
+    public int getAge(){
         return age;
     }
-    public void setId(int id){
+
+
+
+    public void setId(long id){
 
         this.id = id;
     }
-    public void setOwnerid(int id){
+    public void setOwnerid(long id){
 
         this.owner_id = id;
     }
@@ -69,7 +72,7 @@ public class Pet {
     public void setBreed(String breed){
         this.breed = breed;
     }
-    public void setAge(long age){
+    public void setAge(int age){
         this.age = age;
     }
 }

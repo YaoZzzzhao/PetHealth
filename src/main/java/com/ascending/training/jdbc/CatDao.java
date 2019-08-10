@@ -107,12 +107,24 @@ public class CatDao {
 
                 //Step 3. Execute a query
                 System.out.println("Updating statement...");
-                stmt = conn.createStatement();
+
                 String sql;
-                sql = "update cats set id=cat.getId(), owner_id=cat.getOwnerId(), cat_name=cat.getName(), " +
-                        "spay_neuter=cat.getSpayNeuter(), deworm=cat.getDeworm(), Pan=cat.getPan()," +
-                        " Rhi=cat.getRhi(), Calici=cat.getCalici(), Rabies=cat.getRabies() " +
-                        "where id=cat.getId()";
+                sql = "update cats set cat_name=?, " +
+                        "spay_neuter=?, deworm=?, Pan=?," +
+                        " Rhi=?, Calici=?, Rabies=? " +
+                        "where id=?";
+
+                PreparedStatement pstmt = conn.prepareStatement(sql);
+                pstmt.setString(1,cat.getName());
+                pstmt.setString(2,String.valueOf(cat.getSpayNeuter()));
+                pstmt.setString(3,String.valueOf(cat.getDeworm()));
+                pstmt.setString(5,String.valueOf(cat.getPan()));
+                pstmt.setString(4,String.valueOf(cat.getRhi()));
+                pstmt.setString(6,String.valueOf(cat.getCalici()));
+                pstmt.setString(7,String.valueOf(cat.getRabies()));
+                pstmt.setLong(8,cat.getId());
+
+
                 result = stmt.executeUpdate(sql);
 
 

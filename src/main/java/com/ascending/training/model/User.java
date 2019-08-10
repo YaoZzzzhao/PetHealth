@@ -1,6 +1,7 @@
 package com.ascending.training.model;
 
 import javax.persistence.*;
+import java.util.Date;
 import java.util.Objects;
 
 @Entity
@@ -9,7 +10,7 @@ import java.util.Objects;
 public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)     //按顺序自动产生id（只能自动产生integer）
-    private int id;
+    private long id;
 
     @Column(name = "full_name")
     private String full_name;
@@ -21,7 +22,7 @@ public class User {
     private String email;
 
     @Column(name = "regis_date")
-    private String regis_date;
+    private Date regis_date;
 
     @Column(name = "pet_type")
     private String pet_type;
@@ -31,7 +32,7 @@ public class User {
 
 
 
-    public int getId(){
+    public long getId(){
         return id;
     }
     public String getName(){
@@ -43,7 +44,7 @@ public class User {
     public String getEmail(){
         return email;
     }
-    public String getDate(){
+    public Date getDate(){
         return regis_date;
     }
     public String getType(){
@@ -74,7 +75,7 @@ public class User {
 
 
 
-    public void setId(int id){
+    public void setId(long id){
         this.id = id;
     }
     public void setName(String name){
@@ -86,7 +87,7 @@ public class User {
     public void setEmail(String i){
         this.email = i;
     }
-    public void setDate(String i){
+    public void setDate(Date i){
         this.regis_date = i;
     }
     public void setType(String i){

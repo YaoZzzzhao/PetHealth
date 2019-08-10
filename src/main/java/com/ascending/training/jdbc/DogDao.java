@@ -33,7 +33,7 @@ public class DogDao {
                 String name = rs.getString("name");
 
                 Dog dog = new Dog();
-                dog.setId(id);
+//                dog.setId(id);
 
                 dogs.add(dog);
             }
