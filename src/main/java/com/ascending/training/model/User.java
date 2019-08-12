@@ -2,6 +2,7 @@ package com.ascending.training.model;
 
 import javax.persistence.*;
 import java.util.Date;
+import java.util.List;
 import java.util.Objects;
 
 @Entity
@@ -29,6 +30,15 @@ public class User {
 
     @Column(name = "pet_num")
     private int pet_num;
+
+
+
+
+    @OneToMany(mappedBy = "user", cascade = CascadeType.REMOVE, fetch = FetchType.LAZY )
+    private List<Pet> pets;
+
+    public List<Pet> getPets(){return pets;}
+    public void setPets(List<Pet> p){this.pets = p;}
 
 
 

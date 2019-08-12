@@ -8,7 +8,6 @@ import org.hibernate.query.Query;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import javax.sql.rowset.spi.TransactionalWriter;
 import java.util.List;
 
 public class UserDaoImpl implements UserDao {
@@ -37,13 +36,17 @@ public class UserDaoImpl implements UserDao {
     }
 
     @Override
-    public boolean update(User user){
+    public int update(User user){
         Transaction transaction = null;
         boolean isSuccess = true;
+        int updateCount = 0;
 
         try(Session session = HibernateUtil.getSessionFactory().openSession()){
+//            Query<User> query = session.createQuery(hql);
+
             transaction = session.beginTransaction();
             session.saveOrUpdate(user);
+//            updateCount = query.executeUpdate();
             transaction.commit();
         }
         catch(Exception e){
@@ -52,16 +55,19 @@ public class UserDaoImpl implements UserDao {
             logger.error(e.getMessage());
         }
 
-        if(isSuccess) logger.debug(String.format("The user %s was updated.",user.toString()));
+        if(isSuccess) {
+            updateCount ++;
+            logger.debug(String.format("The user %s was updated.",user.toString()));
+        }
 
-        return isSuccess;
+        return updateCount;
     }
 
 
     @Override
-    public boolean delete(int userId, String userName){
+    public int delete(long userId){
 
-        String hql = "DELETE User where userId = :userId1 and userName = :userName1";
+        String hql = "DELETE User where id = :userId1";
 
         int deletedCount = 0;
         Transaction transaction = null;
@@ -69,7 +75,7 @@ public class UserDaoImpl implements UserDao {
         try(Session session = HibernateUtil.getSessionFactory().openSession()){
             Query<User> query = session.createQuery(hql);
             query.setParameter("userId1",userId);
-            query.setParameter("userName1", userName);
+//            query.setParameter("userName1", userName);
 
             transaction = session.beginTransaction();
             deletedCount = query.executeUpdate();
@@ -82,7 +88,7 @@ public class UserDaoImpl implements UserDao {
 
         logger.debug(String.format("The user %s was deleted.", userId));
 
-        return deletedCount >=1 ? true : false;             // Ternary Operaion:  value1 ? value2 : value3
+        return deletedCount ;             // Ternary Operaion:  value1 ? value2 : value3
     }
 
     @Override
@@ -96,10 +102,10 @@ public class UserDaoImpl implements UserDao {
     }
 
     @Override
-    public User getUserById(int userId){
+    public User getUserById(long userId){
         if(userId < 0) return null;
 
-        String hql = "FROM User as user where userId = :userId1";
+        String hql = "FROM User as user where id = :userId1";
 
         try(Session session = HibernateUtil.getSessionFactory().openSession()) {
             Query<User> query = session.createQuery(hql);
@@ -112,4 +118,9 @@ public class UserDaoImpl implements UserDao {
             return user;
         }
     }
+
+//    public void deleteById(long id){
+//        String hql = "Delete User where id = :id1";
+//
+//    }
 }

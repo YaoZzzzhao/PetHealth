@@ -34,6 +34,21 @@ public class Cat {
     @Column(name = "rabies")
     private char rabies;
 
+
+
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "id", referencedColumnName = "id")
+    private Pet pet;
+
+    public Pet getPet(){return pet;}
+    public void setPet(Pet p){
+        this.pet = p;
+    }
+
+
+
+
     public String getName() {
         return cat_name;
     }

@@ -1,4 +1,4 @@
-package com.ascending.training.Repository;
+package com.ascending.training.repository;
 
 import com.ascending.training.model.Dog;
 import com.ascending.training.util.HibernateUtil;

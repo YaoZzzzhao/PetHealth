@@ -1,6 +1,7 @@
 package com.ascending.training.model;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Table(name = "pets")
@@ -27,6 +28,31 @@ public class Pet {
 
     @Column(name = "age")
     private int age;
+
+
+
+    
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "id", referencedColumnName = "id")
+    private User user;
+    public User getUser(){return user;}
+    public void setUser(User u){
+        this.user = u;
+    }
+
+    @OneToMany(mappedBy = "dog", cascade = CascadeType.REMOVE, fetch = FetchType.LAZY )
+
+    private List<Dog> dogs;
+
+    public List<Dog> getDog(){return dogs;}
+    public void setDog(List<Dog> d){this.dogs = d;}
+
+    @OneToMany(mappedBy = "cat", cascade = CascadeType.REMOVE, fetch = FetchType.LAZY )
+    private List<Cat> cats;
+
+    public List<Cat> getCat(){return cats;}
+    public void setCat(List<Cat> c){this.cats = c;}
+
 
 
 

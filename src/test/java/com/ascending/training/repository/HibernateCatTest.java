@@ -1,4 +1,4 @@
-package com.ascending.training.Repository;
+package com.ascending.training.repository;
 
 import com.ascending.training.model.Cat;
 import com.ascending.training.util.HibernateUtil;
@@ -10,7 +10,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.util.List;
-import java.util.Queue;
 
 public class HibernateCatTest{
     Logger logger = LoggerFactory.getLogger(this.getClass());

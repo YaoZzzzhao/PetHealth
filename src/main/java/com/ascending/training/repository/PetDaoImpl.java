@@ -7,7 +7,6 @@ import org.hibernate.Session;
 import org.hibernate.Transaction;
 import org.hibernate.query.Query;
 import org.slf4j.LoggerFactory;
-
 import java.util.List;
 
 public class PetDaoImpl implements PetDao{
@@ -35,9 +34,10 @@ public class PetDaoImpl implements PetDao{
     }
 
     @Override
-    public boolean update(Pet pet){
+    public int update(Pet pet){
         boolean isSuccess = true;
         Transaction transaction = null;
+        int count = 0;
 
         try(Session session = HibernateUtil.getSessionFactory().openSession()){
             transaction = session.beginTransaction();
@@ -50,21 +50,24 @@ public class PetDaoImpl implements PetDao{
             logger.error(e.getMessage());
         }
 
-        if(isSuccess == true) logger.debug(String.format("The pet %s was updated!", pet.toString()));
+        if(isSuccess == true) {
+            count++;
+            logger.debug(String.format("The pet %s was updated!", pet.toString()));
+        }
 
-        return isSuccess;
+        return count;
     }
 
     @Override
-    public boolean delete(int id){
-        String hql = "Delete from Pet where id = :id";
+    public int delete(long id){
+        String hql = "Delete from Pet where id = :id1";
 
         int deleteCount = 0;
         Transaction transaction = null;
 
         try(Session session = HibernateUtil.getSessionFactory().openSession()){
             Query<Pet> query = session.createQuery(hql);
-            query.setParameter("id",id);
+            query.setParameter("id1",id);
             transaction = session.beginTransaction();
             deleteCount = query.executeUpdate();
            // session.delete(pet);
@@ -78,7 +81,7 @@ public class PetDaoImpl implements PetDao{
 
         if(deleteCount == 1) logger.debug(String.format("The pet %s was deleted!", id));
 
-        return deleteCount >=1 ? true : false;
+        return deleteCount;
     }
 
     @Override
@@ -105,7 +108,13 @@ public class PetDaoImpl implements PetDao{
             Pet pet = query.uniqueResult();
             logger.debug(pet.toString());
 
+//            final int[] p = new int[]{2};
+//            p = new int[]{3};
+
             return pet;
+
+
+
         }
     }
 }
