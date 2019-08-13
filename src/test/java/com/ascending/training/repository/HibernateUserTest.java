@@ -92,7 +92,7 @@ public class HibernateUserTest {
 
     @Test
     public void deleteTest(){
-        int expectedOfNum = userDaoImpl.delete(22 );
+        int expectedOfNum = userDaoImpl.delete(23 );
 
         assertEquals(1,expectedOfNum);
     }
@@ -100,7 +100,7 @@ public class HibernateUserTest {
     @Test
     public void getUserTest(){
         List<User> all = userDaoImpl.getUser();
-        int expectedOfNumber = 17;
+        int expectedOfNumber = 20;
 
         assertEquals(all.size(),expectedOfNumber);
     }
@@ -109,6 +109,7 @@ public class HibernateUserTest {
     public void getUserByIdTest(){
         long testId = 12;
         User test = userDaoImpl.getUserById(testId);
+        System.out.println(test.getPets());
 
         assertEquals(testId, test.getId());
     }

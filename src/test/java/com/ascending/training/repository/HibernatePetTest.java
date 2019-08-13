@@ -30,7 +30,7 @@ public class HibernatePetTest {
         a = new Pet();
 //        a.setId(30);
         a.setName(name);
-        a.setOwnerid(owner_id);
+//        a.setOwnerid(owner_id);
         a.setAge(age);
         a.setBreed(breed);
         a.setColor(color);

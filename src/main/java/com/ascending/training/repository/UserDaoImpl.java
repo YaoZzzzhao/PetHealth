@@ -105,7 +105,7 @@ public class UserDaoImpl implements UserDao {
     public User getUserById(long userId){
         if(userId < 0) return null;
 
-        String hql = "FROM User as user where id = :userId1";
+        String hql = "FROM User as user left join fetch user.pets where user.id = :userId1";
 
         try(Session session = HibernateUtil.getSessionFactory().openSession()) {
             Query<User> query = session.createQuery(hql);

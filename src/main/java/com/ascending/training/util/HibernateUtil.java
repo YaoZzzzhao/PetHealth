@@ -55,6 +55,7 @@ public class HibernateUtil {
 
             }
             catch (Exception e) {
+                e.printStackTrace();
                 logger.debug(e.getMessage());
             }
         }

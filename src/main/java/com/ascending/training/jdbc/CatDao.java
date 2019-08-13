@@ -75,7 +75,7 @@ public class CatDao {
             System.out.println("Inserting statement...");
             stmt = conn.createStatement();
             String sql;
-            sql = "insert into cats(id, owner_id, cat_name, spay_neuter, deworm, Panleukopenia, Rhinotracheitis, Calici, Rabies) values(" + cat.getId()+","+cat.getOwnerId()+",'"+cat.getName() +"',"+ "'"+cat.getSpayNeuter()+"',"+"'"+cat.getDeworm()+"'," +"'"+cat.getPan()+"'," +"'"+cat.getRhi()+"'," +"'"+cat.getCalici()+"'," +"'"+cat.getRabies()+"')";
+            sql = "insert into cats(id, owner_id, cat_name, spay_neuter, deworm, Panleukopenia, Rhinotracheitis, Calici, Rabies) values(" + cat.getId()+",'"+cat.getName() +"',"+ "'"+cat.getSpayNeuter()+"',"+"'"+cat.getDeworm()+"'," +"'"+cat.getPan()+"'," +"'"+cat.getRhi()+"'," +"'"+cat.getCalici()+"'," +"'"+cat.getRabies()+"')";
             result = stmt.executeUpdate(sql);
 
 

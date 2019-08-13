@@ -11,8 +11,8 @@ public class Pet {
     @GeneratedValue(strategy= GenerationType.IDENTITY)
     private long id;
 
-    @Column(name = "owner_id")
-    private long owner_id;
+//    @Column
+//    private long owner_id;
 
     @Column(name = "pet_name")
     private String pet_name;
@@ -33,25 +33,25 @@ public class Pet {
 
     
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "id", referencedColumnName = "id")
+    @JoinColumn(name = "owner_id", referencedColumnName = "id")
     private User user;
     public User getUser(){return user;}
     public void setUser(User u){
         this.user = u;
     }
 
-    @OneToMany(mappedBy = "dog", cascade = CascadeType.REMOVE, fetch = FetchType.LAZY )
-
-    private List<Dog> dogs;
-
-    public List<Dog> getDog(){return dogs;}
-    public void setDog(List<Dog> d){this.dogs = d;}
-
-    @OneToMany(mappedBy = "cat", cascade = CascadeType.REMOVE, fetch = FetchType.LAZY )
-    private List<Cat> cats;
-
-    public List<Cat> getCat(){return cats;}
-    public void setCat(List<Cat> c){this.cats = c;}
+//    @OneToMany(mappedBy = "pet", cascade = CascadeType.REMOVE, fetch = FetchType.LAZY )
+//
+//    private List<Dog> dogs;
+//
+//    public List<Dog> getDog(){return dogs;}
+//    public void setDog(List<Dog> d){this.dogs = d;}
+//
+//    @OneToMany(mappedBy = "pet", cascade = CascadeType.REMOVE, fetch = FetchType.LAZY )
+//    private List<Cat> cats;
+//
+//    public List<Cat> getCat(){return cats;}
+//    public void setCat(List<Cat> c){this.cats = c;}
 
 
 
@@ -60,9 +60,9 @@ public class Pet {
     public long getId(){
         return id;
     }
-    public long getOwnerid(){
-        return owner_id;
-    }
+//    public long getOwnerid(){
+//        return owner_id;
+//    }
     public String getName(){
 
         return pet_name;
@@ -84,10 +84,10 @@ public class Pet {
 
         this.id = id;
     }
-    public void setOwnerid(long id){
-
-        this.owner_id = id;
-    }
+//    public void setOwnerid(long id){
+//
+//        this.owner_id = id;
+//    }
     public void setName(String name){
 
         this.pet_name = name;

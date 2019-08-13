@@ -10,8 +10,8 @@ public class Dog {
     @GeneratedValue(strategy= GenerationType.IDENTITY)
     private long id;
 
-    @Column(name = "owner_id")
-    private long owner_id;
+//    @Column(name = "owner_id")
+//    private long owner_id;
 
     @Column(name = "dog_name")
     private String dog_name;
@@ -38,14 +38,13 @@ public class Dog {
 
 
     @ManyToOne(fetch = FetchType.LAZY )
-    @JoinColumn(name = "id", referencedColumnName = "id")
-    private Pet pet;
+    @JoinColumn(name = "owner_id",referencedColumnName = "id")
+    private User user;
 
-    public Pet getPet(){return pet;}
-    public void setPet(Pet p){
-        this.pet = p;
+    public User getUser(){return user;}
+    public void setUser(User u){
+        this.user = u;
     }
-
 
 
 
@@ -53,9 +52,9 @@ public class Dog {
         return id;
     }
 
-    public long getOwnerId() {
-        return owner_id;
-    }
+//    public long getOwnerId() {
+//        return owner_id;
+//    }
 
     public String getName() {
         return dog_name;
@@ -92,9 +91,9 @@ public class Dog {
         this.id = i;
     }
 
-    public void setOwnerId(long i) {
-        this.owner_id = i;
-    }
+//    public void setOwnerId(long i) {
+//        this.owner_id = i;
+//    }
 
     public void setName(String i) {
         this.dog_name = i;
