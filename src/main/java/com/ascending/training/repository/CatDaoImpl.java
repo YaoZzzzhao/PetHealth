@@ -1,6 +1,7 @@
 package com.ascending.training.repository;
 
 import com.ascending.training.model.Cat;
+import com.ascending.training.model.User;
 import org.slf4j.Logger;
 import com.ascending.training.util.HibernateUtil;
 import org.hibernate.Session;
@@ -34,10 +35,35 @@ public class CatDaoImpl implements CatDao{
         return isSuccess;
     }
 
-    @Override
-    public boolean update(Cat cat){
+
+    public boolean saveCat(Cat cat, User user){
         boolean isSuccess = true;
         Transaction transaction = null;
+
+        try(Session session = HibernateUtil.getSessionFactory().openSession()){
+            transaction = session.beginTransaction();
+            cat.setUser(user);
+            session.save(cat);
+            transaction.commit();
+        }
+        catch(Exception e){
+            isSuccess = false;
+            if(transaction != null ) transaction.rollback();
+            logger.error(e.getMessage());
+        }
+
+        if(isSuccess==true) logger.debug(String.format("The pet %s was saved!",cat.toString()));
+
+        return isSuccess;
+    }
+
+
+
+    @Override
+    public int update(Cat cat){
+        boolean isSuccess = true;
+        Transaction transaction = null;
+        int count = 0;
 
         try(Session session = HibernateUtil.getSessionFactory().openSession()){
             transaction = session.beginTransaction();
@@ -50,13 +76,16 @@ public class CatDaoImpl implements CatDao{
             logger.error(e.getMessage());
         }
 
-        if(isSuccess == true) logger.debug(String.format("The cat %s was updated!", cat.toString()));
+        if(isSuccess == true) {
+            count++;
+            logger.debug(String.format("The cat %s was updated!", cat.toString()));
+        }
 
-        return isSuccess;
+        return count;
     }
 
     @Override
-    public boolean delete(long id){
+    public int delete(long id){
         String hql = "Delete from Cat where id = :id";
 
         int deleteCount = 0;
@@ -78,7 +107,7 @@ public class CatDaoImpl implements CatDao{
 
         if(deleteCount == 1) logger.debug(String.format("The cat %s was deleted!", id));
 
-        return deleteCount >=1 ? true : false;
+        return deleteCount;
     }
 
     @Override
@@ -92,18 +121,26 @@ public class CatDaoImpl implements CatDao{
         }
     }
 
+//    public String toString(){
+//        return cat.age;
+//    }
+
     @Override
     public Cat getCatById(long id){
         if (id < 0 ) return null;
 
-        String sql = "From Pet pet where id = :id1";
+        String sql = "From Cat cat where id = :id1";
 
         try(Session session = HibernateUtil.getSessionFactory().openSession()){
             Query<Cat> query = session.createQuery(sql);
             query.setParameter("id1",id);
 
+
+
             Cat cat = query.uniqueResult();
             logger.debug(cat.toString());
+
+
 
             return cat;
         }

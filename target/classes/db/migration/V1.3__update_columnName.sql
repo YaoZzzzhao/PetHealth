@@ -1,1 +1,0 @@
-alter table dogs rename column dogs_id to id;

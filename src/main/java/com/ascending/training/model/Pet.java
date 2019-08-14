@@ -11,11 +11,17 @@ public class Pet {
     @GeneratedValue(strategy= GenerationType.IDENTITY)
     private long id;
 
-//    @Column
-//    private long owner_id;
 
     @Column(name = "pet_name")
     private String pet_name;
+
+    public String getType() {
+        return type;
+    }
+
+    public void setType(String type) {
+        this.type = type;
+    }
 
     @Column(name = "type")
     private String type;
@@ -29,12 +35,12 @@ public class Pet {
     @Column(name = "age")
     private int age;
 
-
-
     
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "owner_id", referencedColumnName = "id")
     private User user;
+
+
     public User getUser(){return user;}
     public void setUser(User u){
         this.user = u;
@@ -60,9 +66,7 @@ public class Pet {
     public long getId(){
         return id;
     }
-//    public long getOwnerid(){
-//        return owner_id;
-//    }
+
     public String getName(){
 
         return pet_name;

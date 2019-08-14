@@ -43,12 +43,12 @@ public class HibernateUserTest {
         userDaoImpl.save(a);
     }
 
-    @After
-    public void cleanUp(){
-        userDaoImpl.delete(a.getId());
-        userDaoImpl = null;
-        assertNull(userDaoImpl);
-    }
+//    @After
+//    public void cleanUp(){
+//        userDaoImpl.delete(a.getId());
+//        userDaoImpl = null;
+//        assertNull(userDaoImpl);
+//    }
 
 
 //    @Test

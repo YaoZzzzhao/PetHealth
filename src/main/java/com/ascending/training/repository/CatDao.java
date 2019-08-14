@@ -6,8 +6,8 @@ import java.util.List;
 
 public interface CatDao {
     boolean save(Cat cat);
-    boolean update(Cat cat);
-    boolean delete(long id);
+    int update(Cat cat);
+    int delete(long id);
 
     List<Cat> getCat();
     Cat getCatById(long id);

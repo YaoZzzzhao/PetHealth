@@ -1,6 +1,7 @@
 package com.ascending.training.repository;
 
 import com.ascending.training.model.Pet;
+import com.ascending.training.model.User;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -16,11 +17,12 @@ public class HibernatePetTest {
     Logger logger = LoggerFactory.getLogger(this.getClass());
     private Pet a;
     private PetDaoImpl petDaoImpl = new PetDaoImpl();
+    private UserDaoImpl userDaoImpl = new UserDaoImpl();
 
 
     @Before
     public void init(){
-        long owner_id = 12;
+//        long owner_id = 12;
         String type = "DOG";
         String breed = "Jinmu";
         String name = "Leave";
@@ -30,13 +32,17 @@ public class HibernatePetTest {
         a = new Pet();
 //        a.setId(30);
         a.setName(name);
-//        a.setOwnerid(owner_id);
+        a.setType(type);
+        User user = userDaoImpl.getUserById(1);
+        a.setUser(user);
+
+//        a.owner_id = a.getUser().getId();
         a.setAge(age);
         a.setBreed(breed);
         a.setColor(color);
 
 
-        petDaoImpl.save(a);
+        petDaoImpl.savePet(a,user);
     }
 
     @After
@@ -49,7 +55,7 @@ public class HibernatePetTest {
 
 
     @Test
-    public void saveTest() {
+    public void savePetTest() {
         String testName = "Leave";
 
 
@@ -58,7 +64,7 @@ public class HibernatePetTest {
 
     @Test
     public void updateTest(){
-        Pet leave = petDaoImpl.getPetById(16);
+        Pet leave = petDaoImpl.getPetById(1);
         String newBreed = "Ameng";
         leave.setBreed(newBreed);
         petDaoImpl.update(leave);
@@ -68,7 +74,7 @@ public class HibernatePetTest {
 
     @Test
     public void deleteTest(){
-        int expectedOfNum = petDaoImpl.delete(22 );
+        int expectedOfNum = petDaoImpl.delete(1 );
 
         assertEquals(1,expectedOfNum);
     }
@@ -76,14 +82,14 @@ public class HibernatePetTest {
     @Test
     public void getUserTest(){
         List<Pet> all = petDaoImpl.getPet();
-        int expectedOfNumber = 17;
+        int expectedOfNumber =5 ;
 
         assertEquals(all.size(),expectedOfNumber);
     }
 
     @Test
     public void getPetByIdTest(){
-        long testId = 12;
+        long testId = 3;
         Pet test = petDaoImpl.getPetById(testId);
 
         assertEquals(testId, test.getId());

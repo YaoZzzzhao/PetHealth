@@ -1,8 +1,6 @@
 package com.ascending.training.jdbc;
 
-import com.ascending.training.model.Cat;
 import com.ascending.training.model.Dog;
-import com.ascending.training.model.Pet;
 
 import java.sql.*;
 import java.util.ArrayList;

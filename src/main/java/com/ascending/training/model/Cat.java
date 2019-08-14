@@ -22,7 +22,7 @@ public class Cat {
     @Column(name ="deworm")
     private char deworm;
 
-    @Column(name ="pan")
+    @Column(name ="panl")
     private char pan;
 
     @Column(name = "rhi")

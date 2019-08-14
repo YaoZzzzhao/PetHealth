@@ -1,31 +1,94 @@
 package com.ascending.training.repository;
 
 import com.ascending.training.model.Cat;
-import com.ascending.training.util.HibernateUtil;
-import org.hibernate.Session;
-import org.hibernate.query.Query;
-import org.junit.Assert;
+import com.ascending.training.model.User;
+import org.junit.After;
+import org.junit.Before;
 import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
 import java.util.List;
 
-public class HibernateCatTest{
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNull;
+
+public class HibernateCatTest {
+
     Logger logger = LoggerFactory.getLogger(this.getClass());
+    private Cat a;
+    private CatDaoImpl catDaoImpl = new CatDaoImpl();
+    private UserDaoImpl userDaoImpl = new UserDaoImpl();
+
+
+    @Before
+    public void init(){
+//        long owner_id = 12;
+
+        a = new Cat();
+        User user = userDaoImpl.getUserById(1);
+//        a.setId(30);
+        a.setCalici('Y');
+//        a.setOwnerid(owner_id);
+        a.setDeworm('N');
+        a.setPan('Y');
+        a.setRhi('Y');
+        a.setRabies('Y');
+        a.setSpayNeuter('N');
+        a.setName("Ringo");
+
+
+        catDaoImpl.saveCat(a,user);
+    }
+
+    @After
+    public void cleanUp(){
+        catDaoImpl.delete(a.getId());
+        catDaoImpl = null;
+        assertNull(catDaoImpl);
+    }
+
+
 
     @Test
-    public void mappingTest(){
-        String hql = "From Cat";
-        List<Cat> cat =null;
+    public void saveTest() {
+        String testName = "Ringo";
 
-        try(Session session = HibernateUtil.getSessionFactory().openSession()){
-            Query<Cat> query = session.createQuery(hql);
-            cat = query.list();
-        }catch(Exception e){
-            logger.error(e.getMessage());
-        }
 
-        Assert.assertNotNull(cat);
+        assertEquals(testName, a.getName());
     }
+
+    @Test
+    public void updateTest(){
+        Cat rio = catDaoImpl.getCatById(8);
+        String newName = "Rio";
+        rio.setName(newName);
+        catDaoImpl.update(rio);
+
+        assertEquals(rio.getName(), newName);
+    }
+
+    @Test
+    public void deleteTest(){
+        int expectedOfNum = catDaoImpl.delete(a.getId());
+
+        assertEquals(1,expectedOfNum);
+    }
+
+    @Test
+    public void getCatTest(){
+        List<Cat> all = catDaoImpl.getCat();
+        int expectedOfNumber = 4;
+
+        assertEquals(all.size(),expectedOfNumber);
+    }
+
+    @Test
+    public void getCatByIdTest(){
+        long testId = 8;
+        Cat test = catDaoImpl.getCatById(testId);
+
+        assertEquals(testId, test.getId());
+    }
+
+
 }

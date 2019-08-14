@@ -11,6 +11,7 @@ public class CatDao {
     static final String USER = "admin";
     static final String PASS = "kkmacs213";
 
+
     public List<Cat> getCats(){
         List<Cat> cats = new ArrayList<>();
         Connection conn = null;

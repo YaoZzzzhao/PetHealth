@@ -1,6 +1,8 @@
 package com.ascending.training.repository;
 
 import com.ascending.training.model.Dog;
+import com.ascending.training.model.Pet;
+import com.ascending.training.model.User;
 import org.slf4j.Logger;
 import com.ascending.training.util.HibernateUtil;
 import org.hibernate.Session;
@@ -34,10 +36,36 @@ public class DogDaoImpl implements DogDao{
         return isSuccess;
     }
 
-    @Override
-    public boolean update(Dog dog){
+
+    public boolean saveDog(Dog dog, User user){
         boolean isSuccess = true;
         Transaction transaction = null;
+
+        try(Session session = HibernateUtil.getSessionFactory().openSession()){
+            transaction = session.beginTransaction();
+            dog.setUser(user);
+            session.save(dog);
+            transaction.commit();
+        }
+        catch(Exception e){
+            isSuccess = false;
+            if(transaction != null ) transaction.rollback();
+            logger.error(e.getMessage());
+        }
+
+        if(isSuccess==true) logger.debug(String.format("The pet %s was saved!",dog.toString()));
+
+        return isSuccess;
+    }
+
+
+
+
+    @Override
+    public int update(Dog dog){
+        boolean isSuccess = true;
+        Transaction transaction = null;
+        int count = 0;
 
         try(Session session = HibernateUtil.getSessionFactory().openSession()){
             transaction = session.beginTransaction();
@@ -50,13 +78,16 @@ public class DogDaoImpl implements DogDao{
             logger.error(e.getMessage());
         }
 
-        if(isSuccess == true) logger.debug(String.format("The dog %s was updated!", dog.toString()));
+        if(isSuccess == true) {
+            count ++;
+            logger.debug(String.format("The dog %s was updated!", dog.toString()));
+        }
 
-        return isSuccess;
+        return count;
     }
 
     @Override
-    public boolean delete(long id){
+    public int delete(long id){
         String hql = "Delete from Dog where id = :id";
 
         int deleteCount = 0;
@@ -77,7 +108,7 @@ public class DogDaoImpl implements DogDao{
 
         if(deleteCount == 1) logger.debug(String.format("The dog %s was deleted!", id));
 
-        return deleteCount >=1 ? true : false;
+        return deleteCount;
     }
 
     @Override

@@ -1,6 +1,7 @@
 package com.ascending.training.repository;
 
 import com.ascending.training.model.Pet;
+import com.ascending.training.model.User;
 import org.slf4j.Logger;
 import com.ascending.training.util.HibernateUtil;
 import org.hibernate.Session;
@@ -32,6 +33,30 @@ public class PetDaoImpl implements PetDao{
 
         return isSuccess;
     }
+
+
+    public boolean savePet(Pet pet, User user){
+        boolean isSuccess = true;
+        Transaction transaction = null;
+
+        try(Session session = HibernateUtil.getSessionFactory().openSession()){
+            transaction = session.beginTransaction();
+            pet.setUser(user);
+            session.save(pet);
+            transaction.commit();
+        }
+        catch(Exception e){
+            isSuccess = false;
+            if(transaction != null ) transaction.rollback();
+            logger.error(e.getMessage());
+        }
+
+        if(isSuccess==true) logger.debug(String.format("The pet %s was saved!",pet.toString()));
+
+        return isSuccess;
+    }
+
+
 
     @Override
     public int update(Pet pet){
