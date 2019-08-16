@@ -113,6 +113,4 @@ public class HibernateUserTest {
 
         assertEquals(testId, test.getId());
     }
-
-
 }
