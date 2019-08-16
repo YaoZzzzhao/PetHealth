@@ -13,25 +13,25 @@ public class Cat {
 //    @Column(name = "owner_id")
 //    private int owner_id;
 
-    @Column(name = "cat_name")
+    @Column(name = "name")
     private String cat_name;
 
-    @Column(name = "spay_neuter")
+    @Column(name = "Spay_neuter")
     private char spay_neuter;
 
-    @Column(name ="deworm")
+    @Column(name ="Deworm")
     private char deworm;
 
-    @Column(name ="panl")
+    @Column(name ="Panl")
     private char pan;
 
-    @Column(name = "rhi")
+    @Column(name = "Rhi")
     private char rhi;
 
-    @Column(name = "calici")
+    @Column(name = "Calici")
     private char calici;
 
-    @Column(name = "rabies")
+    @Column(name = "Rabies")
     private char rabies;
 
 

@@ -25,7 +25,7 @@ public class HibernateCatTest {
 //        long owner_id = 12;
 
         a = new Cat();
-        User user = userDaoImpl.getUserById(1);
+        User user = userDaoImpl.getUserById(2);
 //        a.setId(30);
         a.setCalici('Y');
 //        a.setOwnerid(owner_id);
@@ -34,24 +34,24 @@ public class HibernateCatTest {
         a.setRhi('Y');
         a.setRabies('Y');
         a.setSpayNeuter('N');
-        a.setName("Ringo");
+        a.setName("Kite");
 
 
         catDaoImpl.saveCat(a,user);
     }
 
-    @After
-    public void cleanUp(){
-        catDaoImpl.delete(a.getId());
-        catDaoImpl = null;
-        assertNull(catDaoImpl);
-    }
+//    @After
+//    public void cleanUp(){
+//        catDaoImpl.delete(a.getId());
+//        catDaoImpl = null;
+//        assertNull(catDaoImpl);
+//    }
 
 
 
     @Test
     public void saveTest() {
-        String testName = "Ringo";
+        String testName = "Kite";
 
 
         assertEquals(testName, a.getName());

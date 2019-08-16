@@ -1,7 +1,6 @@
 package com.ascending.training.repository;
 
 import com.ascending.training.model.Dog;
-import com.ascending.training.model.Pet;
 import com.ascending.training.model.User;
 import org.slf4j.Logger;
 import com.ascending.training.util.HibernateUtil;
@@ -31,7 +30,7 @@ public class DogDaoImpl implements DogDao{
             logger.error(e.getMessage());
         }
 
-        if(isSuccess==true) logger.debug(String.format("The dog %s was saved!",dog.toString()));
+        if(isSuccess) logger.debug(String.format("The dog %s was saved!",dog.toString()));
 
         return isSuccess;
     }
@@ -53,7 +52,7 @@ public class DogDaoImpl implements DogDao{
             logger.error(e.getMessage());
         }
 
-        if(isSuccess==true) logger.debug(String.format("The pet %s was saved!",dog.toString()));
+        if(isSuccess) logger.debug(String.format("The pet %s was saved!",dog.toString()));
 
         return isSuccess;
     }
@@ -78,7 +77,7 @@ public class DogDaoImpl implements DogDao{
             logger.error(e.getMessage());
         }
 
-        if(isSuccess == true) {
+        if(isSuccess) {
             count ++;
             logger.debug(String.format("The dog %s was updated!", dog.toString()));
         }

@@ -23,9 +23,9 @@ public class HibernatePetTest {
     @Before
     public void init(){
 //        long owner_id = 12;
-        String type = "DOG";
+        String type = "CAT";
         String breed = "Jinmu";
-        String name = "Leave";
+        String name = "YYzz";
         int age = 3;
         String color = "Orange";
 
@@ -33,7 +33,7 @@ public class HibernatePetTest {
 //        a.setId(30);
         a.setName(name);
         a.setType(type);
-        User user = userDaoImpl.getUserById(1);
+        User user = userDaoImpl.getUserById(2);
         a.setUser(user);
 
 //        a.owner_id = a.getUser().getId();
@@ -45,18 +45,18 @@ public class HibernatePetTest {
         petDaoImpl.savePet(a,user);
     }
 
-    @After
-    public void cleanUp(){
-        petDaoImpl.delete(a.getId());
-        petDaoImpl = null;
-        assertNull(petDaoImpl);
-    }
+//    @After
+//    public void cleanUp(){
+//        petDaoImpl.delete(a.getId());
+//        petDaoImpl = null;
+//        assertNull(petDaoImpl);
+//    }
 
 
 
     @Test
     public void savePetTest() {
-        String testName = "Leave";
+        String testName = "YYzz";
 
 
         assertEquals(testName, a.getName());

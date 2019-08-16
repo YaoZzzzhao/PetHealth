@@ -29,7 +29,7 @@ public class PetDaoImpl implements PetDao{
             logger.error(e.getMessage());
         }
 
-        if(isSuccess==true) logger.debug(String.format("The pet %s was saved!",pet.toString()));
+        if(isSuccess) logger.debug(String.format("The pet %s was saved!",pet.toString()));
 
         return isSuccess;
     }
@@ -51,7 +51,7 @@ public class PetDaoImpl implements PetDao{
             logger.error(e.getMessage());
         }
 
-        if(isSuccess==true) logger.debug(String.format("The pet %s was saved!",pet.toString()));
+        if(isSuccess) logger.debug(String.format("The pet %s was saved!",pet.toString()));
 
         return isSuccess;
     }
@@ -75,7 +75,7 @@ public class PetDaoImpl implements PetDao{
             logger.error(e.getMessage());
         }
 
-        if(isSuccess == true) {
+        if(isSuccess) {
             count++;
             logger.debug(String.format("The pet %s was updated!", pet.toString()));
         }
@@ -133,13 +133,7 @@ public class PetDaoImpl implements PetDao{
             Pet pet = query.uniqueResult();
             logger.debug(pet.toString());
 
-//            final int[] p = new int[]{2};
-//            p = new int[]{3};
-
             return pet;
-
-
-
         }
     }
 }

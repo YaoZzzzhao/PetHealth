@@ -118,9 +118,4 @@ public class UserDaoImpl implements UserDao {
             return user;
         }
     }
-
-//    public void deleteById(long id){
-//        String hql = "Delete User where id = :id1";
-//
-//    }
 }

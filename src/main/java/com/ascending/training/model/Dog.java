@@ -13,25 +13,25 @@ public class Dog {
 //    @Column(name = "owner_id")
 //    private long owner_id;
 
-    @Column(name = "dog_name")
+    @Column(name = "name")
     private String dog_name;
 
-    @Column(name = "spay_neuter")
+    @Column(name = "Spay_neuter")
     private String spay_neuter;
 
-    @Column(name = "rabies")
+    @Column(name = "Rabies")
     private String rabies;
 
-    @Column(name = "distemper")
+    @Column(name = "Distemper")
     private String distemper;
 
-    @Column(name = "parvo")
+    @Column(name = "Parvo")
     private String parvo;
 
-    @Column(name= "adenovirus")
+    @Column(name= "Adenovirus")
     private String adenovirus;
 
-    @Column(name = "bordetella")
+    @Column(name = "Bordetella")
     private String bordetella;
 
 

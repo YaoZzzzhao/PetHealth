@@ -76,7 +76,7 @@ public class CatDaoImpl implements CatDao{
             logger.error(e.getMessage());
         }
 
-        if(isSuccess == true) {
+        if(isSuccess) {
             count++;
             logger.debug(String.format("The cat %s was updated!", cat.toString()));
         }

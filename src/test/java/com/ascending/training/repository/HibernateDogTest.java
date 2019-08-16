@@ -25,7 +25,7 @@ public class HibernateDogTest {
 //        long owner_id = 12;
 
         a = new Dog();
-        User user = userDaoImpl.getUserById(1);
+        User user = userDaoImpl.getUserById(2);
 //        a.setId(30);
         a.setAdenovirus("N");
         a.setName("Jinmu");

@@ -12,7 +12,7 @@ public class Pet {
     private long id;
 
 
-    @Column(name = "pet_name")
+    @Column(name = "name")
     private String pet_name;
 
     public String getType() {

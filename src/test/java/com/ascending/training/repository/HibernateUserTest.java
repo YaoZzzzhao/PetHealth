@@ -24,15 +24,15 @@ public class HibernateUserTest {
     public void init(){
 //        UserDao userDao = new UserDao();
 
-        String fullname = "Kyo";
+        String fullname = "Rui";
         String pwd = "122333.0";
         String email = "Kyo@gmail.com";
         Date regisDate = new Date(119,7,9);
-        String petType = "DOG";
+        String petType = "CAT";
         int petNum = 1;
 
         a = new User();
-        a.setId(30);
+//        a.setId(30);
         a.setName(fullname);
         a.setPwd(pwd);
         a.setDate(regisDate);
@@ -82,7 +82,7 @@ public class HibernateUserTest {
 
     @Test
     public void updateTest(){
-        User kyo = userDaoImpl.getUserById(16);
+        User kyo = userDaoImpl.getUserById(9);
         String newEmail = "Leave@gmail.com";
         kyo.setEmail(newEmail);
         userDaoImpl.update(kyo);
@@ -92,7 +92,7 @@ public class HibernateUserTest {
 
     @Test
     public void deleteTest(){
-        int expectedOfNum = userDaoImpl.delete(23 );
+        int expectedOfNum = userDaoImpl.delete(9 );
 
         assertEquals(1,expectedOfNum);
     }
@@ -100,14 +100,14 @@ public class HibernateUserTest {
     @Test
     public void getUserTest(){
         List<User> all = userDaoImpl.getUser();
-        int expectedOfNumber = 20;
+        int expectedOfNumber = 2;
 
         assertEquals(all.size(),expectedOfNumber);
     }
 
     @Test
     public void getUserByIdTest(){
-        long testId = 12;
+        long testId = 1;
         User test = userDaoImpl.getUserById(testId);
         System.out.println(test.getPets());
 
