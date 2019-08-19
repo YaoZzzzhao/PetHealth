@@ -9,10 +9,8 @@ import org.junit.runner.RunWith;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
-import org.springframework.test.context.junit4.statements.SpringRepeat;
 
 import java.util.Date;
 
@@ -27,12 +25,12 @@ public class UserServiceTest {
     @Autowired
     private UserService userService;
 
-    private User a = new User();
+    private User a;
 
     @Before
     public void init(){
-//        UserDao userDao = new UserDao();
 
+        a = new User();
         String fullname = "Jaygee";
         String pwd = "122333.0";
         String email = "Kyo@gmail.com";
@@ -64,13 +62,8 @@ public class UserServiceTest {
 
     @Test
     public void saveTest() {
-        // long id = 2;
 
-
-//        UserDaoImpl userDaoImpl = new UserDaoImpl();
         String pwd = "122333.0";
-
-//        String
 
         assertEquals(pwd, a.getPwd());
     }
