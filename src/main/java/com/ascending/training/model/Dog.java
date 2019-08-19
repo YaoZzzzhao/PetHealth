@@ -14,36 +14,36 @@ public class Dog {
 //    private long owner_id;
 
     @Column(name = "name")
-    private String dog_name;
+    private String name;
 
     @Column(name = "Spay_neuter")
-    private String spay_neuter;
+    private char spay_neuter;
 
     @Column(name = "Rabies")
-    private String rabies;
+    private char rabies;
 
     @Column(name = "Distemper")
-    private String distemper;
+    private char distemper;
 
     @Column(name = "Parvo")
-    private String parvo;
+    private char parvo;
 
     @Column(name= "Adenovirus")
-    private String adenovirus;
+    private char adenovirus;
 
     @Column(name = "Bordetella")
-    private String bordetella;
+    private char bordetella;
 
 
 
 
     @ManyToOne(fetch = FetchType.LAZY )
-    @JoinColumn(name = "owner_id",referencedColumnName = "id")
-    private User user;
+    @JoinColumn(name = "pet_id",referencedColumnName = "id")
+    private Pet pet;
 
-    public User getUser(){return user;}
-    public void setUser(User u){
-        this.user = u;
+    public Pet getPet(){return pet;}
+    public void setPet(Pet u){
+        this.pet = u;
     }
 
 
@@ -57,69 +57,69 @@ public class Dog {
 //    }
 
     public String getName() {
-        return dog_name;
+        return name;
     }
 
-    public String getSpayNeuter() {
+    public char getSpayNeuter() {
         return spay_neuter;
     }
 
-    public String getRabies() {
+    public char getRabies() {
         return rabies;
     }
 
-    public String getDistemper() {
+    public char getDistemper() {
         return distemper;
     }
 
-    public String getParvo() {
+    public char getParvo() {
         return parvo;
     }
 
-    public String getAdenovirus() {
+    public char getAdenovirus() {
         return adenovirus;
     }
 
-    public String getBordetella() {
+    public char getBordetella() {
         return bordetella;
     }
 
 
 
 
-    public void setId(long i) {
-        this.id = i;
-    }
+//    public void setId(long i) {
+//        this.id = i;
+//    }
 
 //    public void setOwnerId(long i) {
 //        this.owner_id = i;
 //    }
 
     public void setName(String i) {
-        this.dog_name = i;
+        this.name = i;
     }
 
-    public void setSpayNeuter(String i) {
+    public void setSpayNeuter(char i) {
         this.spay_neuter = i;
     }
 
-    public void setRabies(String i) {
+    public void setRabies(char i) {
         this.rabies = i;
     }
 
-    public void setDistemper(String i) {
+    public void setDistemper(char i) {
         this.distemper = i;
     }
 
-    public void setParvo(String i) {
+    public void setParvo(char i) {
         this.parvo = i;
     }
 
-    public void setAdenovirus(String i) {
+    public void setAdenovirus(char i) {
         this.adenovirus = i;
     }
 
-    public void setBordetella(String i) {
+    public void setBordetella(char i) {
         this.bordetella = i;
     }
 

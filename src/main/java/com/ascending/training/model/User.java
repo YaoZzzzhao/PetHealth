@@ -37,20 +37,10 @@ public class User {
     @OneToMany(mappedBy = "user", cascade = CascadeType.REMOVE, fetch = FetchType.LAZY)
     private List<Pet> pets;
 
-    public List<Pet> getPets(){return pets;}
-    public void setPets(List<Pet> p){this.pets = p;}
+    public List<Pet> getPet(){return pets;}
+    public void setPet(List<Pet> p){this.pets = p;}
 
-    @OneToMany(mappedBy = "user", cascade = CascadeType.REMOVE, fetch = FetchType.LAZY)
-    private List<Cat> cats;
 
-    public List<Cat> getCats(){return cats;}
-    public void setCats(List<Cat> c){this.cats = c;}
-
-    @OneToMany(mappedBy = "user", cascade = CascadeType.REMOVE, fetch = FetchType.LAZY)
-    private List<Dog> dogs;
-
-    public List<Dog> getDogs(){return dogs;}
-    public void setDogs(List<Dog> d){this.dogs = d;}
 
 
 
@@ -118,4 +108,5 @@ public class User {
     public void setNum(int i){
         this.pet_num = i;
     }
+
 }

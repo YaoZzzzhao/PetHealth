@@ -1,7 +1,7 @@
 package com.ascending.training.repository;
 
 import com.ascending.training.model.Dog;
-import com.ascending.training.model.User;
+import com.ascending.training.model.Pet;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -17,7 +17,7 @@ public class HibernateDogTest {
     Logger logger = LoggerFactory.getLogger(this.getClass());
     private Dog a;
     private DogDaoImpl dogDaoImpl = new DogDaoImpl();
-    private UserDaoImpl userDaoImpl = new UserDaoImpl();
+    private PetDaoImpl petDaoImpl = new PetDaoImpl();
 
 
     @Before
@@ -25,27 +25,27 @@ public class HibernateDogTest {
 //        long owner_id = 12;
 
         a = new Dog();
-        User user = userDaoImpl.getUserById(2);
+        Pet pet = petDaoImpl.getPetById(2);
 //        a.setId(30);
-        a.setAdenovirus("N");
+        a.setAdenovirus('N');
         a.setName("Jinmu");
 //        a.setOwnerid(owner_id);
-        a.setBordetella("Y");
-        a.setDistemper("Y");
-        a.setParvo("Y");
-        a.setRabies("N");
-        a.setSpayNeuter("Y");
+        a.setBordetella('N');
+        a.setDistemper('Y');
+        a.setParvo('Y');
+        a.setRabies('N');
+        a.setSpayNeuter('N');
 
 
-        dogDaoImpl.saveDog(a,user);
+        dogDaoImpl.saveDog(a,pet);
     }
 
-    @After
-    public void cleanUp(){
-        dogDaoImpl.delete(a.getId());
-        dogDaoImpl = null;
-        assertNull(dogDaoImpl);
-    }
+//    @After
+//    public void cleanUp(){
+//        dogDaoImpl.delete(a.getId());
+//        dogDaoImpl = null;
+//        assertNull(dogDaoImpl);
+//    }
 
 
 
@@ -59,7 +59,7 @@ public class HibernateDogTest {
 
     @Test
     public void updateTest(){
-        Dog leave = dogDaoImpl.getDogById(1);
+        Dog leave = dogDaoImpl.getDogById(3);
         String newName = "Ameng";
         leave.setName(newName);
         dogDaoImpl.update(leave);

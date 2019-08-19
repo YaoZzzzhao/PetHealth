@@ -1,7 +1,7 @@
 package com.ascending.training.repository;
 
 import com.ascending.training.model.Cat;
-import com.ascending.training.model.User;
+import com.ascending.training.model.Pet;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -17,7 +17,7 @@ public class HibernateCatTest {
     Logger logger = LoggerFactory.getLogger(this.getClass());
     private Cat a;
     private CatDaoImpl catDaoImpl = new CatDaoImpl();
-    private UserDaoImpl userDaoImpl = new UserDaoImpl();
+    private PetDaoImpl petDaoImpl = new PetDaoImpl();
 
 
     @Before
@@ -25,7 +25,7 @@ public class HibernateCatTest {
 //        long owner_id = 12;
 
         a = new Cat();
-        User user = userDaoImpl.getUserById(2);
+        Pet pet = petDaoImpl.getPetById(2);
 //        a.setId(30);
         a.setCalici('Y');
 //        a.setOwnerid(owner_id);
@@ -37,7 +37,7 @@ public class HibernateCatTest {
         a.setName("Kite");
 
 
-        catDaoImpl.saveCat(a,user);
+        catDaoImpl.saveCat(a,pet);
     }
 
 //    @After

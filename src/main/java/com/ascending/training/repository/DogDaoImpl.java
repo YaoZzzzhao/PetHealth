@@ -1,15 +1,18 @@
 package com.ascending.training.repository;
 
 import com.ascending.training.model.Dog;
-import com.ascending.training.model.User;
+import com.ascending.training.model.Pet;
 import org.slf4j.Logger;
 import com.ascending.training.util.HibernateUtil;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 import org.hibernate.query.Query;
 import org.slf4j.LoggerFactory;
+import org.springframework.stereotype.Repository;
 
 import java.util.List;
+
+@Repository
 
 public class DogDaoImpl implements DogDao{
     private Logger logger = LoggerFactory.getLogger(this.getClass());
@@ -36,13 +39,13 @@ public class DogDaoImpl implements DogDao{
     }
 
 
-    public boolean saveDog(Dog dog, User user){
+    public boolean saveDog(Dog dog, Pet pet){
         boolean isSuccess = true;
         Transaction transaction = null;
 
         try(Session session = HibernateUtil.getSessionFactory().openSession()){
             transaction = session.beginTransaction();
-            dog.setUser(user);
+            dog.setPet(pet);
             session.save(dog);
             transaction.commit();
         }

@@ -13,7 +13,7 @@ public class Pet {
 
 
     @Column(name = "name")
-    private String pet_name;
+    private String name;
 
     public String getType() {
         return type;
@@ -40,11 +40,26 @@ public class Pet {
     @JoinColumn(name = "owner_id", referencedColumnName = "id")
     private User user;
 
-
     public User getUser(){return user;}
     public void setUser(User u){
         this.user = u;
     }
+
+
+    @OneToMany(mappedBy = "pet", cascade = CascadeType.REMOVE, fetch = FetchType.LAZY)
+    private List<Cat> cats;
+
+    public List<Cat> getCat(){return cats;}
+    public void setCat(List<Cat> c){this.cats = c;}
+
+    @OneToMany(mappedBy = "pet", cascade = CascadeType.REMOVE, fetch = FetchType.LAZY)
+    private List<Dog> dogs;
+
+    public List<Dog> getDog(){return dogs;}
+    public void setDog(List<Dog> d){this.dogs = d;}
+
+
+
 
 //    @OneToMany(mappedBy = "pet", cascade = CascadeType.REMOVE, fetch = FetchType.LAZY )
 //
@@ -69,7 +84,7 @@ public class Pet {
 
     public String getName(){
 
-        return pet_name;
+        return name;
     }
     public String getColor(){
 
@@ -94,7 +109,7 @@ public class Pet {
 //    }
     public void setName(String name){
 
-        this.pet_name = name;
+        this.name = name;
     }
     public void setColor(String color){
         this.color = color;
@@ -105,4 +120,10 @@ public class Pet {
     public void setAge(int age){
         this.age = age;
     }
+
+
+//    public static void main(String[] args) {
+//        Pet a = new Pet();
+//        a.getUser().getId();
+//    }
 }

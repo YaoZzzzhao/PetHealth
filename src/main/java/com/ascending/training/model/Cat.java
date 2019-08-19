@@ -7,14 +7,14 @@ import javax.persistence.*;
 @Table(name = "cats")
 public class Cat {
     @Id
-    @GeneratedValue(strategy= GenerationType.IDENTITY)
+//    @GeneratedValue(strategy= GenerationType.IDENTITY)
     private long id;
 
 //    @Column(name = "owner_id")
 //    private int owner_id;
 
     @Column(name = "name")
-    private String cat_name;
+    private String name;
 
     @Column(name = "Spay_neuter")
     private char spay_neuter;
@@ -39,22 +39,22 @@ public class Cat {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "owner_id", referencedColumnName = "id")
-    private User user;
+    private Pet pet;
 
-    public User getUser(){return user;}
-    public void setUser(User u){
-        this.user = u;
+    public Pet getPet(){return pet;}
+    public void setPet(Pet p){
+        this.pet = p;
     }
 
 
 
 
     public String getName() {
-        return cat_name;
+        return name;
     }
 
     public void setName(String cat_name) {
-        this.cat_name = cat_name;
+        this.name = cat_name;
     }
 
 //    public int getOwnerId() {

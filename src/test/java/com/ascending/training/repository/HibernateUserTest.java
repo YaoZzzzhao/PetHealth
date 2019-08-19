@@ -24,7 +24,7 @@ public class HibernateUserTest {
     public void init(){
 //        UserDao userDao = new UserDao();
 
-        String fullname = "Rui";
+        String fullname = "Jaygee";
         String pwd = "122333.0";
         String email = "Kyo@gmail.com";
         Date regisDate = new Date(119,7,9);
@@ -43,12 +43,12 @@ public class HibernateUserTest {
         userDaoImpl.save(a);
     }
 
-//    @After
-//    public void cleanUp(){
-//        userDaoImpl.delete(a.getId());
-//        userDaoImpl = null;
-//        assertNull(userDaoImpl);
-//    }
+    @After
+    public void cleanUp(){
+        userDaoImpl.delete(a.getId());
+        userDaoImpl = null;
+        assertNull(userDaoImpl);
+    }
 
 
 //    @Test
@@ -92,7 +92,7 @@ public class HibernateUserTest {
 
     @Test
     public void deleteTest(){
-        int expectedOfNum = userDaoImpl.delete(9 );
+        int expectedOfNum = userDaoImpl.delete(2);
 
         assertEquals(1,expectedOfNum);
     }
@@ -109,7 +109,7 @@ public class HibernateUserTest {
     public void getUserByIdTest(){
         long testId = 1;
         User test = userDaoImpl.getUserById(testId);
-        System.out.println(test.getPets());
+        System.out.println(test.getPet());
 
         assertEquals(testId, test.getId());
     }

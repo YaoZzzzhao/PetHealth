@@ -7,9 +7,11 @@ import org.hibernate.Transaction;
 import org.hibernate.query.Query;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
+@Repository
 public class UserDaoImpl implements UserDao {
     private Logger logger = LoggerFactory.getLogger(this.getClass());
 
@@ -67,18 +69,25 @@ public class UserDaoImpl implements UserDao {
     @Override
     public int delete(long userId){
 
-        String hql = "DELETE User where id = :userId1";
+//        String hql = "DELETE User where id = :userId1";
 
         int deletedCount = 0;
         Transaction transaction = null;
 
         try(Session session = HibernateUtil.getSessionFactory().openSession()){
-            Query<User> query = session.createQuery(hql);
-            query.setParameter("userId1",userId);
+            transaction = session.beginTransaction();
+
+            User user = session.get(User.class, userId);
+            session.delete(user);
+
+            deletedCount = 1;
+
+            //Query<User> query = session.createQuery(hql);
+            //query.setParameter("userId1",userId);
 //            query.setParameter("userName1", userName);
 
-            transaction = session.beginTransaction();
-            deletedCount = query.executeUpdate();
+//            transaction = session.beginTransaction();
+            //deletedCount = query.executeUpdate();
             transaction.commit();
         }
         catch(Exception e){

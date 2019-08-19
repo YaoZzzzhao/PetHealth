@@ -23,9 +23,9 @@ public class HibernatePetTest {
     @Before
     public void init(){
 //        long owner_id = 12;
-        String type = "CAT";
-        String breed = "Jinmu";
-        String name = "YYzz";
+        String type = "DOG";
+        String breed = "JinmuDog";
+        String name = "pigff";
         int age = 3;
         String color = "Orange";
 
@@ -33,7 +33,7 @@ public class HibernatePetTest {
 //        a.setId(30);
         a.setName(name);
         a.setType(type);
-        User user = userDaoImpl.getUserById(2);
+        User user = userDaoImpl.getUserById(6);
         a.setUser(user);
 
 //        a.owner_id = a.getUser().getId();
@@ -56,7 +56,7 @@ public class HibernatePetTest {
 
     @Test
     public void savePetTest() {
-        String testName = "YYzz";
+        String testName = "pigff";
 
 
         assertEquals(testName, a.getName());

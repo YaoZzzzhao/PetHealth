@@ -8,7 +8,11 @@ import org.hibernate.Session;
 import org.hibernate.Transaction;
 import org.hibernate.query.Query;
 import org.slf4j.LoggerFactory;
+import org.springframework.stereotype.Repository;
+
 import java.util.List;
+
+@Repository
 
 public class PetDaoImpl implements PetDao{
     private Logger logger = LoggerFactory.getLogger(this.getClass());
@@ -85,17 +89,21 @@ public class PetDaoImpl implements PetDao{
 
     @Override
     public int delete(long id){
-        String hql = "Delete from Pet where id = :id1";
+//        String hql = "Delete from Pet where id = :id1";
 
         int deleteCount = 0;
         Transaction transaction = null;
 
         try(Session session = HibernateUtil.getSessionFactory().openSession()){
-            Query<Pet> query = session.createQuery(hql);
-            query.setParameter("id1",id);
+//            Query<Pet> query = session.createQuery(hql);
+//            query.setParameter("id1",id);
+            Pet pet = session.get(Pet.class, id);
+            session.delete(pet);
+
             transaction = session.beginTransaction();
-            deleteCount = query.executeUpdate();
+//            deleteCount = query.executeUpdate();
            // session.delete(pet);
+            deleteCount = 1;
             transaction.commit();
         }
         catch(Exception e){

@@ -1,15 +1,18 @@
 package com.ascending.training.repository;
 
 import com.ascending.training.model.Cat;
-import com.ascending.training.model.User;
+import com.ascending.training.model.Pet;
 import org.slf4j.Logger;
 import com.ascending.training.util.HibernateUtil;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 import org.hibernate.query.Query;
 import org.slf4j.LoggerFactory;
+import org.springframework.stereotype.Repository;
 
 import java.util.List;
+
+@Repository
 
 public class CatDaoImpl implements CatDao{
     private Logger logger = LoggerFactory.getLogger(this.getClass());
@@ -36,13 +39,13 @@ public class CatDaoImpl implements CatDao{
     }
 
 
-    public boolean saveCat(Cat cat, User user){
+    public boolean saveCat(Cat cat, Pet pet){
         boolean isSuccess = true;
         Transaction transaction = null;
 
         try(Session session = HibernateUtil.getSessionFactory().openSession()){
             transaction = session.beginTransaction();
-            cat.setUser(user);
+            cat.setPet(pet);
             session.save(cat);
             transaction.commit();
         }
