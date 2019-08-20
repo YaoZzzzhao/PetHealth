@@ -98,8 +98,8 @@ public class HibernateUserTest {
     }
 
     @Test
-    public void getUserTest(){
-        List<User> all = userDaoImpl.getUser();
+    public void getUsersTest(){
+        List<User> all = userDaoImpl.getUsers();
         int expectedOfNumber = 2;
 
         assertEquals(all.size(),expectedOfNumber);

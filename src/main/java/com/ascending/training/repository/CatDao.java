@@ -9,6 +9,6 @@ public interface CatDao {
     int update(Cat cat);
     int delete(long id);
 
-    List<Cat> getCat();
+    List<Cat> getCats();
     Cat getCatById(long id);
 }

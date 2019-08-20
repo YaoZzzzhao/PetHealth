@@ -75,8 +75,8 @@ public class HibernateDogTest {
     }
 
     @Test
-    public void getDogTest(){
-        List<Dog> all = dogDaoImpl.getDog();
+    public void getDogsTest(){
+        List<Dog> all = dogDaoImpl.getDogs();
         int expectedOfNumber = 2;
 
         assertEquals(all.size(),expectedOfNumber);

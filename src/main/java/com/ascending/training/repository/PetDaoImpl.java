@@ -39,7 +39,7 @@ public class PetDaoImpl implements PetDao{
     }
 
 
-    public boolean savePet(Pet pet, User user){
+    public boolean saveP(Pet pet, User user){
         boolean isSuccess = true;
         Transaction transaction = null;
 
@@ -118,7 +118,7 @@ public class PetDaoImpl implements PetDao{
     }
 
     @Override
-    public List<Pet> getPet(){
+    public List<Pet> getPets(){
         String sql = "From Pet";
 
         try(Session session = HibernateUtil.getSessionFactory().openSession()){

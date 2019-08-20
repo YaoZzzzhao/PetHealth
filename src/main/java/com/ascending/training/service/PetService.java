@@ -1,6 +1,7 @@
 package com.ascending.training.service;
 
 import com.ascending.training.model.Pet;
+import com.ascending.training.model.User;
 import com.ascending.training.repository.PetDao;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -15,12 +16,16 @@ public class PetService {
 
     private PetDao petDao;
 
-    public boolean save(Pet pet){
+    public boolean save(Pet pet) {
         return petDao.save(pet);
+    }
+
+    public boolean saveP(Pet p, User u){
+        return petDao.saveP(p, u);
     }
     public int update(Pet pet){return petDao.update(pet);}
     public int delete(long petId){return petDao.delete(petId);}
 
-    public List<Pet> getPet(){return petDao.getPet();}
+    public List<Pet> getPets(){return petDao.getPets();}
     public Pet getPetById(long petId){return petDao.getPetById(petId);}
 }

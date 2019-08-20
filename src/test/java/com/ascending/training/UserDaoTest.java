@@ -42,7 +42,7 @@ public class UserDaoTest{
 
 
     @Test
-    public void insertUser(){
+    public void insertUserTest(){
         User user2 = new User();
         Date d = new Date(119,2,3);
         String name = "Curry";
@@ -81,7 +81,7 @@ public class UserDaoTest{
     }
 
      @Test
-    public void deleteUser(){
+    public void deleteUserTest(){
         int d = userDao.deleteUser(1);
 
         Assert.assertEquals(d,1);

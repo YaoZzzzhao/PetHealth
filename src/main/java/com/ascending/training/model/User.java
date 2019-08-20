@@ -2,8 +2,8 @@ package com.ascending.training.model;
 
 import javax.persistence.*;
 import java.util.Date;
-import java.util.List;
 import java.util.Objects;
+import java.util.Set;
 
 @Entity
 @Table(name = "users")
@@ -35,10 +35,10 @@ public class User {
 
 
     @OneToMany(mappedBy = "user", cascade = CascadeType.REMOVE, fetch = FetchType.LAZY)
-    private List<Pet> pets;
+    private Set<Pet> pets;
 
-    public List<Pet> getPet(){return pets;}
-    public void setPet(List<Pet> p){this.pets = p;}
+    public Set<Pet> getPet(){return pets;}
+    public void setPet(Set<Pet> p){this.pets = p;}
 
 
 

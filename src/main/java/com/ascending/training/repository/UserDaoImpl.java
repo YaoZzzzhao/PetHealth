@@ -101,8 +101,8 @@ public class UserDaoImpl implements UserDao {
     }
 
     @Override
-    public List<User> getUser(){
-        String hql = "FROM User";
+    public List<User> getUsers(){
+        String hql = "FROM User as user join fetch user.pets";
         try(Session session = HibernateUtil.getSessionFactory().openSession()){
             Query<User> query = session.createQuery(hql);
 

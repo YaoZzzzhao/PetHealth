@@ -9,6 +9,6 @@ public interface DogDao {
     int update(Dog dog);
     int delete(long id);
 
-    List<Dog> getDog();
+    List<Dog> getDogs();
     Dog getDogById(long id);
 }

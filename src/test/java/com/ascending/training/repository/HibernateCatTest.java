@@ -75,8 +75,8 @@ public class HibernateCatTest {
     }
 
     @Test
-    public void getCatTest(){
-        List<Cat> all = catDaoImpl.getCat();
+    public void getCatsTest(){
+        List<Cat> all = catDaoImpl.getCats();
         int expectedOfNumber = 4;
 
         assertEquals(all.size(),expectedOfNumber);

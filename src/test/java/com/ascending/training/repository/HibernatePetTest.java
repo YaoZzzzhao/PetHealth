@@ -42,15 +42,15 @@ public class HibernatePetTest {
         a.setColor(color);
 
 
-        petDaoImpl.savePet(a,user);
+        petDaoImpl.saveP(a,user);
     }
 
-//    @After
-//    public void cleanUp(){
-//        petDaoImpl.delete(a.getId());
-//        petDaoImpl = null;
-//        assertNull(petDaoImpl);
-//    }
+    @After
+    public void cleanUp(){
+        petDaoImpl.delete(a.getId());
+        petDaoImpl = null;
+        assertNull(petDaoImpl);
+    }
 
 
 
@@ -80,8 +80,8 @@ public class HibernatePetTest {
     }
 
     @Test
-    public void getUserTest(){
-        List<Pet> all = petDaoImpl.getPet();
+    public void getUsersTest(){
+        List<Pet> all = petDaoImpl.getPets();
         int expectedOfNumber =5 ;
 
         assertEquals(all.size(),expectedOfNumber);

@@ -15,9 +15,14 @@ public class UserService {
     public boolean save(User user){
         return userDao.save(user);
     }
+
     public int update(User user){return userDao.update(user);}
     public int delete(long userId){return userDao.delete(userId);}
 
-    public List<User> getUser(){return userDao.getUser();}
+    public List<User> getUsers(){return userDao.getUsers();}
     public User getUserById(long userId){return userDao.getUserById(userId);}
+
+    long toString(User b){
+        return b.getId();
+    }
 }

@@ -114,7 +114,7 @@ public class DogDaoImpl implements DogDao{
     }
 
     @Override
-    public List<Dog> getDog(){
+    public List<Dog> getDogs(){
         String sql = "From Dog";
 
         try(Session session = HibernateUtil.getSessionFactory().openSession()){
