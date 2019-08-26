@@ -1,8 +1,10 @@
 package com.ascending.training.service;
 
 import com.ascending.training.init.AppInitializer;
-import com.ascending.training.model.Dog;
+import com.ascending.training.model.Cat;
 import com.ascending.training.model.Pet;
+import com.ascending.training.repository.CatDaoImpl;
+import com.ascending.training.service.PetService;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -20,12 +22,13 @@ import static org.junit.Assert.assertNull;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest(classes= AppInitializer.class)
-public class DogServiceTest {
+public class CatServiceTset {
+
     Logger logger = LoggerFactory.getLogger(this.getClass());
-    private Dog a;
+    private Cat a;
 
     @Autowired
-    private DogService dogService;
+    private CatDaoImpl catService;
 
     @Autowired
     private PetService petService;
@@ -35,35 +38,34 @@ public class DogServiceTest {
     public void init(){
 //        long owner_id = 12;
 
-        a = new Dog();
-
-        Pet pet = petService.getPetsByName("Shy").get(1);
+        a = new Cat();
+        Pet pet = petService.getPetsByName("XDD").get(0);
 //        a.setId(30);
-        a.setAdenovirus('N');
-        a.setName("Shy");
+        a.setCalici('Y');
 //        a.setOwnerid(owner_id);
-        a.setBordetella('N');
-        a.setDistemper('Y');
-        a.setParvo('Y');
-        a.setRabies('N');
+        a.setDeworm('N');
+        a.setPan('Y');
+        a.setRhi('Y');
+        a.setRabies('Y');
         a.setSpayNeuter('N');
+        a.setName("XDD2.0");
 
 
-        dogService.saveDog(a,pet);
+        catService.saveCat(a,pet);
     }
 
-//    @After
-//    public void cleanUp(){
-//        dogService.delete(a.getId());
-//        dogService = null;
-//        assertNull(dogService);
-//    }
+    @After
+    public void cleanUp(){
+        catService.delete(a.getId());
+        catService = null;
+        assertNull(catService);
+    }
 
 
 
     @Test
     public void saveTest() {
-        String testName = "Shy";
+        String testName = "XDD";
 
 
         assertEquals(testName, a.getName());
@@ -71,35 +73,36 @@ public class DogServiceTest {
 
     @Test
     public void updateTest(){
-        Dog yjjpp = dogService.getDogsByName("Shy").get(0);
-        String newName = "Ameng";
-        yjjpp.setName(newName);
-        dogService.update(yjjpp);
+        Cat kite = catService.getCatsByName("Kite").get(0);
+        String newName = "Jane";
+        kite.setName(newName);
+        catService.update(kite);
 
-        assertEquals(yjjpp.getName(), newName);
+        assertEquals(kite.getName(), newName);
     }
 
     @Test
     public void deleteTest(){
-        int expectedOfNum = dogService.delete(a.getId());
+        int expectedOfNum = catService.delete(a.getId());
 
         assertEquals(1,expectedOfNum);
     }
 
     @Test
-    public void getDogsTest(){
-        List<Dog> all = dogService.getDogs();
-        int expectedOfNumber = 4;
+    public void getCatsTest(){
+        List<Cat> all = catService.getCats();
+        int expectedOfNumber = 5;
 
         assertEquals(all.size(),expectedOfNumber);
     }
 
     @Test
-    public void getDogByNameTest(){
-        String  testName = "Ameng";
-        Dog test = dogService.getDogsByName(testName).get(0);
+    public void getCatByNameTest(){
+        String testName = "Jane";
+        Cat test = catService.getCatsByName("Jane").get(0);
 
         assertEquals(testName, test.getName());
     }
+
 
 }

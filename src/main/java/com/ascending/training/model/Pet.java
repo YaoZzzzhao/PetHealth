@@ -1,5 +1,7 @@
 package com.ascending.training.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import java.util.List;
 import java.util.Set;
@@ -16,14 +18,6 @@ public class Pet {
     @Column(name = "name")
     private String name;
 
-    public String getType() {
-        return type;
-    }
-
-    public void setType(String type) {
-        this.type = type;
-    }
-
     @Column(name = "type")
     private String type;
 
@@ -36,28 +30,54 @@ public class Pet {
     @Column(name = "age")
     private int age;
 
-    
+
+    @JsonIgnore
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "owner_id", referencedColumnName = "id")
     private User user;
 
-    public User getUser(){return user;}
+    public User getUser(){
+        try{
+            String name = user.getFullName();
+        }catch(Exception e){
+            return null;
+        }
+        return user;}
     public void setUser(User u){
         this.user = u;
     }
 
 
+//    @JsonIgnore
     @OneToMany(mappedBy = "pet", cascade = CascadeType.REMOVE, fetch = FetchType.LAZY)
     private Set<Cat> cats;
 
-    public Set<Cat> getCat(){return cats;}
-    public void setCat(Set<Cat> c){this.cats = c;}
 
+    public Set<Cat> getCats(){
+        try{
+            int size = cats.size();
+        }catch(Exception e){
+            return null;
+        }
+        return cats;
+    }
+    public void setCats(Set<Cat> c){this.cats = c;}
+
+//    @JsonIgnore
     @OneToMany(mappedBy = "pet", cascade = CascadeType.REMOVE, fetch = FetchType.LAZY)
     private Set<Dog> dogs;
 
-    public Set<Dog> getDog(){return dogs;}
-    public void setDog(Set<Dog> d){this.dogs = d;}
+    public Set<Dog> getDogs(){
+        try{
+            int size = dogs.size();
+        }catch(Exception e){
+            return null;
+        }
+        return dogs;
+    }
+    public void setDogs(Set<Dog> d){
+        this.dogs = d;
+    }
 
 
 
@@ -76,55 +96,53 @@ public class Pet {
 //    public void setCat(List<Cat> c){this.cats = c;}
 
 
-
-
-
-    public long getId(){
+    public long getId() {
         return id;
     }
 
-    public String getName(){
+    public void setId(long id) {
+        this.id = id;
+    }
 
+    public String getName() {
         return name;
     }
-    public String getColor(){
 
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getType() {
+
+        return type;
+    }
+
+    public void setType(String type) {
+
+        this.type = type;
+    }
+
+    public String getColor() {
         return color;
     }
-    public String getBreed(){
+
+    public void setColor(String color) {
+        this.color = color;
+    }
+
+    public String getBreed() {
         return breed;
     }
-    public int getAge(){
+
+    public void setBreed(String breed) {
+        this.breed = breed;
+    }
+
+    public int getAge() {
         return age;
     }
 
-
-
-    public void setId(long id){
-
-        this.id = id;
-    }
-//    public void setOwnerid(long id){
-//
-//        this.owner_id = id;
-//    }
-    public void setName(String name){
-
-        this.name = name;
-    }
-    public void setColor(String color){
-        this.color = color;
-    }
-    public void setBreed(String breed){
-        this.breed = breed;
-    }
-    public void setAge(int age){
+    public void setAge(int age) {
         this.age = age;
     }
-
-
-//    public static void main(String[] args) {
-//        Pet a = new Pet();
-//        a.getUser().getId();
-//    }
 }

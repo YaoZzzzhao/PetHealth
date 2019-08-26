@@ -1,14 +1,16 @@
 package com.ascending.training.repository;
 
 import com.ascending.training.model.Cat;
+import com.ascending.training.model.Pet;
 
 import java.util.List;
 
 public interface CatDao {
     boolean save(Cat cat);
+    boolean saveCat(Cat cat, Pet pet);
     int update(Cat cat);
     int delete(long id);
 
     List<Cat> getCats();
-    Cat getCatById(long id);
+    List<Cat> getCatsByName(String catName);
 }

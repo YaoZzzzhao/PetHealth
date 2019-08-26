@@ -39,7 +39,7 @@ public class CatDaoImpl implements CatDao{
         return isSuccess;
     }
 
-
+    @Override
     public boolean saveCat(Cat cat, Pet pet){
         boolean isSuccess = true;
         Transaction transaction = null;
@@ -116,12 +116,15 @@ public class CatDaoImpl implements CatDao{
 
     @Override
     public List<Cat> getCats(){
-        String sql = "From Cat";
+        String sql = "From Cat xxxx";
 
         try(Session session = HibernateUtil.getSessionFactory().openSession()){
             Query <Cat> query = session.createQuery(sql);
 
             return query.list();
+        }catch(Exception e){
+            logger.debug(e.getMessage());
+            return null;
         }
     }
 
@@ -130,23 +133,22 @@ public class CatDaoImpl implements CatDao{
 //    }
 
     @Override
-    public Cat getCatById(long id){
-        if (id < 0 ) return null;
+    public List<Cat> getCatsByName(String catName){
+        if (catName == null ) return null;
 
-        String sql = "From Cat cat where id = :id1";
+        String sql = "From Cat cat where name = :name";
 
         try(Session session = HibernateUtil.getSessionFactory().openSession()){
             Query<Cat> query = session.createQuery(sql);
-            query.setParameter("id1",id);
+            query.setParameter("name",catName);
 
+//            Cat cat = query.uniqueResult();
+//            logger.debug(cat.toString());
 
-
-            Cat cat = query.uniqueResult();
-            logger.debug(cat.toString());
-
-
-
-            return cat;
+            return query.list();
+        }catch(Exception e){
+            logger.debug(e.getMessage());
+            return null;
         }
     }
 }

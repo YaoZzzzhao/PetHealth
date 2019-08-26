@@ -45,12 +45,12 @@ public class UserDao {
                 //Fill the object
                 User user = new User();
                 user.setId(id);
-                user.setName(name);
-                user.setPwd(pwd);
+                user.setFullName(name);
+                user.setPassword(pwd);
                 user.setEmail(email);
-                user.setType(type);
-                user.setDate(rdt);
-                user.setNum(num);
+                user.setPetType(type);
+                user.setRegisDate(rdt);
+                user.setPetNum(num);
 
                 users.add(user);
             }
@@ -88,7 +88,7 @@ public class UserDao {
             System.out.println("Inserting statement...");
             stmt = conn.createStatement();
             String sql;
-            sql = "insert into users(id, full_name, password, email, regis_date, pet_type, pet_num) values(" + user.getId() + ",'" + user.getName() + "'," + "'" + user.getPwd() + "'," + "'" + user.getEmail() + "'," + "'" + user.getDate() + "'," + "'" + user.getType() + "'," + "'" + user.getNum()  + "')";
+            sql = "insert into users(id, full_name, password, email, regis_date, pet_type, pet_num) values(" + user.getId() + ",'" + user.getFullName() + "'," + "'" + user.getPassword() + "'," + "'" + user.getEmail() + "'," + "'" + user.getRegisDate() + "'," + "'" + user.getPetType() + "'," + "'" + user.getPetNum()  + "')";
             result = stmt.executeUpdate(sql);
 
 
@@ -129,12 +129,12 @@ public class UserDao {
 
             PreparedStatement pstmt = conn.prepareStatement(sql);
 
-            pstmt.setString(1, user.getName());
-            pstmt.setString(2, String.valueOf(user.getPwd()));
+            pstmt.setString(1, user.getFullName());
+            pstmt.setString(2, String.valueOf(user.getPassword()));
             pstmt.setString(3, String.valueOf(user.getEmail()));
-            pstmt.setString(4, String.valueOf(user.getDate()));
-            pstmt.setString(5, String.valueOf(user.getType()));
-            pstmt.setString(6, String.valueOf(user.getNum()));
+            pstmt.setString(4, String.valueOf(user.getRegisDate()));
+            pstmt.setString(5, String.valueOf(user.getPetType()));
+            pstmt.setString(6, String.valueOf(user.getPetNum()));
             pstmt.setLong(7, user.getId());
 
 

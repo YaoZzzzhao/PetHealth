@@ -20,6 +20,6 @@ public class CatService {
     public int update(Cat cat){return catDao.update(cat);}
     public int delete(long catId){return catDao.delete(catId);}
 
-    public List<Cat> getCat(){return catDao.getCat();}
-    public Cat getCatById(long catId){return catDao.getCatById(catId);}
+    public List<Cat> getCats(){return catDao.getCats();}
+    public List<Cat> getCatsByName(String catName){return catDao.getCatsByName(catName);}
 }

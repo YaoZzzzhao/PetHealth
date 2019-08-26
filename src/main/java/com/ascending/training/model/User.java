@@ -1,5 +1,7 @@
 package com.ascending.training.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import java.util.Date;
 import java.util.Objects;
@@ -14,7 +16,7 @@ public class User {
     private long id;
 
     @Column(name = "full_name")
-    private String full_name;
+    private String fullName;
 
     @Column(name = "password")
     private String password;
@@ -23,50 +25,29 @@ public class User {
     private String email;
 
     @Column(name = "regis_date")
-    private Date regis_date;
+    private Date regisDate;
 
     @Column(name = "pet_type")
-    private String pet_type;
+    private String petType;
 
     @Column(name = "pet_num")
-    private int pet_num;
+    private int petNum;
 
 
-
-
+//    @JsonIgnore
     @OneToMany(mappedBy = "user", cascade = CascadeType.REMOVE, fetch = FetchType.LAZY)
     private Set<Pet> pets;
 
-    public Set<Pet> getPet(){return pets;}
-    public void setPet(Set<Pet> p){this.pets = p;}
 
-
-
-
-
-    public long getId(){
-        return id;
+    public Set<Pet> getPets(){
+        try{
+            int size = pets.size();
+        }catch(Exception e){
+            return null;
+        }
+        return pets;
     }
-    public String getName(){
-        return full_name;
-    }
-    public String getPwd(){
-        return password;
-    }
-    public String getEmail(){
-        return email;
-    }
-    public Date getDate(){
-        return regis_date;
-    }
-    public String getType(){
-        return pet_type;
-    }
-    public int getNum(){
-        return pet_num;
-    }
-
-
+    public void setPets(Set<Pet> p){this.pets = p;}
 
 
     @Override
@@ -75,38 +56,73 @@ public class User {
         if (o == null || getClass() != o.getClass()) return false;
         User users = (User) o;
         return id == users.id &&
-                full_name.equals(users.full_name);
+                fullName.equals(users.fullName);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, full_name);
+        return Objects.hash(id, fullName);
     }
 
 
+    public long getId() {
+        return id;
+    }
 
-
-
-    public void setId(long id){
+    public void setId(long id) {
         this.id = id;
     }
-    public void setName(String name){
-        this.full_name = name;
-    }
-    public void setPwd(String i){
-        this.password = i;
-    }
-    public void setEmail(String i){
-        this.email = i;
-    }
-    public void setDate(Date i){
-        this.regis_date = i;
-    }
-    public void setType(String i){
-        this.pet_type = i;
-    }
-    public void setNum(int i){
-        this.pet_num = i;
+
+    public String getFullName() {
+        return fullName;
     }
 
+    public void setFullName(String fullName) {
+        this.fullName = fullName;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public Date getRegisDate() {
+        return regisDate;
+    }
+
+    public void setRegisDate(Date regisDate) {
+        this.regisDate = regisDate;
+    }
+
+    public String getPetType() {
+        return petType;
+    }
+
+    public void setPetType(String petType) {
+        this.petType = petType;
+    }
+
+    public int getPetNum() {
+        return petNum;
+    }
+
+    public void setPetNum(int petNum) {
+        this.petNum = petNum;
+    }
+
+    @Override
+    public String toString() {
+        return id + "," + fullName + "," + email + "," + regisDate + "," + petNum;
+    }
 }

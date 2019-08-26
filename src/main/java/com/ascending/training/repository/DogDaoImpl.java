@@ -38,7 +38,7 @@ public class DogDaoImpl implements DogDao{
         return isSuccess;
     }
 
-
+    @Override
     public boolean saveDog(Dog dog, Pet pet){
         boolean isSuccess = true;
         Transaction transaction = null;
@@ -115,29 +115,35 @@ public class DogDaoImpl implements DogDao{
 
     @Override
     public List<Dog> getDogs(){
-        String sql = "From Dog";
+        String sql = "From dog";
 
         try(Session session = HibernateUtil.getSessionFactory().openSession()){
             Query <Dog> query = session.createQuery(sql);
 
             return query.list();
+        }catch(Exception e){
+            logger.error(e.getMessage(),e);
+            return null;
         }
     }
 
     @Override
-    public Dog getDogById(long id){
-        if (id < 0 ) return null;
+    public List<Dog> getDogsByName(String dogName){
+        if (dogName == null ) return null;
 
-        String sql = "From Dog dog where id = :id1";
+        String sql = "From Dog dog where name = :name";
 
         try(Session session = HibernateUtil.getSessionFactory().openSession()){
             Query<Dog> query = session.createQuery(sql);
-            query.setParameter("id1",id);
+            query.setParameter("name",dogName);
 
-            Dog dog = query.uniqueResult();
-            logger.debug(dog.toString());
+//            Dog dog = query.uniqueResult();
+//            logger.debug(dog.toString());
 
-            return dog;
+            return query.list();
+        }catch(Exception e){
+            logger.error(e.getMessage(),e);
+            return null;
         }
     }
 }

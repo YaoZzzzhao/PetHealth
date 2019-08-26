@@ -39,7 +39,7 @@ public class PetDaoImpl implements PetDao{
     }
 
 
-    public boolean saveP(Pet pet, User user){
+    public boolean savePet(Pet pet, User user){
         boolean isSuccess = true;
         Transaction transaction = null;
 
@@ -119,29 +119,38 @@ public class PetDaoImpl implements PetDao{
 
     @Override
     public List<Pet> getPets(){
-        String sql = "From Pet";
+//        String hql = "From Pet as pet left join fetch pet.dogs left join fetch pet.cats";
+        String hql = "From Pet order by id";
+//        pet join fetch pet.cats p_c on pet.id = p_c.id join fetch pet.dogs p_d on pet.id = p_d.id
+
 
         try(Session session = HibernateUtil.getSessionFactory().openSession()){
-            Query <Pet> query = session.createQuery(sql);
+            Query <Pet> query = session.createQuery(hql);
 
             return query.list();
+        }catch(Exception e){
+            logger.debug(e.getMessage());
+            return null;
         }
     }
 
     @Override
-    public Pet getPetById(long id){
-        if (id < 0 ) return null;
+    public List<Pet> getPetsByName(String petName){
+        if (petName == null) return null;
 
-        String sql = "From Pet pet where id = :id1";
+        String sql = "From Pet pet where pet.name = :name";
 
         try(Session session = HibernateUtil.getSessionFactory().openSession()){
             Query<Pet> query = session.createQuery(sql);
-            query.setParameter("id1",id);
+            query.setParameter("name",petName);
 
-            Pet pet = query.uniqueResult();
-            logger.debug(pet.toString());
+//            Pet pet = query.uniqueResult();
+//            logger.debug(pet.toString());
 
-            return pet;
+            return query.list();
+        }catch(Exception e){
+            logger.debug(e.getMessage());
+            return null;
         }
     }
 }

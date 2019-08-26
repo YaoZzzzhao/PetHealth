@@ -1,0 +1,1 @@
+alter table dogs rename dog_ig to dog_id;

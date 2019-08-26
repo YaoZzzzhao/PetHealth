@@ -33,11 +33,11 @@ public class HibernateUserTest {
 
         a = new User();
 //        a.setId(30);
-        a.setName(fullname);
-        a.setPwd(pwd);
-        a.setDate(regisDate);
-        a.setType(petType);
-        a.setNum(petNum);
+        a.setFullName(fullname);
+        a.setPassword(pwd);
+        a.setRegisDate(regisDate);
+        a.setPetType(petType);
+        a.setPetNum(petNum);
         a.setEmail(email);
 
         userDaoImpl.save(a);
@@ -77,12 +77,12 @@ public class HibernateUserTest {
 
 //        String
 
-        assertEquals(pwd, a.getPwd());
+        assertEquals(pwd, a.getPassword());
     }
 
     @Test
     public void updateTest(){
-        User kyo = userDaoImpl.getUserById(9);
+        User kyo = userDaoImpl.getUsersByName("Jaygee").get(0);
         String newEmail = "Leave@gmail.com";
         kyo.setEmail(newEmail);
         userDaoImpl.update(kyo);
@@ -106,12 +106,12 @@ public class HibernateUserTest {
     }
 
     @Test
-    public void getUserByIdTest(){
-        long testId = 1;
-        User test = userDaoImpl.getUserById(testId);
-        System.out.println(test.getPet());
+    public void getUserByNameTest(){
+        String testName = "Jaygee";
+        User test = userDaoImpl.getUsersByName("Jaygee").get(0);
+        System.out.println(test.getPets());
 
-        assertEquals(testId, test.getId());
+        assertEquals(testName, test.getFullName());
     }
 
 

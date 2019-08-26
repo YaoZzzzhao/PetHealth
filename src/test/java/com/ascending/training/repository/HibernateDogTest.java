@@ -25,7 +25,7 @@ public class HibernateDogTest {
 //        long owner_id = 12;
 
         a = new Dog();
-        Pet pet = petDaoImpl.getPetById(2);
+        Pet pet = petDaoImpl.getPetsByName("pigff").get(0);
 //        a.setId(30);
         a.setAdenovirus('N');
         a.setName("Jinmu");
@@ -59,7 +59,7 @@ public class HibernateDogTest {
 
     @Test
     public void updateTest(){
-        Dog leave = dogDaoImpl.getDogById(3);
+        Dog leave = dogDaoImpl.getDogsByName("pigff").get(0);
         String newName = "Ameng";
         leave.setName(newName);
         dogDaoImpl.update(leave);
@@ -83,11 +83,11 @@ public class HibernateDogTest {
     }
 
     @Test
-    public void getDogByIdTest(){
-        long testId = 1;
-        Dog test = dogDaoImpl.getDogById(testId);
+    public void getDogByNameTest(){
+        String testName = "Jinmu";
+        Dog test = dogDaoImpl.getDogsByName(testName).get(0);
 
-        assertEquals(testId, test.getId());
+        assertEquals(testName, test.getName());
     }
 
 

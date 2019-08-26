@@ -1,24 +1,34 @@
 package com.ascending.training.service;
 
+import com.ascending.training.init.AppInitializer;
 import com.ascending.training.model.Pet;
 import com.ascending.training.model.User;
 import com.ascending.training.repository.UserDaoImpl;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
+import org.junit.runner.RunWith;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.context.junit4.SpringRunner;
 
 import java.util.List;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNull;
 
+@RunWith(SpringRunner.class)
+@SpringBootTest(classes= AppInitializer.class)              //找AppInitializer中的scanBasePackage，测试package下的文件
 public class PetServiceTest {
 
     Logger logger = LoggerFactory.getLogger(this.getClass());
     private Pet a;
-    private PetService petService = new PetService();
+
+    @Autowired
+    private PetService petService;
+    @Autowired
     private UserService userService = new UserService();
 
 
@@ -27,7 +37,7 @@ public class PetServiceTest {
 //        long owner_id = 12;
         String type = "DOG";
         String breed = "JinmuDog";
-        String name = "pigff";
+        String name = "Shy";
         int age = 3;
         String color = "Orange";
 
@@ -35,14 +45,19 @@ public class PetServiceTest {
 //        a.setId(30);
         a.setName(name);
         a.setType(type);
-        User user = userService.getUserById(6);
-        a.setUser(user);
 
 //        a.owner_id = a.getUser().getId();
         a.setAge(age);
         a.setBreed(breed);
         a.setColor(color);
 
+        //User user = userService.getUserByName("Hoan").get(0);
+        List<User> users = userService.getUsersByName("Jaygee");
+
+        if (users == null || users.size() == 0) logger.info(">>>>>>> users is null or size is 0");
+        User user = users.get(0);
+
+        a.setUser(user);
 
         petService.saveP(a,user);
     }
@@ -58,7 +73,7 @@ public class PetServiceTest {
 
     @Test
     public void savePetTest() {
-        String testName = "pigff";
+        String testName = "Shy";
 
 
         assertEquals(testName, a.getName());
@@ -66,35 +81,35 @@ public class PetServiceTest {
 
     @Test
     public void updateTest(){
-        Pet leave = petService.getPetById(1);
-        String newBreed = "Ameng";
-        leave.setBreed(newBreed);
-        petService.update(leave);
+        Pet pf = petService.getPetsByName("Pigff").get(0);
+        String newName = "Sufei";
+        pf.setName(newName);
+        petService.update(pf);
 
-        assertEquals(leave.getBreed(), newBreed);
+        assertEquals(pf.getName(), newName);
     }
 
     @Test
     public void deleteTest(){
-        int expectedOfNum = petService.delete(1 );
+        int expectedOfNum = petService.delete(7);
 
         assertEquals(1,expectedOfNum);
     }
 
     @Test
-    public void getUserTest(){
-        List<Pet> all = petService.getPet();
-        int expectedOfNumber =5 ;
+    public void getPetTest(){
+        List<Pet> all = petService.getPets();
+        int expectedOfNumber =10 ;
 
         assertEquals(all.size(),expectedOfNumber);
     }
 
     @Test
-    public void getPetByIdTest(){
-        long testId = 3;
-        Pet test = petService.getPetById(testId);
+    public void getPetByNameTest(){
+        String testName = "Shy";
+        Pet test = petService.getPetsByName(testName).get(0);
 
-        assertEquals(testId, test.getId());
+        assertEquals(testName, test.getName());
     }
 
 

@@ -7,11 +7,11 @@ import java.util.List;
 
 public interface PetDao {
     boolean save(Pet pet);
-    boolean saveP(Pet p, User u );
+    boolean savePet(Pet p, User u );
     int update(Pet pet);
     int delete(long petId);
 
     List<Pet> getPets();
-    Pet getPetById(long petId);
+    List<Pet> getPetsByName(String petName);
 
 }

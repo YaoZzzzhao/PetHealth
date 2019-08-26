@@ -9,11 +9,9 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 @Service
-
 public class PetService {
 
     @Autowired
-
     private PetDao petDao;
 
     public boolean save(Pet pet) {
@@ -21,11 +19,11 @@ public class PetService {
     }
 
     public boolean saveP(Pet p, User u){
-        return petDao.saveP(p, u);
+        return petDao.savePet(p, u);
     }
     public int update(Pet pet){return petDao.update(pet);}
     public int delete(long petId){return petDao.delete(petId);}
 
     public List<Pet> getPets(){return petDao.getPets();}
-    public Pet getPetById(long petId){return petDao.getPetById(petId);}
+    public List<Pet> getPetsByName(String petName){return petDao.getPetsByName(petName);}
 }

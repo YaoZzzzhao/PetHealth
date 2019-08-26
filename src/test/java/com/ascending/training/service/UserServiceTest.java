@@ -33,7 +33,7 @@ public class UserServiceTest {
     public void init(){
 
         a = new User();
-        String fullname = "Jaygee";
+        String fullname = "Slim";
         String pwd = "122333.0";
         String email = "Kyo@gmail.com";
         Date regisDate = new Date(119,7,9);
@@ -42,11 +42,11 @@ public class UserServiceTest {
 
 
 //        a.setId(30);
-        a.setName(fullname);
-        a.setPwd(pwd);
-        a.setDate(regisDate);
-        a.setType(petType);
-        a.setNum(petNum);
+        a.setFullName(fullname);
+        a.setPassword(pwd);
+        a.setRegisDate(regisDate);
+        a.setPetType(petType);
+        a.setPetNum(petNum);
         a.setEmail(email);
 
         userService.save(a);
@@ -67,12 +67,12 @@ public class UserServiceTest {
 
         String pwd = "122333.0";
 
-        assertEquals(pwd, a.getPwd());
+        assertEquals(pwd, a.getPassword());
     }
 
     @Test
     public void updateTest(){
-        User kyo = userService.getUserById( 1);
+        User kyo = userService.getUsersByName( "Jaygee").get(0);
         String newEmail = "Leave@gmail.com";
         kyo.setEmail(newEmail);
         userService.update(kyo);
@@ -82,7 +82,7 @@ public class UserServiceTest {
 
     @Test
     public void deleteTest(){
-        int expectedOfNum = userService.delete(0);
+        int expectedOfNum = userService.delete(6);
 
         assertEquals(1,expectedOfNum);
     }
@@ -94,7 +94,7 @@ public class UserServiceTest {
     @Test
     public void getUsersTest(){
         List<User> all = userService.getUsers();
-        int expectedOfNumber = 8;
+        int expectedOfNumber = 7;
 
 
 //        for (User i : all){
@@ -105,11 +105,11 @@ public class UserServiceTest {
     }
 
     @Test
-    public void getUserByIdTest(){
-        long testId = 11;
-        User test = userService.getUserById(testId);
-        System.out.println(test.getPet());
+    public void getUserByNameTest(){
+        String testName = "Hoan";
+        User test = userService.getUsersByName(testName).get(0);
+        System.out.println(test.getPets());
 
-        assertEquals(testId, test.getId());
+        assertEquals(testName, test.getFullName());
     }
 }

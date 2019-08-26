@@ -33,7 +33,7 @@ public class HibernatePetTest {
 //        a.setId(30);
         a.setName(name);
         a.setType(type);
-        User user = userDaoImpl.getUserById(6);
+        User user = userDaoImpl.getUsersByName("Hoan").get(0);
         a.setUser(user);
 
 //        a.owner_id = a.getUser().getId();
@@ -42,7 +42,7 @@ public class HibernatePetTest {
         a.setColor(color);
 
 
-        petDaoImpl.saveP(a,user);
+        petDaoImpl.savePet(a,user);
     }
 
     @After
@@ -64,7 +64,7 @@ public class HibernatePetTest {
 
     @Test
     public void updateTest(){
-        Pet leave = petDaoImpl.getPetById(1);
+        Pet leave = petDaoImpl.getPetsByName("Hoan").get(0);
         String newBreed = "Ameng";
         leave.setBreed(newBreed);
         petDaoImpl.update(leave);
@@ -88,11 +88,11 @@ public class HibernatePetTest {
     }
 
     @Test
-    public void getPetByIdTest(){
-        long testId = 3;
-        Pet test = petDaoImpl.getPetById(testId);
+    public void getPetByNameTest(){
+        String testName = "Hoan";
+        Pet test = petDaoImpl.getPetsByName(testName).get(0);
 
-        assertEquals(testId, test.getId());
+        assertEquals(testName, test.getName());
     }
 
 

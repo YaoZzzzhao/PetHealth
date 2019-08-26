@@ -25,7 +25,7 @@ public class HibernateCatTest {
 //        long owner_id = 12;
 
         a = new Cat();
-        Pet pet = petDaoImpl.getPetById(2);
+        Pet pet = petDaoImpl.getPetsByName("YYzz").get(0);
 //        a.setId(30);
         a.setCalici('Y');
 //        a.setOwnerid(owner_id);
@@ -59,7 +59,7 @@ public class HibernateCatTest {
 
     @Test
     public void updateTest(){
-        Cat rio = catDaoImpl.getCatById(8);
+        Cat rio = catDaoImpl.getCatsByName("YYzz").get(0);
         String newName = "Rio";
         rio.setName(newName);
         catDaoImpl.update(rio);
@@ -83,11 +83,11 @@ public class HibernateCatTest {
     }
 
     @Test
-    public void getCatByIdTest(){
-        long testId = 8;
-        Cat test = catDaoImpl.getCatById(testId);
+    public void getCatByNameTest(){
+        String testName = "YYzz";
+        Cat test = catDaoImpl.getCatsByName("YYzz").get(0);
 
-        assertEquals(testId, test.getId());
+        assertEquals(testName, test.getName());
     }
 
 

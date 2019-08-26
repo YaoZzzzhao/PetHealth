@@ -15,7 +15,7 @@ public class UserDaoTest{
     private UserDao userDao;
 
     String toString(User u){
-        return u.getName();
+        return u.getFullName();
     }
 
 
@@ -35,7 +35,7 @@ public class UserDaoTest{
         List<User> users = userDao.getUsers();
         for (User t : users) {
 //            assertEquals("",t.getUsername());
-            System.out.println(t.getName());
+            System.out.println(t.getFullName());
 //            System.out.println(t.toString());
         }
     }
@@ -47,17 +47,17 @@ public class UserDaoTest{
         Date d = new Date(119,2,3);
         String name = "Curry";
         user2.setId(1);
-        user2.setName(name);
+        user2.setFullName(name);
         user2.setEmail("Cooker@yahoo.com");
-        user2.setPwd("kkyyttmacs");
-        user2.setNum(3);
-        user2.setDate(d);
-        user2.setType("CAT");
+        user2.setPassword("kkyyttmacs");
+        user2.setPetNum(3);
+        user2.setRegisDate(d);
+        user2.setPetType("CAT");
 
 
         userDao.insertUser(user2);
 
-        Assert.assertEquals(user2.getName(),name);
+        Assert.assertEquals(user2.getFullName(),name);
 
 
     }
@@ -69,11 +69,11 @@ public class UserDaoTest{
         String name = "Curry";
         String email = "Curry@yahoo.com";
         user3.setId(1);
-        user3.setName(name);
+        user3.setFullName(name);
         user3.setEmail(email);
-        user3.setNum(3);
-        user3.setDate(d);
-        user3.setType("CAT");
+        user3.setPetNum(3);
+        user3.setRegisDate(d);
+        user3.setPetType("CAT");
 
         userDao.updateUser(user3);
 

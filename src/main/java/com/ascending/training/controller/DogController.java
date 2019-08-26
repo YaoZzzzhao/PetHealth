@@ -2,10 +2,10 @@ package com.ascending.training.controller;
 
 import com.ascending.training.model.Dog;
 import com.ascending.training.service.DogService;
+import org.hibernate.annotations.Parameter;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.MediaType;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -20,6 +20,12 @@ public class DogController {
     @RequestMapping(value = "",method = RequestMethod.GET, produces = "application/json")
     public List<Dog> getDogs(){
         return dogService.getDogs();
+    }
+
+    @RequestMapping(params="{name}", method =RequestMethod.GET, produces = {MediaType.APPLICATION_JSON_VALUE})
+    public List<Dog> getDogsByName(@RequestParam String name){
+
+        return dogService.getDogsByName(name);
     }
 
 

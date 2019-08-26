@@ -8,7 +8,6 @@ import org.hibernate.query.Query;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Repository;
-
 import java.util.List;
 
 @Repository
@@ -102,29 +101,37 @@ public class UserDaoImpl implements UserDao {
 
     @Override
     public List<User> getUsers(){
-        String hql = "FROM User as user join fetch user.pets";
-        try(Session session = HibernateUtil.getSessionFactory().openSession()){
-            Query<User> query = session.createQuery(hql);
+//        String hql = "select distinct user FROM User as user left join fetch user.pets as pet left join fetch pet.dogs left join fetch pet.cats order by user.id";
+        String hql = "From User";
 
-            return query.list();
-        }
+        Session session = HibernateUtil.getSessionFactory().getCurrentSession();
+        Transaction t = session.beginTransaction();
+        Query<User> query = session.createQuery(hql);
+        List<User> users = query.list();
+        t.commit();
+        return users;
     }
 
     @Override
-    public User getUserById(long userId){
-        if(userId < 0) return null;
+    public List<User> getUsersByName(String name){
+        if(name == null) return null;
 
-        String hql = "FROM User as user left join fetch user.pets where user.id = :userId1";
+        logger.info(">>>>>>>>>> Name = " + name);
+        String hql = "FROM User as user where user.fullName = :name";
+//        left join fetch user.pets
 
         try(Session session = HibernateUtil.getSessionFactory().openSession()) {
             Query<User> query = session.createQuery(hql);
-            query.setParameter("userId1", userId);
+            query.setParameter("name", name);
 
-            User user = query.uniqueResult();
-            logger.debug(user.toString());
+//            User user = query.uniqueResult();
+//            logger.debug(user.toString());
 
 
-            return user;
+            return query.list();
+        }catch(Exception e){
+            logger.debug(e.getMessage());
+            return null;
         }
     }
 }

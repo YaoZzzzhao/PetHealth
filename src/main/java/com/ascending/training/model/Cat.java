@@ -1,13 +1,15 @@
 package com.ascending.training.model;
 
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 
 @Entity
 @Table(name = "cats")
 public class Cat {
     @Id
-//    @GeneratedValue(strategy= GenerationType.IDENTITY)
+    @GeneratedValue(strategy= GenerationType.IDENTITY)
     private long id;
 
 //    @Column(name = "owner_id")
@@ -17,7 +19,7 @@ public class Cat {
     private String name;
 
     @Column(name = "Spay_neuter")
-    private char spay_neuter;
+    private char spayNeuter;
 
     @Column(name ="Deworm")
     private char deworm;
@@ -36,9 +38,9 @@ public class Cat {
 
 
 
-
+    @JsonIgnore
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "owner_id", referencedColumnName = "id")
+    @JoinColumn(name = "cat_id", referencedColumnName = "id")
     private Pet pet;
 
     public Pet getPet(){return pet;}
@@ -46,24 +48,6 @@ public class Cat {
         this.pet = p;
     }
 
-
-
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String cat_name) {
-        this.name = cat_name;
-    }
-
-//    public int getOwnerId() {
-//        return owner_id;
-//    }
-
-//    public void setOwnerId(int owner_id) {
-//        this.owner_id = owner_id;
-//    }
 
     public long getId() {
         return id;
@@ -73,12 +57,20 @@ public class Cat {
         this.id = id;
     }
 
-    public char getRhi() {
-        return rhi;
+    public String getName() {
+        return name;
     }
 
-    public void setRhi(char rhi) {
-        this.rhi = rhi;
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public char getSpayNeuter() {
+        return spayNeuter;
+    }
+
+    public void setSpayNeuter(char spayNeuter) {
+        this.spayNeuter = spayNeuter;
     }
 
     public char getDeworm() {
@@ -89,12 +81,20 @@ public class Cat {
         this.deworm = deworm;
     }
 
-    public char getRabies() {
-        return rabies;
+    public char getPan() {
+        return pan;
     }
 
-    public void setRabies(char rabies) {
-        this.rabies = rabies;
+    public void setPan(char pan) {
+        this.pan = pan;
+    }
+
+    public char getRhi() {
+        return rhi;
+    }
+
+    public void setRhi(char rhi) {
+        this.rhi = rhi;
     }
 
     public char getCalici() {
@@ -105,23 +105,11 @@ public class Cat {
         this.calici = calici;
     }
 
-    public char getPan() {
-        return pan;
+    public char getRabies() {
+        return rabies;
     }
 
-    public void setPan(char pan) {
-        this.pan = pan;
+    public void setRabies(char rabies) {
+        this.rabies = rabies;
     }
-
-    public char getSpayNeuter() {
-        return spay_neuter;
-    }
-
-    public void setSpayNeuter(char spay_neuter) {
-        this.spay_neuter = spay_neuter;
-    }
-
-    //    public String toString(){
-//        return cat_name+calici+panleukopenia;
-//    }
 }

@@ -1,5 +1,7 @@
 package com.ascending.training.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 
 @Entity
@@ -17,7 +19,7 @@ public class Dog {
     private String name;
 
     @Column(name = "Spay_neuter")
-    private char spay_neuter;
+    private char spayNeuter;
 
     @Column(name = "Rabies")
     private char rabies;
@@ -36,9 +38,9 @@ public class Dog {
 
 
 
-
+    @JsonIgnore
     @ManyToOne(fetch = FetchType.LAZY )
-    @JoinColumn(name = "pet_id",referencedColumnName = "id")
+    @JoinColumn(name = "dog_id",referencedColumnName = "id")
     private Pet pet;
 
     public Pet getPet(){return pet;}
@@ -46,88 +48,67 @@ public class Dog {
         this.pet = u;
     }
 
-
-
     public long getId() {
         return id;
     }
 
-//    public long getOwnerId() {
-//        return owner_id;
-//    }
+    public void setId(long id) {
+        this.id = id;
+    }
 
     public String getName() {
         return name;
     }
 
+    public void setName(String name) {
+        this.name = name;
+    }
+
     public char getSpayNeuter() {
-        return spay_neuter;
+        return spayNeuter;
+    }
+
+    public void setSpayNeuter(char spayNeuter) {
+        this.spayNeuter = spayNeuter;
     }
 
     public char getRabies() {
         return rabies;
     }
 
+    public void setRabies(char rabies) {
+        this.rabies = rabies;
+    }
+
     public char getDistemper() {
         return distemper;
+    }
+
+    public void setDistemper(char distemper) {
+        this.distemper = distemper;
     }
 
     public char getParvo() {
         return parvo;
     }
 
+    public void setParvo(char parvo) {
+        this.parvo = parvo;
+    }
+
     public char getAdenovirus() {
         return adenovirus;
+    }
+
+    public void setAdenovirus(char adenovirus) {
+        this.adenovirus = adenovirus;
     }
 
     public char getBordetella() {
         return bordetella;
     }
 
-
-
-
-//    public void setId(long i) {
-//        this.id = i;
-//    }
-
-//    public void setOwnerId(long i) {
-//        this.owner_id = i;
-//    }
-
-    public void setName(String i) {
-        this.name = i;
+    public void setBordetella(char bordetella) {
+        this.bordetella = bordetella;
     }
-
-    public void setSpayNeuter(char i) {
-        this.spay_neuter = i;
-    }
-
-    public void setRabies(char i) {
-        this.rabies = i;
-    }
-
-    public void setDistemper(char i) {
-        this.distemper = i;
-    }
-
-    public void setParvo(char i) {
-        this.parvo = i;
-    }
-
-    public void setAdenovirus(char i) {
-        this.adenovirus = i;
-    }
-
-    public void setBordetella(char i) {
-        this.bordetella = i;
-    }
-
-//    public int getDog_id() {
-//        return dog_id;
-//    }
-
-//    public void setDog_id(int dog_id) {
-//        this.dog_id = dog_id;
-//    }
 }
