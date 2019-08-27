@@ -1,7 +1,5 @@
 package com.ascending.training.model;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-
 import javax.persistence.*;
 import java.util.Date;
 import java.util.Objects;
@@ -10,7 +8,7 @@ import java.util.Set;
 @Entity
 @Table(name = "users")
 
-public class User {
+public class Customer {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)     //按顺序自动产生id（只能自动产生integer）
     private long id;
@@ -54,7 +52,7 @@ public class User {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        User users = (User) o;
+        Customer users = (Customer) o;
         return id == users.id &&
                 fullName.equals(users.fullName);
     }

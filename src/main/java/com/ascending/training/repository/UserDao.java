@@ -1,16 +1,16 @@
 package com.ascending.training.repository;
 
-import com.ascending.training.model.User;
+import com.ascending.training.model.Customer;
 
 import java.util.List;
 
-public interface UserDao {
-    boolean save(User user);
-    int update(User user);
+public interface CustomerDao {
+    boolean save(Customer customer);
+    int update(Customer customer);
     int delete(long userId);
 
-    List<User> getUsers();
-    List<User> getUsersByName(String name);
+    List<Customer> getUsers();
+    List<Customer> getUsersByName(String name);
 
 
 

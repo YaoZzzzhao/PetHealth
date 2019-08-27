@@ -1,6 +1,6 @@
 package com.ascending.training.repository;
 
-import com.ascending.training.model.User;
+import com.ascending.training.model.Customer;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -13,16 +13,16 @@ import java.util.List;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNull;
 
-public class HibernateUserTest {
+public class HibernateCustomerTest {
 
     Logger logger = LoggerFactory.getLogger(this.getClass());
-    private User a;
-    private UserDaoImpl userDaoImpl = new UserDaoImpl();
+    private Customer a;
+    private CustomerDaoImpl userDaoImpl = new CustomerDaoImpl();
 
 
     @Before
     public void init(){
-//        UserDao userDao = new UserDao();
+//        CustomerDao userDao = new CustomerDao();
 
         String fullname = "Jaygee";
         String pwd = "122333.0";
@@ -31,7 +31,7 @@ public class HibernateUserTest {
         String petType = "CAT";
         int petNum = 1;
 
-        a = new User();
+        a = new Customer();
 //        a.setId(30);
         a.setFullName(fullname);
         a.setPassword(pwd);
@@ -53,11 +53,11 @@ public class HibernateUserTest {
 
 //    @Test
 //    public void getUserTest() {
-//        String hql = "FROM User";
-//        List<User> users = null;
+//        String hql = "FROM Customer";
+//        List<Customer> users = null;
 //
 //        try (Session session = HibernateUtil.getSessionFactory().openSession()) {
-//            Query<User> query = session.createQuery(hql);
+//            Query<Customer> query = session.createQuery(hql);
 //            users = query.list();
 //
 //        } catch (Exception e) {
@@ -72,7 +72,7 @@ public class HibernateUserTest {
         // long id = 2;
 
 
-//        UserDaoImpl userDaoImpl = new UserDaoImpl();
+//        CustomerDaoImpl userDaoImpl = new CustomerDaoImpl();
         String pwd = "122333.0";
 
 //        String
@@ -82,7 +82,7 @@ public class HibernateUserTest {
 
     @Test
     public void updateTest(){
-        User kyo = userDaoImpl.getUsersByName("Jaygee").get(0);
+        Customer kyo = userDaoImpl.getUsersByName("Jaygee").get(0);
         String newEmail = "Leave@gmail.com";
         kyo.setEmail(newEmail);
         userDaoImpl.update(kyo);
@@ -99,7 +99,7 @@ public class HibernateUserTest {
 
     @Test
     public void getUsersTest(){
-        List<User> all = userDaoImpl.getUsers();
+        List<Customer> all = userDaoImpl.getUsers();
         int expectedOfNumber = 2;
 
         assertEquals(all.size(),expectedOfNumber);
@@ -108,7 +108,7 @@ public class HibernateUserTest {
     @Test
     public void getUserByNameTest(){
         String testName = "Jaygee";
-        User test = userDaoImpl.getUsersByName("Jaygee").get(0);
+        Customer test = userDaoImpl.getUsersByName("Jaygee").get(0);
         System.out.println(test.getPets());
 
         assertEquals(testName, test.getFullName());
