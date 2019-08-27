@@ -40,12 +40,12 @@ public class HibernateCatTest {
         catDaoImpl.saveCat(a,pet);
     }
 
-//    @After
-//    public void cleanUp(){
-//        catDaoImpl.delete(a.getId());
-//        catDaoImpl = null;
-//        assertNull(catDaoImpl);
-//    }
+   @After
+   public void cleanUp(){
+       catDaoImpl.delete(a.getId());
+       catDaoImpl = null;
+       assertNull(catDaoImpl);
+   }
 
 
 
@@ -89,6 +89,4 @@ public class HibernateCatTest {
 
         assertEquals(testName, test.getName());
     }
-
-
 }

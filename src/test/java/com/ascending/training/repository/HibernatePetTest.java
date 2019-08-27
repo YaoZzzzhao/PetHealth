@@ -45,12 +45,21 @@ public class HibernatePetTest {
         petDaoImpl.savePet(a, user);
     }
 
+<<<<<<< HEAD
     @After
     public void cleanUp(){
         petDaoImpl.delete(a.getId());
         petDaoImpl = null;
         assertNull(petDaoImpl);
     }
+=======
+   @After
+   public void cleanUp(){
+       petDaoImpl.delete(a.getId());
+       petDaoImpl = null;
+       assertNull(petDaoImpl);
+   }
+>>>>>>> b6bbaf11dff598af8188a7439b51ea0a83ddc47c
 
 
 
