@@ -1,6 +1,6 @@
 package com.ascending.training.repository;
 
-import com.ascending.training.model.Customer;
+import com.ascending.training.model.User;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -13,25 +13,25 @@ import java.util.List;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNull;
 
-public class HibernateCustomerTest {
+public class HibernateUserTest {
 
     Logger logger = LoggerFactory.getLogger(this.getClass());
-    private Customer a;
-    private CustomerDaoImpl userDaoImpl = new CustomerDaoImpl();
+    private User a;
+    private UserDaoImpl userDaoImpl = new UserDaoImpl();
 
 
     @Before
     public void init(){
-//        CustomerDao userDao = new CustomerDao();
+//        UserDao userDao = new UserDao();
 
-        String fullname = "Jaygee";
-        String pwd = "122333.0";
+        String fullname = "Rio";
+        String pwd =     "123456789";
         String email = "Kyo@gmail.com";
         Date regisDate = new Date(119,7,9);
         String petType = "CAT";
         int petNum = 1;
 
-        a = new Customer();
+        a = new User();
 //        a.setId(30);
         a.setFullName(fullname);
         a.setPassword(pwd);
@@ -43,21 +43,21 @@ public class HibernateCustomerTest {
         userDaoImpl.save(a);
     }
 
-    @After
-    public void cleanUp(){
-        userDaoImpl.delete(a.getId());
-        userDaoImpl = null;
-        assertNull(userDaoImpl);
-    }
+//    @After
+//    public void cleanUp(){
+//        userDaoImpl.delete(a.getId());
+//        userDaoImpl = null;
+//        assertNull(userDaoImpl);
+//    }
 
 
 //    @Test
 //    public void getUserTest() {
-//        String hql = "FROM Customer";
-//        List<Customer> users = null;
+//        String hql = "FROM User";
+//        List<User> users = null;
 //
 //        try (Session session = HibernateUtil.getSessionFactory().openSession()) {
-//            Query<Customer> query = session.createQuery(hql);
+//            Query<User> query = session.createQuery(hql);
 //            users = query.list();
 //
 //        } catch (Exception e) {
@@ -72,8 +72,8 @@ public class HibernateCustomerTest {
         // long id = 2;
 
 
-//        CustomerDaoImpl userDaoImpl = new CustomerDaoImpl();
-        String pwd = "122333.0";
+//        UserDaoImpl userDaoImpl = new UserDaoImpl();
+        String pwd = "123456789";
 
 //        String
 
@@ -82,7 +82,7 @@ public class HibernateCustomerTest {
 
     @Test
     public void updateTest(){
-        Customer kyo = userDaoImpl.getUsersByName("Jaygee").get(0);
+        User kyo = userDaoImpl.getUsersByName("Jaygee").get(0);
         String newEmail = "Leave@gmail.com";
         kyo.setEmail(newEmail);
         userDaoImpl.update(kyo);
@@ -99,7 +99,7 @@ public class HibernateCustomerTest {
 
     @Test
     public void getUsersTest(){
-        List<Customer> all = userDaoImpl.getUsers();
+        List<User> all = userDaoImpl.getUsers();
         int expectedOfNumber = 2;
 
         assertEquals(all.size(),expectedOfNumber);
@@ -108,7 +108,7 @@ public class HibernateCustomerTest {
     @Test
     public void getUserByNameTest(){
         String testName = "Jaygee";
-        Customer test = userDaoImpl.getUsersByName("Jaygee").get(0);
+        User test = userDaoImpl.getUsersByName("Jaygee").get(0);
         System.out.println(test.getPets());
 
         assertEquals(testName, test.getFullName());

@@ -1,9 +1,8 @@
 package com.ascending.training.service;
 
 import com.ascending.training.init.AppInitializer;
-import com.ascending.training.model.Pet;
 import com.ascending.training.model.User;
-import com.ascending.training.repository.UserDaoImpl;
+import com.ascending.training.model.Pet;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -59,7 +58,7 @@ public class PetServiceTest {
 
         a.setUser(user);
 
-        petService.saveP(a,user);
+        petService.saveP(a, user);
     }
 
     @After

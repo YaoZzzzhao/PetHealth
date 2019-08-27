@@ -1,7 +1,7 @@
 package com.ascending.training.service;
 
 import com.ascending.training.init.AppInitializer;
-import com.ascending.training.model.Customer;
+import com.ascending.training.model.User;
 import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
@@ -21,18 +21,18 @@ import static org.junit.Assert.assertNull;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest(classes= AppInitializer.class)
-public class CustomerServiceTest {
+public class UserServiceTest {
     Logger logger = LoggerFactory.getLogger(this.getClass());
 
     @Autowired
-    private CustomerService customerService;
+    private UserService userService;
 
-    private Customer a;
+    private User a;
 
     @Before
     public void init(){
 
-        a = new Customer();
+        a = new User();
         String fullname = "Slim";
         String pwd = "122333.0";
         String email = "Kyo@gmail.com";
@@ -49,14 +49,14 @@ public class CustomerServiceTest {
         a.setPetNum(petNum);
         a.setEmail(email);
 
-        customerService.save(a);
+        userService.save(a);
     }
 
     @After
     public void cleanUp(){
-        customerService.delete(a.getId());
-        customerService = null;
-        assertNull(customerService);
+        userService.delete(a.getId());
+        userService = null;
+        assertNull(userService);
     }
 
 
@@ -72,32 +72,32 @@ public class CustomerServiceTest {
 
     @Test
     public void updateTest(){
-        Customer kyo = customerService.getUsersByName( "Jaygee").get(0);
+        User kyo = userService.getUsersByName( "Jaygee").get(0);
         String newEmail = "Leave@gmail.com";
         kyo.setEmail(newEmail);
-        customerService.update(kyo);
+        userService.update(kyo);
 
         assertEquals(kyo.getEmail(), newEmail);
     }
 
     @Test
     public void deleteTest(){
-        int expectedOfNum = customerService.delete(6);
+        int expectedOfNum = userService.delete(6);
 
         assertEquals(1,expectedOfNum);
     }
 
-    long toString(Customer b){
+    long toString(User b){
         return b.getId();
     }
 
     @Test
     public void getUsersTest(){
-        List<Customer> all = customerService.getUsers();
+        List<User> all = userService.getUsers();
         int expectedOfNumber = 7;
 
 
-//        for (Customer i : all){
+//        for (User i : all){
 //            System.out.println(i);
 //        }
 
@@ -107,7 +107,7 @@ public class CustomerServiceTest {
     @Test
     public void getUserByNameTest(){
         String testName = "Hoan";
-        Customer test = customerService.getUsersByName(testName).get(0);
+        User test = userService.getUsersByName(testName).get(0);
         System.out.println(test.getPets());
 
         assertEquals(testName, test.getFullName());

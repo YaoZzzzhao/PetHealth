@@ -1,7 +1,7 @@
 package com.ascending.training.repository;
 
-import com.ascending.training.model.Pet;
 import com.ascending.training.model.User;
+import com.ascending.training.model.Pet;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -42,7 +42,7 @@ public class HibernatePetTest {
         a.setColor(color);
 
 
-        petDaoImpl.savePet(a,user);
+        petDaoImpl.savePet(a, user);
     }
 
     @After

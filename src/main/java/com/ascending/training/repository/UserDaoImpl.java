@@ -1,6 +1,6 @@
 package com.ascending.training.repository;
 
-import com.ascending.training.model.Customer;
+import com.ascending.training.model.User;
 import com.ascending.training.util.HibernateUtil;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
@@ -11,17 +11,17 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 
 @Repository
-public class CustomerDaoImpl implements CustomerDao {
+public class UserDaoImpl implements UserDao {
     private Logger logger = LoggerFactory.getLogger(this.getClass());
 
     @Override
-    public boolean save(Customer customer){
+    public boolean save(User user){
         Transaction transaction = null;
         boolean isSuccess = true;
 
         try(Session session = HibernateUtil.getSessionFactory().openSession()){
             transaction = session.beginTransaction();
-            session.save(customer);
+            session.save(user);
             transaction.commit();
         }
 
@@ -31,22 +31,22 @@ public class CustomerDaoImpl implements CustomerDao {
             logger.error(e.getMessage());
         }
 
-        if(isSuccess) logger.debug(String.format("The customer %s was saved.", customer.toString()));
+        if(isSuccess) logger.debug(String.format("The user %s was saved.", user.toString()));
 
         return isSuccess;
     }
 
     @Override
-    public int update(Customer customer){
+    public int update(User user){
         Transaction transaction = null;
         boolean isSuccess = true;
         int updateCount = 0;
 
         try(Session session = HibernateUtil.getSessionFactory().openSession()){
-//            Query<Customer> query = session.createQuery(hql);
+//            Query<User> query = session.createQuery(hql);
 
             transaction = session.beginTransaction();
-            session.saveOrUpdate(customer);
+            session.saveOrUpdate(user);
 //            updateCount = query.executeUpdate();
             transaction.commit();
         }
@@ -58,7 +58,7 @@ public class CustomerDaoImpl implements CustomerDao {
 
         if(isSuccess) {
             updateCount ++;
-            logger.debug(String.format("The customer %s was updated.", customer.toString()));
+            logger.debug(String.format("The user %s was updated.", user.toString()));
         }
 
         return updateCount;
@@ -68,7 +68,7 @@ public class CustomerDaoImpl implements CustomerDao {
     @Override
     public int delete(long userId){
 
-//        String hql = "DELETE Customer where id = :userId1";
+//        String hql = "DELETE User where id = :userId1";
 
         int deletedCount = 0;
         Transaction transaction = null;
@@ -76,12 +76,12 @@ public class CustomerDaoImpl implements CustomerDao {
         try(Session session = HibernateUtil.getSessionFactory().openSession()){
             transaction = session.beginTransaction();
 
-            Customer customer = session.get(Customer.class, userId);
-            session.delete(customer);
+            User user = session.get(User.class, userId);
+            session.delete(user);
 
             deletedCount = 1;
 
-            //Query<Customer> query = session.createQuery(hql);
+            //Query<User> query = session.createQuery(hql);
             //query.setParameter("userId1",userId);
 //            query.setParameter("userName1", userName);
 
@@ -100,20 +100,20 @@ public class CustomerDaoImpl implements CustomerDao {
     }
 
     @Override
-    public List<Customer> getUsers(){
-//        String hql = "select distinct user FROM Customer as user left join fetch user.pets as pet left join fetch pet.dogs left join fetch pet.cats order by user.id";
+    public List<User> getUsers(){
+//        String hql = "select distinct user FROM User as user left join fetch user.pets as pet left join fetch pet.dogs left join fetch pet.cats order by user.id";
         String hql = "From User";
 
         Session session = HibernateUtil.getSessionFactory().getCurrentSession();
         Transaction t = session.beginTransaction();
-        Query<Customer> query = session.createQuery(hql);
-        List<Customer> customers = query.list();
+        Query<User> query = session.createQuery(hql);
+        List<User> users = query.list();
         t.commit();
-        return customers;
+        return users;
     }
 
     @Override
-    public List<Customer> getUsersByName(String name){
+    public List<User> getUsersByName(String name){
         if(name == null) return null;
 
         logger.info(">>>>>>>>>> Name = " + name);
@@ -121,10 +121,10 @@ public class CustomerDaoImpl implements CustomerDao {
 //        left join fetch user.pets
 
         try(Session session = HibernateUtil.getSessionFactory().openSession()) {
-            Query<Customer> query = session.createQuery(hql);
+            Query<User> query = session.createQuery(hql);
             query.setParameter("name", name);
 
-//            Customer user = query.uniqueResult();
+//            User user = query.uniqueResult();
 //            logger.debug(user.toString());
 
 
@@ -132,6 +132,18 @@ public class CustomerDaoImpl implements CustomerDao {
         }catch(Exception e){
             logger.debug(e.getMessage());
             return null;
+        }
+    }
+
+//    @Override
+    public User getUserByCredentials(String email, String password) {
+        String hql = "FROM User as u where lower(u.email) = :email and u.password = :password";
+        logger.debug(String.format("User email: %s, password: %s", email, password));
+        try (Session session = HibernateUtil.getSessionFactory().openSession()) {
+            Query<User> query = session.createQuery(hql);
+            query.setParameter("email", email.toLowerCase().trim());
+            query.setParameter("password", password);
+            return query.uniqueResult();
         }
     }
 }

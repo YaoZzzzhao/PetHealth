@@ -1,7 +1,7 @@
 package com.ascending.training.service;
 
-import com.ascending.training.model.Pet;
 import com.ascending.training.model.User;
+import com.ascending.training.model.Pet;
 import com.ascending.training.repository.PetDao;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

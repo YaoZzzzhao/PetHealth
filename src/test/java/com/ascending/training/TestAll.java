@@ -1,10 +1,6 @@
 package com.ascending.training;
 
 
-import com.ascending.training.CatDaoTest;
-import com.ascending.training.DogDaoTest;
-import com.ascending.training.PetDaoTest;
-import com.ascending.training.UserDaoTest;
 import org.junit.runner.RunWith;
 import org.junit.runners.Suite;
 

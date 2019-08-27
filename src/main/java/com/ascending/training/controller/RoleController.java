@@ -1,4 +1,5 @@
 package com.ascending.training.controller;
 
-public class RoleCotroller {
+public class RoleController {
+
 }

@@ -20,6 +20,7 @@
 /Users/yaozhao/Documents/runtime/src/main/java/com/ascending/training/jdbc/DogDao.java
 /Users/yaozhao/Documents/runtime/src/main/java/com/ascending/training/service/DogService.java
 /Users/yaozhao/Documents/runtime/src/main/java/com/ascending/training/repository/DogDao.java
+/Users/yaozhao/Documents/runtime/src/main/java/com/ascending/training/filter/SecurityFilter.java
 /Users/yaozhao/Documents/runtime/src/main/java/com/ascending/training/model/Pet.java
 /Users/yaozhao/Documents/runtime/src/main/java/com/ascending/training/service/PetService.java
 /Users/yaozhao/Documents/runtime/src/main/java/com/ascending/training/model/Dog.java

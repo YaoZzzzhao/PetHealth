@@ -1,6 +1,6 @@
 package com.ascending.training;
 
-import com.ascending.training.model.Customer;
+import com.ascending.training.model.User;
 import com.ascending.training.jdbc.UserDao;
 import org.junit.After;
 import org.junit.Assert;
@@ -11,10 +11,10 @@ import org.junit.Test;
 import java.util.Date;
 import java.util.List;
 
-public class CustomerDaoTest {
+public class UserDaoTest {
     private UserDao userDao;
 
-    String toString(Customer u){
+    String toString(User u){
         return u.getFullName();
     }
 
@@ -32,8 +32,8 @@ public class CustomerDaoTest {
 
     @Test
     public void getUserTest(){
-        List<Customer> customers = userDao.getUsers();
-        for (Customer t : customers) {
+        List<User> users = userDao.getUsers();
+        for (User t : users) {
 //            assertEquals("",t.getUsername());
             System.out.println(t.getFullName());
 //            System.out.println(t.toString());
@@ -43,41 +43,41 @@ public class CustomerDaoTest {
 
     @Test
     public void insertUserTest(){
-        Customer customer2 = new Customer();
+        User user2 = new User();
         Date d = new Date(119,2,3);
         String name = "Curry";
-        customer2.setId(1);
-        customer2.setFullName(name);
-        customer2.setEmail("Cooker@yahoo.com");
-        customer2.setPassword("kkyyttmacs");
-        customer2.setPetNum(3);
-        customer2.setRegisDate(d);
-        customer2.setPetType("CAT");
+        user2.setId(1);
+        user2.setFullName(name);
+        user2.setEmail("Cooker@yahoo.com");
+        user2.setPassword("kkyyttmacs");
+        user2.setPetNum(3);
+        user2.setRegisDate(d);
+        user2.setPetType("CAT");
 
 
-        userDao.insertUser(customer2);
+        userDao.insertUser(user2);
 
-        Assert.assertEquals(customer2.getFullName(),name);
+        Assert.assertEquals(user2.getFullName(),name);
 
 
     }
 
     @Test
     public void updateUserTest(){
-        Customer customer3 = new Customer();
+        User user3 = new User();
         Date d = new Date(119,2,3);
         String name = "Curry";
         String email = "Curry@yahoo.com";
-        customer3.setId(1);
-        customer3.setFullName(name);
-        customer3.setEmail(email);
-        customer3.setPetNum(3);
-        customer3.setRegisDate(d);
-        customer3.setPetType("CAT");
+        user3.setId(1);
+        user3.setFullName(name);
+        user3.setEmail(email);
+        user3.setPetNum(3);
+        user3.setRegisDate(d);
+        user3.setPetType("CAT");
 
-        userDao.updateUser(customer3);
+        userDao.updateUser(user3);
 
-        Assert.assertEquals(customer3.getEmail(),email);
+        Assert.assertEquals(user3.getEmail(),email);
     }
 
      @Test

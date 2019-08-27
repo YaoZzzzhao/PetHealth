@@ -1,31 +1,34 @@
 package com.ascending.training.service;
 
-import com.ascending.training.model.Customer;
-import com.ascending.training.repository.CustomerDao;
+import com.ascending.training.model.User;
+import com.ascending.training.repository.UserDao;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 @Service
-public class CustomerService {
+public class UserService {
     @Autowired
-    private CustomerDao customerDao;
+    private UserDao userDao;
 
-    public boolean save(Customer customer){
-        return customerDao.save(customer);
+    public boolean save(User user){
+        return userDao.save(user);
     }
 
-    public int update(Customer customer){return customerDao.update(customer);}
-    public int delete(long userId){return customerDao.delete(userId);}
+    public int update(User user){return userDao.update(user);}
+    public int delete(long userId){return userDao.delete(userId);}
 
-    public List<Customer> getCustomer(){return customerDao.getUsers();}
+    public User getUserByCredentials(String email, String password) {
+        return userDao.getUserByCredentials(email, password);
+    }
+    public List<User> getUsers(){return userDao.getUsers();}
 
-    public List<Customer> getCustomersByName(String customerName){
-        return customerDao.getCustomersByName(customerName);
+    public List<User> getUsersByName(String customerName){
+        return userDao.getUsersByName(customerName);
     }
 
-    long toString(Customer b){
+    long toString(User b){
         return b.getId();
     }
 }

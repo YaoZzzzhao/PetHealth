@@ -2,7 +2,6 @@ package com.ascending.training;
 
 import com.ascending.training.model.Pet;
 import com.ascending.training.jdbc.PetDao;
-import com.ascending.training.model.User;
 import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;

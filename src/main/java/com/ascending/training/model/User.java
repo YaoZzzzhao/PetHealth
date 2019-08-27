@@ -1,14 +1,17 @@
 package com.ascending.training.model;
 
+import org.apache.commons.codec.digest.DigestUtils;
+
 import javax.persistence.*;
 import java.util.Date;
+import java.util.List;
 import java.util.Objects;
 import java.util.Set;
 
 @Entity
 @Table(name = "users")
 
-public class Customer {
+public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)     //按顺序自动产生id（只能自动产生integer）
     private long id;
@@ -47,12 +50,21 @@ public class Customer {
     }
     public void setPets(Set<Pet> p){this.pets = p;}
 
+    //@ManyToMany(mappedBy = "users", cascade = {CascadeType.REFRESH}, fetch = FetchType.EAGER)
+    @ManyToMany(cascade = {CascadeType.ALL}, fetch = FetchType.EAGER)
+    @JoinTable(name = "users_role",
+            joinColumns = { @JoinColumn(name = "user_id") },
+            inverseJoinColumns = { @JoinColumn(name = "role_id") }
+    )
+    private List<Role> roles;
+
+
 
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        Customer users = (Customer) o;
+        User users = (User) o;
         return id == users.id &&
                 fullName.equals(users.fullName);
     }
@@ -117,6 +129,14 @@ public class Customer {
 
     public void setPetNum(int petNum) {
         this.petNum = petNum;
+    }
+
+    public List<Role> getRoles() {
+        return roles;
+    }
+
+    public void setRoles(List<Role> roles) {
+        this.roles = roles;
     }
 
     @Override
