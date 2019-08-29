@@ -1,6 +1,7 @@
 package com.ascending.training.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonView;
 
 import javax.persistence.*;
 import java.util.Set;
@@ -11,21 +12,26 @@ import java.util.Set;
 public class Pet {
     @Id
     @GeneratedValue(strategy= GenerationType.IDENTITY)
+    @JsonView(View.Pet.class)
     private long id;
 
-
+    @JsonView(View.Pet.class)
     @Column(name = "name")
     private String name;
 
+    @JsonView(View.Pet.class)
     @Column(name = "type")
     private String type;
 
+    @JsonView(View.Pet.class)
     @Column(name = "color")
     private String color;
 
+    @JsonView(View.Pet.class)
     @Column(name = "breed")
     private String breed;
 
+    @JsonView(View.Pet.class)
     @Column(name = "age")
     private int age;
 
@@ -48,6 +54,7 @@ public class Pet {
 
 
 //    @JsonIgnore
+    @JsonView(View.CatNDog.class)
     @OneToMany(mappedBy = "pet", cascade = CascadeType.REMOVE, fetch = FetchType.LAZY)
     private Set<Cat> cats;
 
@@ -63,6 +70,7 @@ public class Pet {
     public void setCats(Set<Cat> c){this.cats = c;}
 
 //    @JsonIgnore
+    @JsonView(View.CatNDog.class)
     @OneToMany(mappedBy = "pet", cascade = CascadeType.REMOVE, fetch = FetchType.LAZY)
     private Set<Dog> dogs;
 

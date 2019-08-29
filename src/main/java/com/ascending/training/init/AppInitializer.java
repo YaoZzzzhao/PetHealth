@@ -7,9 +7,8 @@ import org.springframework.boot.web.servlet.ServletComponentScan;
 
 @SpringBootApplication(scanBasePackages = {"com.ascending.training"})
 @ServletComponentScan(basePackages = {"com.ascending.training.filter"})
+
 public class AppInitializer {
-
-
     public static void main(String[] args) {
         SpringApplication.run(AppInitializer.class,args);
     }

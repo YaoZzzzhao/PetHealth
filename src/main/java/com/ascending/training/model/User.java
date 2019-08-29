@@ -1,5 +1,7 @@
 package com.ascending.training.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonView;
 import org.apache.commons.codec.digest.DigestUtils;
 
 import javax.persistence.*;
@@ -14,29 +16,37 @@ import java.util.Set;
 public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)     //按顺序自动产生id（只能自动产生integer）
+    @JsonView(View.User.class)
     private long id;
 
     @Column(name = "full_name")
+    @JsonView(View.User.class)
     private String fullName;
 
     @Column(name = "password")
+    @JsonView(View.User.class)
     private String password;
 
     @Column(name = "email")
+    @JsonView(View.User.class)
     private String email;
 
     @Column(name = "regis_date")
+    @JsonView(View.User.class)
     private Date regisDate;
 
     @Column(name = "pet_type")
+    @JsonView(View.User.class)
     private String petType;
 
     @Column(name = "pet_num")
+    @JsonView(View.User.class)
     private int petNum;
 
 
 //    @JsonIgnore
     @OneToMany(mappedBy = "user", cascade = CascadeType.REMOVE, fetch = FetchType.LAZY)
+    @JsonView(View.Pet.class)
     private Set<Pet> pets;
 
 
@@ -56,6 +66,7 @@ public class User {
             joinColumns = { @JoinColumn(name = "user_id") },
             inverseJoinColumns = { @JoinColumn(name = "role_id") }
     )
+    @JsonIgnore
     private List<Role> roles;
 
 

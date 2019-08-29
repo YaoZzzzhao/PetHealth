@@ -1,7 +1,9 @@
 package com.ascending.training.controller;
 
 import com.ascending.training.model.Pet;
+import com.ascending.training.model.View;
 import com.ascending.training.service.PetService;
+import com.fasterxml.jackson.annotation.JsonView;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,7 +21,14 @@ public class PetController {
     private PetService petService;
 
     @RequestMapping(value = "",method = RequestMethod.GET, produces = "application/json")
+    @JsonView(View.Pet.class)
     public List<Pet> getPets(){
+        return petService.getPets();
+    }
+
+    @RequestMapping(value = "/withAllInfo", method = RequestMethod.GET, produces = {MediaType.APPLICATION_JSON_VALUE})
+    @JsonView(View.CatNDog.Class)
+    public List<Pet> getPetsWithAllInfo(){
         return petService.getPets();
     }
 

@@ -4,11 +4,11 @@
 -- ;
 -- commit;
 
-insert into users_role (user_id, role_id)values
-(1, 1),
-(2, 2),
-(3, 2),
-(1, 2)
-;
-commit;
+-- insert into users_role (user_id, role_id)values
+-- (1, 1),
+-- (2, 2),
+-- (3, 2),
+-- (1, 2)
+-- ;
+-- commit;
 

@@ -2,7 +2,9 @@ package com.ascending.training.controller;
 
 
 import com.ascending.training.model.User;
+import com.ascending.training.model.View;
 import com.ascending.training.service.UserService;
+import com.fasterxml.jackson.annotation.JsonView;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
@@ -19,8 +21,21 @@ public class UserController {
     @Autowired
     private UserService userService;
 
+    @JsonView(View.User.class)
     @RequestMapping(value = "",method = RequestMethod.GET, produces = {MediaType.APPLICATION_JSON_VALUE})
     public List<User> getUsers(){
+        return userService.getUsers();
+    }
+
+    @JsonView(View.Pet.class)
+    @RequestMapping(value = "/withPets",method = RequestMethod.GET, produces = {MediaType.APPLICATION_JSON_VALUE})
+    public List<User> getUsersWithPets(){
+        return userService.getUsers();
+    }
+
+    @JsonView(View.CatNDog.class)
+    @RequestMapping(value = "/withAllInfo",method = RequestMethod.GET, produces = {MediaType.APPLICATION_JSON_VALUE})
+    public List<User> getUsersWithAllInfo(){
         return userService.getUsers();
     }
 

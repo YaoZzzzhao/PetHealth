@@ -25,10 +25,10 @@ public class HibernateDogTest {
 //        long owner_id = 12;
 
         a = new Dog();
-        Pet pet = petDaoImpl.getPetsByName("pigff").get(0);
+        Pet pet = petDaoImpl.getPetsByName("Jane").get(0);
 //        a.setId(30);
         a.setAdenovirus('N');
-        a.setName("Jinmu");
+        a.setName("Jane");
 //        a.setOwnerid(owner_id);
         a.setBordetella('N');
         a.setDistemper('Y');

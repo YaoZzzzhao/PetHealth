@@ -101,8 +101,8 @@ public class UserDaoImpl implements UserDao {
 
     @Override
     public List<User> getUsers(){
-//        String hql = "select distinct user FROM User as user left join fetch user.pets as pet left join fetch pet.dogs left join fetch pet.cats order by user.id";
-        String hql = "From User";
+        String hql = "select distinct user FROM User as user left join fetch user.pets as pet left join fetch pet.dogs left join fetch pet.cats order by user.id";
+//        String hql = "From User";
 
         Session session = HibernateUtil.getSessionFactory().getCurrentSession();
         Transaction t = session.beginTransaction();

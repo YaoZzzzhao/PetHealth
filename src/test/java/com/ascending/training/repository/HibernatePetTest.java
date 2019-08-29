@@ -23,9 +23,9 @@ public class HibernatePetTest {
     @Before
     public void init(){
 //        long owner_id = 12;
-        String type = "DOG";
-        String breed = "JinmuDog";
-        String name = "pigff";
+        String type = "CAT";
+        String breed = "AdoraCat";
+        String name = "Yveltal";
         int age = 3;
         String color = "Orange";
 
@@ -33,7 +33,7 @@ public class HibernatePetTest {
 //        a.setId(30);
         a.setName(name);
         a.setType(type);
-        User user = userDaoImpl.getUsersByName("Hoan").get(0);
+        User user = userDaoImpl.getUsersByName("Kite").get(0);
         a.setUser(user);
 
 //        a.owner_id = a.getUser().getId();
@@ -45,27 +45,17 @@ public class HibernatePetTest {
         petDaoImpl.savePet(a, user);
     }
 
-<<<<<<< HEAD
-    @After
-    public void cleanUp(){
-        petDaoImpl.delete(a.getId());
-        petDaoImpl = null;
-        assertNull(petDaoImpl);
-    }
-=======
-   @After
-   public void cleanUp(){
-       petDaoImpl.delete(a.getId());
-       petDaoImpl = null;
-       assertNull(petDaoImpl);
-   }
->>>>>>> b6bbaf11dff598af8188a7439b51ea0a83ddc47c
-
+//    @After
+//    public void cleanUp(){
+//        petDaoImpl.delete(a.getId());
+//        petDaoImpl = null;
+//        assertNull(petDaoImpl);
+//    }
 
 
     @Test
     public void savePetTest() {
-        String testName = "pigff";
+        String testName = "Jane";
 
 
         assertEquals(testName, a.getName());
@@ -89,7 +79,7 @@ public class HibernatePetTest {
     }
 
     @Test
-    public void getUsersTest(){
+    public void getPetsTest(){
         List<Pet> all = petDaoImpl.getPets();
         int expectedOfNumber =5 ;
 
@@ -97,7 +87,7 @@ public class HibernatePetTest {
     }
 
     @Test
-    public void getPetByNameTest(){
+    public void getPetsByNameTest(){
         String testName = "Hoan";
         Pet test = petDaoImpl.getPetsByName(testName).get(0);
 

@@ -25,7 +25,7 @@ public class HibernateCatTest {
 //        long owner_id = 12;
 
         a = new Cat();
-        Pet pet = petDaoImpl.getPetsByName("YYzz").get(0);
+        Pet pet = petDaoImpl.getPetsByName("Yveltal").get(0);
 //        a.setId(30);
         a.setCalici('Y');
 //        a.setOwnerid(owner_id);
@@ -34,18 +34,18 @@ public class HibernateCatTest {
         a.setRhi('Y');
         a.setRabies('Y');
         a.setSpayNeuter('N');
-        a.setName("Kite");
+        a.setName("Yveltal");
 
 
         catDaoImpl.saveCat(a,pet);
     }
 
-   @After
-   public void cleanUp(){
-       catDaoImpl.delete(a.getId());
-       catDaoImpl = null;
-       assertNull(catDaoImpl);
-   }
+//   @After
+//   public void cleanUp(){
+//       catDaoImpl.delete(a.getId());
+//       catDaoImpl = null;
+//       assertNull(catDaoImpl);
+//   }
 
 
 

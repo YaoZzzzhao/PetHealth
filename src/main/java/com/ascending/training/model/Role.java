@@ -25,7 +25,7 @@ public class Role {
     private boolean allowedUpdate;
     @Column(name = "allowed_delete")
     private boolean allowedDelete;
-    @JsonIgnore
+//    @JsonIgnore
    /*
    @ManyToMany(fetch = FetchType.EAGER)
    @JoinTable(name = "users_role",

@@ -24,9 +24,9 @@ public class HibernateUserTest {
     public void init(){
 //        UserDao userDao = new UserDao();
 
-        String fullname = "Rio";
-        String pwd =     "123456789";
-        String email = "Kyo@gmail.com";
+        String fullname = "Kite";
+        String pwd =     "123kkkk";
+        String email = "Kite@gmail.com";
         Date regisDate = new Date(119,7,9);
         String petType = "CAT";
         int petNum = 1;
@@ -43,29 +43,12 @@ public class HibernateUserTest {
         userDaoImpl.save(a);
     }
 
-   @After
-   public void cleanUp(){
-       userDaoImpl.delete(a.getId());
-       userDaoImpl = null;
-       assertNull(userDaoImpl);
-   }
-
-
-//    @Test
-//    public void getUserTest() {
-//        String hql = "FROM User";
-//        List<User> users = null;
-//
-//        try (Session session = HibernateUtil.getSessionFactory().openSession()) {
-//            Query<User> query = session.createQuery(hql);
-//            users = query.list();
-//
-//        } catch (Exception e) {
-//            logger.error(e.getMessage());
-//        }
-//
-//        Assert.assertNotNull(users);
-//    }
+//   @After
+//   public void cleanUp(){
+//       userDaoImpl.delete(a.getId());
+//       userDaoImpl = null;
+//       assertNull(userDaoImpl);
+//   }
 
     @Test
     public void saveTest() {
@@ -82,12 +65,12 @@ public class HibernateUserTest {
 
     @Test
     public void updateTest(){
-        User kyo = userDaoImpl.getUsersByName("Jaygee").get(0);
-        String newEmail = "Leave@gmail.com";
-        kyo.setEmail(newEmail);
+        User kyo = userDaoImpl.getUsersByName("Rio").get(0);
+        String newEmail = "gggggg";
+        kyo.setPassword(newEmail);
         userDaoImpl.update(kyo);
 
-        assertEquals(kyo.getEmail(), newEmail);
+        assertEquals(kyo.getPassword(), newEmail);
     }
 
     @Test

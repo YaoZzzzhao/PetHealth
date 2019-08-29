@@ -1,6 +1,7 @@
 package com.ascending.training.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonView;
 
 import javax.persistence.*;
 
@@ -10,29 +11,36 @@ import javax.persistence.*;
 public class Dog {
     @Id
     @GeneratedValue(strategy= GenerationType.IDENTITY)
+    @JsonView(View.CatNDog.class)
     private long id;
 
 //    @Column(name = "owner_id")
 //    private long owner_id;
-
+    @JsonView(View.CatNDog.class)
     @Column(name = "name")
     private String name;
 
+    @JsonView(View.CatNDog.class)
     @Column(name = "Spay_neuter")
     private char spayNeuter;
 
+    @JsonView(View.CatNDog.class)
     @Column(name = "Rabies")
     private char rabies;
 
+    @JsonView(View.CatNDog.class)
     @Column(name = "Distemper")
     private char distemper;
 
+    @JsonView(View.CatNDog.class)
     @Column(name = "Parvo")
     private char parvo;
 
+    @JsonView(View.CatNDog.class)
     @Column(name= "Adenovirus")
     private char adenovirus;
 
+    @JsonView(View.CatNDog.class)
     @Column(name = "Bordetella")
     private char bordetella;
 

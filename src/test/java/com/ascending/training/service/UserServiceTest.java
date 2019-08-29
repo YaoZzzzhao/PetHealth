@@ -52,12 +52,12 @@ public class UserServiceTest {
         userService.save(a);
     }
 
-    @After
-    public void cleanUp(){
-        userService.delete(a.getId());
-        userService = null;
-        assertNull(userService);
-    }
+//    @After
+//    public void cleanUp(){
+//        userService.delete(a.getId());
+//        userService = null;
+//        assertNull(userService);
+//    }
 
 
 
@@ -72,7 +72,7 @@ public class UserServiceTest {
 
     @Test
     public void updateTest(){
-        User kyo = userService.getUsersByName( "Jaygee").get(0);
+        User kyo = userService.getUsersByName( "Rio").get(1);
         String newEmail = "Leave@gmail.com";
         kyo.setEmail(newEmail);
         userService.update(kyo);
