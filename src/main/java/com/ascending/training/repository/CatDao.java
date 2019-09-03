@@ -7,7 +7,7 @@ import java.util.List;
 
 public interface CatDao {
     boolean save(Cat cat);
-    boolean saveCat(Cat cat, Pet pet);
+    boolean saveCat(Cat cat, long id);
     int update(Cat cat);
     int delete(long id);
 

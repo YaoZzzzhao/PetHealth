@@ -13,5 +13,8 @@ public interface PetDao {
 
     List<Pet> getPets();
     List<Pet> getPetsByName(String petName);
+    Pet userGetPetById(long id);
+    Pet dogGetPetById(long id);
+    Pet catGetPetById(long id);
 
 }

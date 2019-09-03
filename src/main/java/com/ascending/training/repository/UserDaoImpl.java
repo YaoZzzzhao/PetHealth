@@ -135,6 +135,29 @@ public class UserDaoImpl implements UserDao {
         }
     }
 
+    @Override
+    public User getUserById(long id){
+        if(id <= 0) return null;
+
+        logger.info(">>>>>>>>>> Id = " + id);
+        String hql = "FROM User as user where user.id = :id";
+//        left join fetch user.pets
+
+        try(Session session = HibernateUtil.getSessionFactory().openSession()) {
+            Query<User> query = session.createQuery(hql);
+            query.setParameter("id", id);
+
+//            User user = query.uniqueResult();
+//            logger.debug(user.toString());
+
+
+            return query.uniqueResult();
+        }catch(Exception e){
+            logger.debug(e.getMessage());
+            return null;
+        }
+    }
+
 //    @Override
     public User getUserByCredentials(String email, String password) {
         String hql = "FROM User as u where lower(u.email) = :email and u.password = :password";

@@ -25,7 +25,7 @@ public class HibernateDogTest {
 //        long owner_id = 12;
 
         a = new Dog();
-        Pet pet = petDaoImpl.getPetsByName("Jane").get(0);
+        Pet pet = petDaoImpl.getPetsByName("Elsa").get(0);
 //        a.setId(30);
         a.setAdenovirus('N');
         a.setName("Jane");
@@ -36,8 +36,10 @@ public class HibernateDogTest {
         a.setRabies('N');
         a.setSpayNeuter('N');
 
+        long id = pet.getId();
 
-        dogDaoImpl.saveDog(a,pet);
+
+        dogDaoImpl.saveDog(a,id);
     }
 
 //    @After
@@ -51,7 +53,7 @@ public class HibernateDogTest {
 
     @Test
     public void saveTest() {
-        String testName = "Jinmu";
+        String testName = "Elsa";
 
 
         assertEquals(testName, a.getName());

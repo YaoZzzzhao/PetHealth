@@ -16,6 +16,7 @@ import java.util.List;
 
 public class DogDaoImpl implements DogDao{
     private Logger logger = LoggerFactory.getLogger(this.getClass());
+    private PetDaoImpl petDaoImpl = new PetDaoImpl();
 
     @Override
     public boolean save(Dog dog){
@@ -39,12 +40,13 @@ public class DogDaoImpl implements DogDao{
     }
 
     @Override
-    public boolean saveDog(Dog dog, Pet pet){
+    public boolean saveDog(Dog dog, long id){
         boolean isSuccess = true;
         Transaction transaction = null;
 
         try(Session session = HibernateUtil.getSessionFactory().openSession()){
             transaction = session.beginTransaction();
+            Pet pet = petDaoImpl.dogGetPetById(id);
             dog.setPet(pet);
             session.save(dog);
             transaction.commit();
@@ -115,7 +117,7 @@ public class DogDaoImpl implements DogDao{
 
     @Override
     public List<Dog> getDogs(){
-        String sql = "From dog";
+        String sql = "From Dog";
 
         try(Session session = HibernateUtil.getSessionFactory().openSession()){
             Query <Dog> query = session.createQuery(sql);

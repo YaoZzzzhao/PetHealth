@@ -1,8 +1,10 @@
 package com.ascending.training.controller;
 
 import com.ascending.training.model.Pet;
+import com.ascending.training.model.User;
 import com.ascending.training.model.View;
 import com.ascending.training.service.PetService;
+import com.ascending.training.service.UserService;
 import com.fasterxml.jackson.annotation.JsonView;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -20,6 +22,9 @@ public class PetController {
     @Autowired
     private PetService petService;
 
+    @Autowired
+    private UserService userService;
+
     @RequestMapping(value = "",method = RequestMethod.GET, produces = "application/json")
     @JsonView(View.Pet.class)
     public List<Pet> getPets(){
@@ -27,7 +32,7 @@ public class PetController {
     }
 
     @RequestMapping(value = "/withAllInfo", method = RequestMethod.GET, produces = {MediaType.APPLICATION_JSON_VALUE})
-    @JsonView(View.CatNDog.Class)
+    @JsonView(View.CatNDog.class)
     public List<Pet> getPetsWithAllInfo(){
         return petService.getPets();
     }
@@ -36,24 +41,35 @@ public class PetController {
 //    public String
 
     @RequestMapping(params = {"name"}, method = RequestMethod.GET, produces = {MediaType.APPLICATION_JSON_VALUE})
+    @JsonView(View.Pet.class)
     public List<Pet> getPetsByName(@RequestParam String name){
         logger.warn(">>>>>>>>Param: %s" , name);
         return petService.getPetsByName(name);
     }
 
-//    @RequestMapping(method = RequestMethod.POST, produces = {MediaType.APPLICATION_JSON_VALUE})
+    @RequestMapping(value = "/{ownerId}", method = RequestMethod.POST, produces = {MediaType.APPLICATION_JSON_VALUE})
+    public String create(@RequestBody Pet p, @PathVariable long ownerId){
+        String msg = "The pet was created!";
+        User u =userService.getUserById(ownerId);
+        boolean isSuccess = petService.saveP(p,u);
+
+        if(! isSuccess) msg = "The pet was not created successfully!";
+        return msg;
+    }
 
 
-    @RequestMapping(value="", method = RequestMethod.PUT, consumes = {MediaType.APPLICATION_JSON_VALUE})
+    @RequestMapping(method = RequestMethod.PUT, produces = {MediaType.APPLICATION_JSON_VALUE})
     public String update(@RequestBody Pet p){
+        User owner = petService.userGetPetById(p.getId()).getUser();
         String msg = "This pet was updated successfully!";
+        p.setUser(owner);
         int updatedCount = petService.update(p);
         if(updatedCount==0) msg = "The pet was not updated.";
 
         return msg;
     }
 
-    @RequestMapping(value="/{petId}",method=RequestMethod.DELETE, produces = {MediaType.APPLICATION_JSON_VALUE})
+    @RequestMapping(value="/{id}",method=RequestMethod.DELETE, produces = {MediaType.APPLICATION_JSON_VALUE})
     public String delete(@PathVariable long id){
         String msg = "This pet was deleted!";
         int deletedCount = petService.delete(id);

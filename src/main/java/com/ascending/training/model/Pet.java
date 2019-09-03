@@ -47,7 +47,8 @@ public class Pet {
         }catch(Exception e){
             return null;
         }
-        return user;}
+        return user;
+    }
     public void setUser(User u){
         this.user = u;
     }

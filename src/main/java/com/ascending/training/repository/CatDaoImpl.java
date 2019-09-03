@@ -18,6 +18,8 @@ import java.util.Set;
 public class CatDaoImpl implements CatDao{
     private Logger logger = LoggerFactory.getLogger(this.getClass());
 
+    private PetDaoImpl petDaoImpl = new PetDaoImpl();
+
     @Override
     public boolean save(Cat cat){
         boolean isSuccess = true;
@@ -40,12 +42,13 @@ public class CatDaoImpl implements CatDao{
     }
 
     @Override
-    public boolean saveCat(Cat cat, Pet pet){
+    public boolean saveCat(Cat cat, long id){
         boolean isSuccess = true;
         Transaction transaction = null;
 
         try(Session session = HibernateUtil.getSessionFactory().openSession()){
             transaction = session.beginTransaction();
+            Pet pet = petDaoImpl.catGetPetById(id);
             cat.setPet(pet);
             session.save(cat);
             transaction.commit();
@@ -116,7 +119,7 @@ public class CatDaoImpl implements CatDao{
 
     @Override
     public List<Cat> getCats(){
-        String sql = "From Cat xxxx";
+        String sql = "From Cat";
 
         try(Session session = HibernateUtil.getSessionFactory().openSession()){
             Query <Cat> query = session.createQuery(sql);

@@ -27,6 +27,9 @@ public class UserService {
     public List<User> getUsersByName(String customerName){
         return userDao.getUsersByName(customerName);
     }
+    public User getUserById(long id){
+        return userDao.getUserById(id);
+    }
 
     long toString(User b){
         return b.getId();

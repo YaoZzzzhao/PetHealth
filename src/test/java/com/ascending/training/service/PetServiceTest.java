@@ -34,8 +34,16 @@ public class PetServiceTest {
     @Before
     public void init(){
 //        long owner_id = 12;
-        String type = "DOG";
+        List<User> users = userService.getUsersByName("Jaygee");
+
+
+        String type = users.get(0).getPetType();
+
         String breed = "JinmuDog";
+        if(type == "CAT"){
+            breed = "AdoraCat";
+        }
+
         String name = "Shy";
         int age = 3;
         String color = "Orange";
@@ -51,7 +59,6 @@ public class PetServiceTest {
         a.setColor(color);
 
         //User user = userService.getUserByName("Hoan").get(0);
-        List<User> users = userService.getUsersByName("Jaygee");
 
         if (users == null || users.size() == 0) logger.info(">>>>>>> users is null or size is 0");
         User user = users.get(0);
@@ -61,12 +68,12 @@ public class PetServiceTest {
         petService.saveP(a, user);
     }
 
-    @After
-    public void cleanUp(){
-        petService.delete(a.getId());
-        petService = null;
-        assertNull(petService);
-    }
+//    @After
+//    public void cleanUp(){
+//        petService.delete(a.getId());
+//        petService = null;
+//        assertNull(petService);
+//    }
 
 
 

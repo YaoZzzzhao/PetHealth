@@ -51,7 +51,14 @@ public class Dog {
     @JoinColumn(name = "dog_id",referencedColumnName = "id")
     private Pet pet;
 
-    public Pet getPet(){return pet;}
+    public Pet getPet(){
+        try{
+            int size = pet.getAge();
+        }catch(Exception e){
+            return null;
+        }
+        return pet;
+    }
     public void setPet(Pet u){
         this.pet = u;
     }

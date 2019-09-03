@@ -52,7 +52,7 @@ public class UserController {
     }
 
     @RequestMapping(value = "", method = RequestMethod.POST, consumes = {MediaType.APPLICATION_JSON_VALUE})
-    public String creatUser(@RequestBody User user){
+    public String creat(@RequestBody User user){
         logger.warn(">>>>>>>User:" + user.toString());
         String msg = "The user has been created!";
         boolean isSuccess = userService.save(user);
@@ -63,7 +63,7 @@ public class UserController {
     }
 
     @RequestMapping(method = RequestMethod.PUT, produces = {MediaType.APPLICATION_JSON_VALUE})
-    public String updateUser(@RequestBody User u){
+    public String update(@RequestBody User u){
         String msg = "This user was updated successfully!";
         int updatedCount = userService.update(u);
         if(updatedCount==0) msg = "The user was not updated.";
@@ -72,7 +72,7 @@ public class UserController {
     }
 
     @RequestMapping(value="/{userId}",method = RequestMethod.DELETE, produces = {MediaType.APPLICATION_JSON_VALUE})
-    public String deleteUser(@PathVariable long userId){
+    public String delete(@PathVariable long userId){
         String msg = "The user was deleted successfully!";
         int deletedCount = userService.delete(userId);
         if(deletedCount==0) msg = "The user was not deleted successfully!";

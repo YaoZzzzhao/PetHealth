@@ -26,4 +26,13 @@ public class PetService {
 
     public List<Pet> getPets(){return petDao.getPets();}
     public List<Pet> getPetsByName(String petName){return petDao.getPetsByName(petName);}
+    public Pet userGetPetById(long id){
+        return petDao.userGetPetById(id);
+    }
+    public Pet catGetPetById(long id){
+        return petDao.catGetPetById(id);
+    }
+    public Pet dogGetPetById(long id){
+        return petDao.dogGetPetById(id);
+    }
 }

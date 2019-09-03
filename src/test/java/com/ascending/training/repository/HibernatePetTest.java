@@ -55,7 +55,7 @@ public class HibernatePetTest {
 
     @Test
     public void savePetTest() {
-        String testName = "Jane";
+        String testName = "Yveltal";
 
 
         assertEquals(testName, a.getName());

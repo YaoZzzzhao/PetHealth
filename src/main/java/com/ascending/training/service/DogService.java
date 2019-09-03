@@ -17,8 +17,8 @@ public class DogService {
     public boolean save(Dog dog){
         return dogDao.save(dog);
     }
-    public boolean saveDog(Dog d, Pet p){
-        return dogDao.saveDog(d,p);
+    public boolean saveDog(Dog d, long id){
+        return dogDao.saveDog(d,id);
     }
     public int update(Dog dog){return dogDao.update(dog);}
     public int delete(long dogId){return dogDao.delete(dogId);}

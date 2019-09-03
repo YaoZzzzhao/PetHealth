@@ -119,8 +119,8 @@ public class PetDaoImpl implements PetDao{
 
     @Override
     public List<Pet> getPets(){
-//        String hql = "From Pet as pet left join fetch pet.dogs left join fetch pet.cats";
-        String hql = "From Pet order by id";
+        String hql = "select distinct pet From Pet as pet left join fetch pet.dogs left join fetch pet.cats order by pet.id";
+//        String hql = "From Pet order by id";
 //        pet join fetch pet.cats p_c on pet.id = p_c.id join fetch pet.dogs p_d on pet.id = p_d.id
 
 
@@ -138,16 +138,73 @@ public class PetDaoImpl implements PetDao{
     public List<Pet> getPetsByName(String petName){
         if (petName == null) return null;
 
-        String sql = "From Pet pet where pet.name = :name";
+        String hql = "From Pet pet where pet.name = :name";
 
         try(Session session = HibernateUtil.getSessionFactory().openSession()){
-            Query<Pet> query = session.createQuery(sql);
+            Query<Pet> query = session.createQuery(hql);
             query.setParameter("name",petName);
 
 //            Pet pet = query.uniqueResult();
 //            logger.debug(pet.toString());
 
             return query.list();
+        }catch(Exception e){
+            logger.debug(e.getMessage());
+            return null;
+        }
+    }
+
+    @Override
+    public Pet userGetPetById(long id){
+        if (id <= 0) return null;
+
+        String hql = "From Pet as pet left join fetch pet.user where pet.id = :id1";
+
+        try(Session session = HibernateUtil.getSessionFactory().openSession()){
+            Query<Pet> query = session.createQuery(hql);
+            query.setParameter("id1",id);
+
+//            Pet pet = query.uniqueResult();
+//            logger.debug(pet.toString());
+            Pet p = query.uniqueResult();
+            return p;
+        }catch(Exception e){
+            logger.debug(e.getMessage());
+            return null;
+        }
+    }
+
+    @Override
+    public Pet dogGetPetById(long id){
+        String hql = "From Pet as pet left join fetch pet.dogs as pd where pd.dogId = :id";
+//        select distinct pet
+//        String hql = "From Pet order by id";
+//        pet join fetch pet.cats p_c on pet.id = p_c.id join fetch pet.dogs p_d on pet.id = p_d.id
+
+
+        try(Session session = HibernateUtil.getSessionFactory().openSession()){
+            Query <Pet> query = session.createQuery(hql);
+            query.setParameter("id",id);
+
+            return query.uniqueResult();
+        }catch(Exception e){
+            logger.debug(e.getMessage());
+            return null;
+        }
+    }
+
+    @Override
+    public Pet catGetPetById(long id){
+        String hql = "select distinct pet From Pet as pet left join fetch pet.cats where pet.cats.cat_id = :id";
+//        String hql = "From Pet order by id";
+//        pet join fetch pet.cats p_c on pet.id = p_c.id join fetch pet.dogs p_d on pet.id = p_d.id
+
+
+        try(Session session = HibernateUtil.getSessionFactory().openSession()){
+            Query <Pet> query = session.createQuery(hql);
+            query.setParameter("id",id);
+
+            return query.uniqueResult();
         }catch(Exception e){
             logger.debug(e.getMessage());
             return null;
