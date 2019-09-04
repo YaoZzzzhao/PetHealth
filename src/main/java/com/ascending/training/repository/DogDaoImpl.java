@@ -54,7 +54,7 @@ public class DogDaoImpl implements DogDao{
         catch(Exception e){
             isSuccess = false;
             if(transaction != null ) transaction.rollback();
-            logger.error(e.getMessage());
+            logger.error(e.getMessage(),e);
         }
 
         if(isSuccess) logger.debug(String.format("The pet %s was saved!",dog.toString()));

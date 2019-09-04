@@ -1,7 +1,9 @@
 package com.ascending.training.controller;
 
 import com.ascending.training.model.Dog;
+import com.ascending.training.model.Pet;
 import com.ascending.training.service.DogService;
+import com.ascending.training.service.PetService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,6 +18,8 @@ public class DogController {
     private final Logger logger = LoggerFactory.getLogger(this.getClass());
 
     @Autowired private DogService dogService;
+
+    @Autowired private PetService petService;
 
 
     @RequestMapping(value = "",method = RequestMethod.GET, produces = {MediaType.APPLICATION_JSON_VALUE})
@@ -41,6 +45,8 @@ public class DogController {
     @RequestMapping(method = RequestMethod.PUT,produces = {MediaType.APPLICATION_JSON_VALUE})
     public String update(@RequestBody Dog d){
         String msg = "This record was updated successfully!";
+        Pet p = petService.dogGetPetById(d.getPet().getId());
+        d.setPet(p);
         int isSuccess = dogService.update(d);
         if(isSuccess == 0) msg = "This record was not updated successfully!";
         return msg;
@@ -53,4 +59,5 @@ public class DogController {
         if(isSuccess == 0) msg ="Failed to delete!";
         return msg;
     }
+
 }

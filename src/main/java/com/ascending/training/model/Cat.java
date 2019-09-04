@@ -49,8 +49,19 @@ public class Cat {
 
     @JsonIgnore
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "cat_id", referencedColumnName = "id")
+    @JoinColumn(name = "pet_id", referencedColumnName = "id")
     private Pet pet;
+
+    @Override
+    public int hashCode(){
+        final int prime = 37;
+        int result = 1;
+        result = result * prime + name.hashCode();
+        result = result * prime + (int)id;
+        return result;
+    }
+
+
 
     public Pet getPet(){
         try{

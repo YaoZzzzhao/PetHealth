@@ -176,7 +176,7 @@ public class PetDaoImpl implements PetDao{
 
     @Override
     public Pet dogGetPetById(long id){
-        String hql = "From Pet as pet left join fetch pet.dogs as pd where pd.dogId = :id";
+        String hql = "From Pet as pet left join fetch pet.dogs as pd where pet.id = :id";
 //        select distinct pet
 //        String hql = "From Pet order by id";
 //        pet join fetch pet.cats p_c on pet.id = p_c.id join fetch pet.dogs p_d on pet.id = p_d.id

@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonView;
 
 import javax.persistence.*;
+import java.util.Objects;
 
 @Entity
 @Table(name = "dogs")
@@ -45,11 +46,29 @@ public class Dog {
     private char bordetella;
 
 
-
     @JsonIgnore
-    @ManyToOne(fetch = FetchType.LAZY )
-    @JoinColumn(name = "dog_id",referencedColumnName = "id")
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "pet_id",referencedColumnName = "id")
+//    @JoinColumn(name = "dog_id")
     private Pet pet;
+
+    @Override
+    public int hashCode(){
+        return Objects.hash(id, name);
+    }
+
+    @Override
+    public boolean equals(Object obj){
+        if (this == obj) return true;
+        if(obj == null) return false;
+        if(this.getClass() != obj.getClass()) return false;
+        Dog d = (Dog)obj;
+        if(this.id != d.id)
+            return false;
+        if(!this.name.equals(d.name))
+            return false;
+        return true;
+    }
 
     public Pet getPet(){
         try{

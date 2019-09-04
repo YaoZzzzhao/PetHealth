@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonView;
 
 import javax.persistence.*;
+import java.util.Objects;
 import java.util.Set;
 
 @Entity
@@ -87,8 +88,22 @@ public class Pet {
         this.dogs = d;
     }
 
+    @Override
+    public int hashCode(){
+        return Objects.hash(name,type);
+    }
 
+    @Override
+    public boolean equals(Object obj){
+        if(this == obj) return true;
+        if(obj == null) return false;
+        if(this.getClass() != obj.getClass()) return false;
+        Pet other = (Pet) obj;
+        if(id != other.id) return false;
+        if(!this.type.equals(other.type)) return false;
 
+        return true;
+    }
 
 //    @OneToMany(mappedBy = "pet", cascade = CascadeType.REMOVE, fetch = FetchType.LAZY )
 //
@@ -153,4 +168,6 @@ public class Pet {
     public void setAge(int age) {
         this.age = age;
     }
+
+
 }
