@@ -45,7 +45,7 @@ public class User {
 
 
 //    @JsonIgnore
-    @OneToMany(mappedBy = "user", cascade = CascadeType.REMOVE, fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     @JsonView(View.Pet.class)
     private Set<Pet> pets;
 

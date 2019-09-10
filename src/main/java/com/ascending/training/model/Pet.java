@@ -57,7 +57,7 @@ public class Pet {
 
 //    @JsonIgnore
     @JsonView(View.CatNDog.class)
-    @OneToMany(mappedBy = "pet", cascade = CascadeType.REMOVE, fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "pet", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private Set<Cat> cats;
 
 
@@ -73,7 +73,7 @@ public class Pet {
 
 //    @JsonIgnore
     @JsonView(View.CatNDog.class)
-    @OneToMany(mappedBy = "pet", cascade = CascadeType.REMOVE, fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "pet", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private Set<Dog> dogs;
 
     public Set<Dog> getDogs(){

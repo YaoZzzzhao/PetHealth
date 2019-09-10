@@ -73,7 +73,9 @@ public class DogDaoImpl implements DogDao{
 
         try(Session session = HibernateUtil.getSessionFactory().openSession()){
             transaction = session.beginTransaction();
-            session.saveOrUpdate(dog);
+            Pet p = petDaoImpl.dogGetPetById(dog.getPet().getId());
+            dog.setPet(p);
+            session.update(dog);
             transaction.commit();
         }
         catch(Exception e){

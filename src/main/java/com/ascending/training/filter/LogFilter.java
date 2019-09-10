@@ -13,7 +13,7 @@ import java.util.*;
 @WebFilter(filterName = "logFilter", urlPatterns = {"/*"}, dispatcherTypes = {DispatcherType.REQUEST})
     public class LogFilter implements Filter{
     private Logger logger = LoggerFactory.getLogger(this.getClass());
-    private final List<String> excludeWords = Arrays.asList("newPassword","confirmPassword","password","passwd");
+    private final List<String> excludeWords = Arrays.asList("newPassword","confirmPassword","passed","password");
     private SimpleDateFormat formatter = new SimpleDateFormat("yyyy-mm-dd HH:mm:ss.SSS");
 
     @Override
@@ -41,7 +41,7 @@ import java.util.*;
     }
 
     private String logInfo(HttpServletRequest req){
-        String formData = null;
+        String formDate = null;
         String httpMethod = req.getMethod();
 
         Date startDateTime = new Date();
@@ -59,15 +59,15 @@ import java.util.*;
         }
 
         if(!parameters.isEmpty()){
-            formData = parameters.toString().replaceAll("^.|.$","");
+            formDate = parameters.toString().replaceAll("^.|.$","");
         }
-        return new StringBuilder("|")
-                .append(formatter.format(startDateTime)).append("|")
+        return new StringBuilder("| ")
+                .append(formatter.format(startDateTime)).append(" | ")
                 .append(userIP).append(" | ")
                 .append(httpMethod).append(" | ")
                 .append(requestURL).append(" | ")
                 .append(sessionID).append(" | ")
                 .append("responseTime ms").append(" | ")
-                .append(formData).toString();
+                .append(formDate).toString();
     }
 }
