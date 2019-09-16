@@ -7,7 +7,7 @@ import com.ascending.training.util.HibernateUtil;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 import org.hibernate.query.Query;
-import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -15,7 +15,9 @@ import java.util.List;
 @Repository
 
 public class PetDaoImpl implements PetDao{
-    private Logger logger = LoggerFactory.getLogger(this.getClass());
+
+    @Autowired
+    private Logger logger;
 
     @Override
     public boolean save(Pet pet){

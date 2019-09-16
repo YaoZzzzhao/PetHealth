@@ -8,6 +8,7 @@ import org.hibernate.Session;
 import org.hibernate.Transaction;
 import org.hibernate.query.Query;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -15,8 +16,12 @@ import java.util.List;
 @Repository
 
 public class DogDaoImpl implements DogDao{
-    private Logger logger = LoggerFactory.getLogger(this.getClass());
-    private PetDaoImpl petDaoImpl = new PetDaoImpl();
+
+    @Autowired
+    private Logger logger;
+
+    @Autowired
+    private PetDaoImpl petDaoImpl;
 
     @Override
     public boolean save(Dog dog){
