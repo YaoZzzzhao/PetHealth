@@ -1,7 +1,8 @@
 package com.ascending.training.service;
 
+import com.amazonaws.AmazonServiceException;
 import com.amazonaws.HttpMethod;
-import com.amazonaws.services.dynamodbv2.xspec.S;
+import com.amazonaws.SdkClientException;
 import com.amazonaws.services.s3.AmazonS3;
 import com.amazonaws.services.s3.model.*;
 import org.slf4j.Logger;
@@ -29,15 +30,20 @@ public class FileService {
     private AmazonS3 amazonS3;
 
     public void createBucket(String bucketName){
-        Bucket b = null;
-        if(amazonS3.doesBucketExistV2(bucketName)) {
-            logger.info("Bucket %s already exists", bucketName);
-        }else{
-            try{
-                b = amazonS3.createBucket(bucketName);
-            }catch(AmazonS3Exception e){
-                System.err.println(e.getErrorMessage());
+        //Regions clientRegion =Regions.US_EAST_2;
+        try{
+
+            if(amazonS3.doesBucketExistV2(bucketName)){
+                logger.info(String.format("The bucket %s has existed.", bucketName));
+            }else{
+                amazonS3.createBucket(bucketName);
+//                String bucketLocation = s3Client.getBucketLocation(new GetBucketLocationRequest(bucketName));
+                logger.info(String.format("Bucket %s is created", bucketName));
             }
+        }catch(AmazonServiceException e){
+            e.printStackTrace();
+        }catch(SdkClientException e){
+            e.printStackTrace();
         }
     }
 

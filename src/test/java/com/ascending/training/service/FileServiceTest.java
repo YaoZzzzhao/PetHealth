@@ -43,4 +43,24 @@ public class FileServiceTest {
         Assert.assertNotNull(test);
     }
 
+    @Test
+    public void createBucketTest(){
+        String bucketName = "new-test-bucket222";
+        fileService.createBucket(bucketName);
+        List<Bucket> ls = fileService.getBucketList();
+        int s = ls.size();
+        ls.forEach(b -> System.out.println(b.getName()));
+        Assert.assertEquals(s,2);
+    }
+
+    @Test
+    public void deleteBucketTest(){
+        String bucketName = "new-test-bucket222";
+        fileService.deleteBucket(bucketName);
+        int s =fileService.getBucketList().size();
+        Assert.assertEquals(1,s);
+    }
+
+
+
 }

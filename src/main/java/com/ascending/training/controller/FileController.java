@@ -84,7 +84,20 @@ public class FileController {
 //        S3Object obj = fileService.getObject(bucketName,key);
         String fileUrl = fileService.getFileUrl(bucketName,key);
         return fileUrl;
-
-
     }
+
+    @RequestMapping(value = "/{bucketName}", method = RequestMethod.POST,produces = MediaType.MULTIPART_FORM_DATA_VALUE)
+    public String createBucket(@PathVariable String bucketName){
+        String msg = "The bucket is created!";
+        try{
+            fileService.createBucket(bucketName);
+        }catch(Exception e){
+            msg = "Failed to create the bucket.";
+            e.printStackTrace();
+        }
+        return msg;
+    }
+
+
+
 }
