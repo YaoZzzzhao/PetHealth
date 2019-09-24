@@ -14,6 +14,7 @@ import java.util.Map;
 public class MessageService {
     @Autowired
     private Logger logger;
+
     @Autowired
     private AmazonSQS amazonSQS;
 

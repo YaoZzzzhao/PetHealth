@@ -12,7 +12,7 @@ import java.util.*;
 
 @WebFilter(filterName = "logFilter", urlPatterns = {"/*"}, dispatcherTypes = {DispatcherType.REQUEST})
     public class LogFilter implements Filter{
-    private Logger logger = LoggerFactory.getLogger(this.getClass());
+    private final Logger logger = LoggerFactory.getLogger(this.getClass());
     private final List<String> excludeWords = Arrays.asList("newPassword","confirmPassword","passed","password");
     private SimpleDateFormat formatter = new SimpleDateFormat("yyyy-mm-dd HH:mm:ss.SSS");
 

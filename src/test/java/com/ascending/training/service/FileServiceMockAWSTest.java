@@ -1,8 +1,11 @@
 package com.ascending.training.service;
 
+import com.amazonaws.services.cloudsearchdomain.model.Bucket;
 import com.amazonaws.services.s3.AmazonS3;
+import com.amazonaws.services.s3.model.S3Object;
 import com.amazonaws.util.IOUtils;
 import com.ascending.training.init.AppInitializer;
+import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -21,6 +24,7 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.util.List;
 
 import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.Mockito.*;
@@ -57,15 +61,44 @@ public class FileServiceMockAWSTest {
     }
 
     @Test
+    public void createBucketTest(){
+        fileService.createBucket("");
+        verify(amazonS3,times(1)).createBucket(anyString());
+    }
+
+    @Test
     public void getFileUrlTest(){
 
-        FileService fileService = Mockito.mock(FileService.class);
+//        AmazonS3 amazonS3 = Mockito.mock(AmazonS3.class);
+        String fileUrl = fileService.getFileUrl(bucketName,fileName);
 
-        when(fileService.getFileUrl(anyString(),anyString())).thenReturn(anyString());
+//        FileService f = Mockito.mock(FileService.class);
+//
+//        when(f.getFileUrl(anyString(),anyString())).thenReturn(anyString());
 
-//        boolean isSuccess = fileService.getFileUrl(bucketName,fileName);
+//        Assert.assertEquals(fileUrl,fakeFileUrl.toString());
 
-        verify(fileService, times(1)).getFileUrl(anyString(),anyString());
+        verify(amazonS3, times(1)).generatePresignedUrl(any());
+    }
+
+    @Test
+    public void getObjectTest(){
+        S3Object obj = fileService.getObject(bucketName,fileName);
+//        when(obj.)
+        verify(amazonS3,times(1)).getObject(anyString(),anyString());
+    }
+
+    @Test
+    public void getFilesListTest(){
+
+    }
+
+    @Test
+    public void getBucketListTest(){
+//        FileService f = Mockito.mock(FileService.class);
+        List<Bucket> bucketList = fileService.getBucketList();
+//        when(fileService.getBucketList()).thenReturn(anyList());
+        verify(amazonS3,times(1)).listBuckets();
     }
 
 }

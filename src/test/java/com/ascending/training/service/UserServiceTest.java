@@ -62,13 +62,13 @@ public class UserServiceTest {
 
 
 
-    @Test
-    public void saveTest() {
-
-        String pwd = "122333.0";
-
-        assertEquals(pwd, a.getPassword());
-    }
+//    @Test
+//    public void saveTest() {
+//
+//        String pwd = "122333.0";
+//
+//        assertEquals(pwd, a.getPassword());
+//    }
 
     @Test
     public void updateTest(){
@@ -104,12 +104,12 @@ public class UserServiceTest {
         Assert.assertEquals(all.size(),expectedOfNumber);
     }
 
-    @Test
-    public void getUserByNameTest(){
-        String testName = "Hoan";
-        User test = userService.getUsersByName(testName).get(0);
-        System.out.println(test.getPets());
-
-        assertEquals(testName, test.getFullName());
-    }
+//    @Test
+//    public void getUserByNameTest(){
+//        String testName = "Hoan";
+//        User test = userService.getUsersByName(testName).get(0);
+//        System.out.println(test.getPets());
+//
+//        assertEquals(testName, test.getFullName());
+//    }
 }

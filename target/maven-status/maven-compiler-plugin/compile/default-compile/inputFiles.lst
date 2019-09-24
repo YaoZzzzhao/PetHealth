@@ -1,10 +1,12 @@
 /Users/yaozhao/Documents/runtime/src/main/java/com/ascending/training/model/Role.java
 /Users/yaozhao/Documents/runtime/src/main/java/com/ascending/training/repository/PetDao.java
 /Users/yaozhao/Documents/runtime/src/main/java/com/ascending/training/controller/Authentication.java
+/Users/yaozhao/Documents/runtime/src/main/java/com/ascending/training/controller/FileController.java
 /Users/yaozhao/Documents/runtime/src/main/java/com/ascending/training/model/View.java
 /Users/yaozhao/Documents/runtime/src/main/java/com/ascending/training/util/HibernateUtil.java
 /Users/yaozhao/Documents/runtime/src/main/java/com/ascending/training/util/JwtUtil.java
 /Users/yaozhao/Documents/runtime/src/main/java/com/ascending/training/controller/DogController.java
+/Users/yaozhao/Documents/runtime/src/main/java/com/ascending/training/service/MessageService.java
 /Users/yaozhao/Documents/runtime/src/main/java/com/ascending/training/controller/CatController.java
 /Users/yaozhao/Documents/runtime/src/main/java/com/ascending/training/repository/CatDaoImpl.java
 /Users/yaozhao/Documents/runtime/src/main/java/com/ascending/training/filter/LogFilter.java
@@ -34,4 +36,5 @@
 /Users/yaozhao/Documents/runtime/src/main/java/com/ascending/training/controller/RoleController.java
 /Users/yaozhao/Documents/runtime/src/main/java/com/ascending/training/model/Dog.java
 /Users/yaozhao/Documents/runtime/src/main/java/com/ascending/training/service/UserService.java
+/Users/yaozhao/Documents/runtime/src/main/java/com/ascending/training/service/FileService.java
 /Users/yaozhao/Documents/runtime/src/main/java/com/ascending/training/controller/PetController.java

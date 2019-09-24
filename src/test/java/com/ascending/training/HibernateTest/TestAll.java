@@ -6,7 +6,7 @@ import org.junit.runners.Suite;
 
 @RunWith(Suite.class)
 @Suite.SuiteClasses({
-        UserDaoTest.class, PetDaoTest.class, CatDaoTest.class, DogDaoTest.class
+        com.ascending.training.UserDaoTest.class, com.ascending.training.PetDaoTest.class, com.ascending.training.CatDaoTest.class, com.ascending.training.DogDaoTest.class
 })
 
 public class TestAll {

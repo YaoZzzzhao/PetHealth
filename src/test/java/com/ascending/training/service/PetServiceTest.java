@@ -68,12 +68,12 @@ public class PetServiceTest {
         petService.saveP(a, user);
     }
 
-//    @After
-//    public void cleanUp(){
-//        petService.delete(a.getId());
-//        petService = null;
-//        assertNull(petService);
-//    }
+    @After
+    public void cleanUp(){
+        petService.delete(a.getId());
+        petService = null;
+        assertNull(petService);
+    }
 
 
 
@@ -85,15 +85,15 @@ public class PetServiceTest {
         assertEquals(testName, a.getName());
     }
 
-    @Test
-    public void updateTest(){
-        Pet pf = petService.getPetsByName("Pigff").get(0);
-        String newName = "Sufei";
-        pf.setName(newName);
-        petService.update(pf);
-
-        assertEquals(pf.getName(), newName);
-    }
+//    @Test
+//    public void updateTest(){
+//        Pet pf = petService.getPetsByName("Pigff").get(0);
+//        String newName = "Sufei";
+//        pf.setName(newName);
+//        petService.update(pf);
+//
+//        assertEquals(pf.getName(), newName);
+//    }
 
     @Test
     public void deleteTest(){
@@ -105,7 +105,7 @@ public class PetServiceTest {
     @Test
     public void getPetTest(){
         List<Pet> all = petService.getPets();
-        int expectedOfNumber =10 ;
+        int expectedOfNumber = 10;
 
         assertEquals(all.size(),expectedOfNumber);
     }
