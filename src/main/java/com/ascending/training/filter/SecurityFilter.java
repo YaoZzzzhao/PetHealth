@@ -8,6 +8,8 @@ import javax.servlet.annotation.WebFilter;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 @WebFilter(filterName = "securityFilter", urlPatterns = {"/*"}, dispatcherTypes = {DispatcherType.REQUEST})
 public class SecurityFilter implements Filter {
@@ -21,7 +23,7 @@ public class SecurityFilter implements Filter {
     }
     @Override
     public void doFilter(ServletRequest request, ServletResponse response, FilterChain filterChain) throws IOException, ServletException {
-        HttpServletRequest req = (HttpServletRequest) request;
+        HttpServletRequest req = (HttpServletRequest)request;       // cast into HttpServletRequest form
         int statusCode = authorization(req);
         if (statusCode == HttpServletResponse.SC_ACCEPTED) filterChain.doFilter(request, response);
         else ((HttpServletResponse)response).sendError(statusCode);
@@ -37,7 +39,7 @@ public class SecurityFilter implements Filter {
         if (uri.equalsIgnoreCase(AUTH_URI)) return HttpServletResponse.SC_ACCEPTED;
 
         try {
-            String token = req.getHeader("Authorization").replaceAll("^(.*?) ", "");
+            String token = req.getHeader("Authorization").replaceAll("^(.*?) ", "");    //notice that there is a space in regex.
             if (token == null || token.isEmpty()) return statusCode;
             Claims claims = JwtUtil.decodeJwtToken(token);
             String allowedResources = "/";
@@ -60,5 +62,16 @@ public class SecurityFilter implements Filter {
             logger.error(e.getMessage());
         }
         return statusCode;
+    }
+
+
+    public void status(List l){
+
+    }
+
+    public static void main(String[] ars){
+        List l = new ArrayList();
+        SecurityFilter f = new SecurityFilter();
+        f.status(l);
     }
 }

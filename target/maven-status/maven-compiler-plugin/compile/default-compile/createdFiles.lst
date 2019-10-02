@@ -5,7 +5,6 @@ com/ascending/training/repository/UserDaoImpl.class
 com/ascending/training/service/PetService.class
 com/ascending/training/repository/DogDaoImpl.class
 com/ascending/training/model/View.class
-com/ascending/training/controller/RoleController.class
 com/ascending/training/jdbc/DogDao.class
 com/ascending/training/service/DogService.class
 com/ascending/training/App.class
