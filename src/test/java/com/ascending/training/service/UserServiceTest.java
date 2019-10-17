@@ -52,23 +52,23 @@ public class UserServiceTest {
         userService.save(a);
     }
 
-//    @After
-//    public void cleanUp(){
-//        userService.delete(a.getId());
-//        userService = null;
-//        assertNull(userService);
-//    }
+    @After
+    public void cleanUp(){
+        userService.delete(a.getId());
+        userService = null;
+        assertNull(userService);
+    }
 
 
 
 
-//    @Test
-//    public void saveTest() {
-//
-//        String pwd = "122333.0";
-//
-//        assertEquals(pwd, a.getPassword());
-//    }
+    @Test
+    public void saveTest() {
+
+        String pwd = "122333.0";
+
+        assertEquals(pwd, a.getPassword());
+    }
 
     @Test
     public void updateTest(){

@@ -10,9 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.IOException;
+import java.io.*;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.time.LocalDateTime;
@@ -98,6 +96,34 @@ public class FileService {
         return getFileUrl(bucketName, file.getOriginalFilename());
     }
 
+    public String downloadObject(String bucketName, String key){
+        System.out.format("Downloading %s from S3 bucket %s \n", key, bucketName);
+        String result = "Download success!";
+        try{
+            S3Object s3o = amazonS3.getObject(bucketName, key);
+            S3ObjectInputStream s3ois = s3o.getObjectContent();
+            FileOutputStream fos = new FileOutputStream(new File(key));
+            byte[] read_buf = new byte[1024];
+            int read_len = 0;
+            while((read_len=s3ois.read(read_buf))>0){
+                fos.write(read_buf,0,read_len);
+            }
+            s3ois.close();
+            fos.close();
+        }catch(AmazonServiceException e){
+            System.err.println(e.getMessage());
+            System.exit(1);
+            result = "Download ";
+        }catch(FileNotFoundException e){
+            System.err.println(e.getMessage());
+            System.exit(1);
+        }catch(IOException e){
+            System.err.println(e.getMessage());
+            System.exit(1);
+        }
+        return result;
+    }
+
     public boolean saveFile(MultipartFile multipartFile, String filePath){
         boolean isSuccess = false;
 
@@ -118,6 +144,16 @@ public class FileService {
 
     public S3Object getObject(String bucketName, String S3key){
         return amazonS3.getObject(bucketName,S3key);
+    }
+
+    public static void displayContentOfObject(InputStream input) throws IOException {
+        BufferedReader reader = new BufferedReader(new InputStreamReader(input));
+        while(true){
+            String line = reader.readLine();
+            if(line == null) break;
+            System.out.println("    "+ line);
+        }
+        System.out.println();
     }
 
     public List getFilesList(String bucketName){

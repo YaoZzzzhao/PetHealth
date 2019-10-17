@@ -1,4 +1,4 @@
-package com.ascending.training;
+package com.ascending.training.HibernateTest;
 
 import org.junit.*;
 import org.slf4j.Logger;

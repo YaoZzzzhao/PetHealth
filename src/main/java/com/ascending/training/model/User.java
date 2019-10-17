@@ -152,6 +152,6 @@ public class User {
 
     @Override
     public String toString() {
-        return id + "," + fullName + "," + email + "," + regisDate + "," + petNum;
+        return id + "," + fullName + "," + email + "," + petNum;
     }
 }

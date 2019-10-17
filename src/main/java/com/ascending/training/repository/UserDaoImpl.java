@@ -62,6 +62,8 @@ public class UserDaoImpl implements UserDao {
             logger.debug(String.format("The user %s was updated.", user.toString()));
         }
 
+        logger.debug(String.format(">>>>>>>>>> The user %s was updated.", user.toString()));
+
         return updateCount;
     }
 

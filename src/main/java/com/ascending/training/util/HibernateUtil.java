@@ -33,9 +33,8 @@ public class HibernateUtil {
                 String dbDialect = System.getProperty("database.dialect");
                 String dbUrl = System.getProperty("database.url");
                 String dbUser = System.getProperty("database.user");
-
-
                 String dbPassword = System.getProperty("database.password");
+
                 Configuration configuration = new Configuration();
                 Properties settings = new Properties();
                 settings.put (Environment.DRIVER, dbDriver);

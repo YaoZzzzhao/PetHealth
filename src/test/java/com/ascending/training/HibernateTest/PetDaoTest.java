@@ -1,4 +1,4 @@
-package com.ascending.training;
+package com.ascending.training.HibernateTest;
 
 import com.ascending.training.model.Pet;
 import com.ascending.training.jdbc.PetDao;

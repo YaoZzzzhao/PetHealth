@@ -1,4 +1,4 @@
-package com.ascending.training;
+package com.ascending.training.HibernateTest;
 
 import com.ascending.training.model.User;
 import com.ascending.training.jdbc.UserDao;
@@ -46,7 +46,7 @@ public class UserDaoTest {
         User user2 = new User();
         Date d = new Date(119,2,3);
         String name = "Curry";
-        user2.setId(1);
+//        user2.setId(12);
         user2.setFullName(name);
         user2.setEmail("Cooker@yahoo.com");
         user2.setPassword("kkyyttmacs");
@@ -68,7 +68,7 @@ public class UserDaoTest {
         Date d = new Date(119,2,3);
         String name = "Curry";
         String email = "Curry@yahoo.com";
-        user3.setId(1);
+//        user3.setId(1);
         user3.setFullName(name);
         user3.setEmail(email);
         user3.setPetNum(3);
@@ -82,7 +82,7 @@ public class UserDaoTest {
 
      @Test
     public void deleteUserTest(){
-        int d = userDao.deleteUser(1);
+        int d = userDao.deleteUser(12);
 
         Assert.assertEquals(d,1);
     }

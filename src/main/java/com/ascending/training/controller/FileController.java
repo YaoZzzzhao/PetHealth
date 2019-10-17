@@ -48,29 +48,29 @@ public class FileController {
         }
         return responseEntity;
     }
-    @RequestMapping(value = "/{fileName}", method = RequestMethod.GET, produces = MediaType.MULTIPART_FORM_DATA_VALUE)
-    public ResponseEntity<Object> downloadFile(@PathVariable String fileName, HttpServletRequest request) {
-        Resource resource = null;
-        String msg = "The file doesn't exist.";
-        ResponseEntity responseEntity;
-        try {
-            Path filePath = Paths.get(fileDownloadDir).toAbsolutePath().resolve(fileName).normalize();
-            resource = new UrlResource(filePath.toUri());
-            if(!resource.exists()) return ResponseEntity.status(HttpServletResponse.SC_NOT_FOUND).body(msg);
-            responseEntity = ResponseEntity.ok()
-                    .header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=\"" + resource.getFilename() + "\"")
-                    .body(resource);;
-            msg = String.format("The file %s was downloaded", resource.getFilename());
-            //Send message to SQS
-            messageService.sendMessage(queueName, msg);
-            logger.debug(msg);
-        }
-        catch (Exception ex) {
-            responseEntity = ResponseEntity.status(HttpServletResponse.SC_INTERNAL_SERVER_ERROR).body(ex.getMessage());
-            logger.debug(ex.getMessage());
-        }
-        return responseEntity;
-    }
+//    @RequestMapping(value = "/{fileName}", method = RequestMethod.GET, produces = MediaType.MULTIPART_FORM_DATA_VALUE)
+//    public ResponseEntity<Object> downloadFile(@PathVariable String fileName, HttpServletRequest request) {
+//        Resource resource = null;
+//        String msg = "The file doesn't exist.";
+//        ResponseEntity responseEntity;
+//        try {
+//            Path filePath = Paths.get(fileDownloadDir).toAbsolutePath().resolve(fileName).normalize();
+//            resource = new UrlResource(filePath.toUri());
+//            if(!resource.exists()) return ResponseEntity.status(HttpServletResponse.SC_NOT_FOUND).body(msg);
+//            responseEntity = ResponseEntity.ok()
+//                    .header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=\"" + resource.getFilename() + "\"")
+//                    .body(resource);;
+//            msg = String.format("The file %s was downloaded", resource.getFilename());
+//            //Send message to SQS
+//            messageService.sendMessage(queueName, msg);
+//            logger.debug(msg);
+//        }
+//        catch (Exception ex) {
+//            responseEntity = ResponseEntity.status(HttpServletResponse.SC_INTERNAL_SERVER_ERROR).body(ex.getMessage());
+//            logger.debug(ex.getMessage());
+//        }
+//        return responseEntity;
+//    }
 
 //    @RequestMapping(value = "/{bucketName}/{key}",method = RequestMethod.GET, produces = MediaType.MULTIPART_FORM_DATA_VALUE)
 //    public S3Object getObject(@PathVariable String bucketName, @PathVariable String key){
@@ -97,6 +97,8 @@ public class FileController {
         }
         return msg;
     }
+
+//    @RequestMapping(value = "/{fileName}",method = RequestMethod.GET, produces = Media)
 
 
 
