@@ -97,7 +97,7 @@ public class PetServiceTest {
 
     @Test
     public void deleteTest(){
-        int expectedOfNum = petService.delete(7);
+        int expectedOfNum = petService.delete(a.getId());
 
         assertEquals(1,expectedOfNum);
     }
@@ -105,7 +105,7 @@ public class PetServiceTest {
     @Test
     public void getPetTest(){
         List<Pet> all = petService.getPets();
-        int expectedOfNumber = 10;
+        int expectedOfNumber = 5;
 
         assertEquals(all.size(),expectedOfNumber);
     }

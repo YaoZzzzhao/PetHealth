@@ -54,7 +54,9 @@ public class UserServiceTest {
 
     @After
     public void cleanUp(){
-        userService.delete(a.getId());
+        if(a.getFullName()!=null) {
+            userService.delete(a.getId());
+        }
         userService = null;
         assertNull(userService);
     }
@@ -72,7 +74,7 @@ public class UserServiceTest {
 
     @Test
     public void updateTest(){
-        User kyo = userService.getUsersByName( "Rio").get(1);
+        User kyo = userService.getUsersByName( a.getFullName()).get(0);
         String newEmail = "Leave@gmail.com";
         kyo.setEmail(newEmail);
         userService.update(kyo);
@@ -82,7 +84,7 @@ public class UserServiceTest {
 
     @Test
     public void deleteTest(){
-        int expectedOfNum = userService.delete(6);
+        int expectedOfNum = userService.delete(a.getId());
 
         assertEquals(1,expectedOfNum);
     }
@@ -94,7 +96,7 @@ public class UserServiceTest {
     @Test
     public void getUsersTest(){
         List<User> all = userService.getUsers();
-        int expectedOfNumber = 7;
+        int expectedOfNumber = 9;
 
 
 //        for (User i : all){

@@ -154,9 +154,9 @@
           <version>${flyway.version}</version>
           <configuration>
             <driver>org.postgresql.Driver</driver>
-            <url>jdbc:postgresql://localhost:5433/project_db</url>
-            <user>admin</user>
-            <password>kkmacs213</password>
+            <url>jdbc:postgresql://$db_url:$db_port/$db_name</url>
+            <user>$db_user</user>
+            <password>$db_password</password>
             <schemas>
               <schema>public</schema>
             </schemas>

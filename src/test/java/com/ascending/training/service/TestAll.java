@@ -5,10 +5,10 @@ import org.junit.runners.Suite;
 
 @RunWith(Suite.class)
 @Suite.SuiteClasses({
-        UserServiceTest.class,
-        PetServiceTest.class,
-//       CatServiceTest.class,
-//       DogServiceTest.class
+//        UserServiceTest.class,
+//        PetServiceTest.class,
+//        CatServiceTest.class,
+        DogServiceTest.class
     })
 
 

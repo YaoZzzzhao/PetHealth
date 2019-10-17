@@ -9,6 +9,7 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
@@ -21,10 +22,16 @@ import static org.junit.Assert.assertNull;
 @SpringBootTest(classes= AppInitializer.class)
 public class HibernatePetTest {
 
-    Logger logger = LoggerFactory.getLogger(this.getClass());
+    @Autowired
+    Logger logger;
+//            = LoggerFactory.getLogger(this.getClass());
     private Pet a;
-    private PetDaoImpl petDaoImpl = new PetDaoImpl();
-    private UserDaoImpl userDaoImpl = new UserDaoImpl();
+    @Autowired
+    private PetDaoImpl petDaoImpl;
+//            = new PetDaoImpl();
+    @Autowired
+    private UserDaoImpl userDaoImpl;
+//        = new UserDaoImpl();
 
 
     @Before
@@ -54,7 +61,9 @@ public class HibernatePetTest {
 
     @After
     public void cleanUp(){
-        petDaoImpl.delete(a.getId());
+        if(a.getName()!=null) {
+            petDaoImpl.delete(a.getId());
+        }
         petDaoImpl = null;
         assertNull(petDaoImpl);
     }
@@ -70,7 +79,7 @@ public class HibernatePetTest {
 
     @Test
     public void updateTest(){
-        Pet leave = petDaoImpl.getPetsByName("Hoan").get(0);
+        Pet leave = petDaoImpl.getPetsByName(a.getName()).get(0);
         String newBreed = "Ameng";
         leave.setBreed(newBreed);
         petDaoImpl.update(leave);
@@ -80,7 +89,7 @@ public class HibernatePetTest {
 
     @Test
     public void deleteTest(){
-        int expectedOfNum = petDaoImpl.delete(1 );
+        int expectedOfNum = petDaoImpl.delete(a.getId());
 
         assertEquals(1,expectedOfNum);
     }
@@ -88,14 +97,14 @@ public class HibernatePetTest {
     @Test
     public void getPetsTest(){
         List<Pet> all = petDaoImpl.getPets();
-        int expectedOfNumber =5 ;
+        int expectedOfNumber =8;
 
         assertEquals(all.size(),expectedOfNumber);
     }
 
     @Test
     public void getPetsByNameTest(){
-        String testName = "Hoan";
+        String testName = "pigff";
         Pet test = petDaoImpl.getPetsByName(testName).get(0);
 
         assertEquals(testName, test.getName());

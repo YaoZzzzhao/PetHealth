@@ -9,6 +9,7 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
@@ -21,10 +22,17 @@ import static org.junit.Assert.assertNull;
 @SpringBootTest(classes= AppInitializer.class)
 public class HibernateDogTest {
 
-    Logger logger = LoggerFactory.getLogger(this.getClass());
+    @Autowired
+    Logger logger;
+//    = LoggerFactory.getLogger(this.getClass());
     private Dog a;
-    private DogDaoImpl dogDaoImpl = new DogDaoImpl();
-    private PetDaoImpl petDaoImpl = new PetDaoImpl();
+
+    @Autowired
+    private DogDaoImpl dogDaoImpl;
+//    = new DogDaoImpl();
+    @Autowired
+    private PetDaoImpl petDaoImpl;
+//    = new PetDaoImpl();
 
 
     @Before
@@ -51,7 +59,9 @@ public class HibernateDogTest {
 
     @After
     public void cleanUp(){
-        dogDaoImpl.delete(a.getId());
+        if(a.getName()!=null) {
+            dogDaoImpl.delete(a.getId());
+        }
         dogDaoImpl = null;
         assertNull(dogDaoImpl);
     }
@@ -60,7 +70,7 @@ public class HibernateDogTest {
 
     @Test
     public void saveTest() {
-        String testName = "Elsa";
+        String testName = "Jane";
 
 
         assertEquals(testName, a.getName());
@@ -68,7 +78,7 @@ public class HibernateDogTest {
 
     @Test
     public void updateTest(){
-        Dog leave = dogDaoImpl.getDogsByName("pigff").get(0);
+        Dog leave = dogDaoImpl.getDogsByName(a.getName()).get(0);
         String newName = "Ameng";
         leave.setName(newName);
         dogDaoImpl.update(leave);
@@ -86,15 +96,15 @@ public class HibernateDogTest {
     @Test
     public void getDogsTest(){
         List<Dog> all = dogDaoImpl.getDogs();
-        int expectedOfNumber = 2;
+        int expectedOfNumber = 8;
 
         assertEquals(all.size(),expectedOfNumber);
     }
 
     @Test
     public void getDogByNameTest(){
-        String testName = "Jinmu";
-        Dog test = dogDaoImpl.getDogsByName(testName).get(0);
+        String testName = "Jane";
+        Dog test = dogDaoImpl.getDogsByName(a.getName()).get(0);
 
         assertEquals(testName, test.getName());
     }

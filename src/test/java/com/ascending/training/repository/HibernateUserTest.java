@@ -56,7 +56,9 @@ public class HibernateUserTest {
 
    @After
    public void cleanUp(){
-       userDaoImpl.delete(a.getId());
+        if(a.getFullName()!=null) {
+            userDaoImpl.delete(a.getId());
+        }
        userDaoImpl = null;
        assertNull(userDaoImpl);
    }
@@ -67,7 +69,7 @@ public class HibernateUserTest {
 
 
 //        UserDaoImpl userDaoImpl = new UserDaoImpl();
-        String pwd = "123kkk";
+        String pwd = "123kkkk";
 
 //        String
 
@@ -86,7 +88,7 @@ public class HibernateUserTest {
 
     @Test
     public void deleteTest(){
-        int expectedOfNum = userDaoImpl.delete(24);
+        int expectedOfNum = userDaoImpl.delete(a.getId());
 
         assertEquals(1,expectedOfNum);
     }
@@ -94,7 +96,7 @@ public class HibernateUserTest {
     @Test
     public void getUsersTest(){
         List<User> all = userDaoImpl.getUsers();
-        int expectedOfNumber = 2;
+        int expectedOfNumber = 10;
 
         assertEquals(all.size(),expectedOfNumber);
     }

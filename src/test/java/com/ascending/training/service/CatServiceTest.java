@@ -1,8 +1,10 @@
-package com.ascending.training.repository;
+package com.ascending.training.service;
 
 import com.ascending.training.init.AppInitializer;
 import com.ascending.training.model.Cat;
 import com.ascending.training.model.Pet;
+import com.ascending.training.repository.CatDaoImpl;
+import com.ascending.training.service.PetService;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -20,26 +22,24 @@ import static org.junit.Assert.assertNull;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest(classes= AppInitializer.class)
-public class HibernateCatTest {
+public class CatServiceTest {
+
+    Logger logger = LoggerFactory.getLogger(this.getClass());
+    private Cat a;
 
     @Autowired
-    Logger logger;
-//    = LoggerFactory.getLogger(this.getClass());
-    private Cat a;
+    private CatDaoImpl catService;
+
     @Autowired
-    private CatDaoImpl catDaoImpl;
-//    = new CatDaoImpl();
-    @Autowired
-    private PetDaoImpl petDaoImpl;
-//    = new PetDaoImpl();
+    private PetService petService;
 
 
     @Before
     public void init(){
-        long owner_id = 12;
+//        long owner_id = 12;
 
         a = new Cat();
-        Pet pet = petDaoImpl.getPetsByName("Yveltal").get(0);
+        Pet pet = petService.getPetsByName("Shy").get(0);
 //        a.setId(30);
         a.setCalici('Y');
 //        a.setOwnerid(owner_id);
@@ -48,26 +48,24 @@ public class HibernateCatTest {
         a.setRhi('Y');
         a.setRabies('Y');
         a.setSpayNeuter('N');
-        a.setName("Yveltal");
+        a.setName("XDD2.0");
 
 
-        catDaoImpl.saveCat(a,owner_id);
+        catService.saveCat(a,pet.getId());
     }
 
-   @After
-   public void cleanUp(){
-        if(a.getName()!=null) {
-            catDaoImpl.delete(a.getId());
-        }
-       catDaoImpl = null;
-       assertNull(catDaoImpl);
-   }
+    @After
+    public void cleanUp(){
+        catService.delete(a.getId());
+        catService = null;
+        assertNull(catService);
+    }
 
 
 
     @Test
     public void saveTest() {
-        String testName = "Yveltal";
+        String testName = "XDD2.0";
 
 
         assertEquals(testName, a.getName());
@@ -75,37 +73,36 @@ public class HibernateCatTest {
 
     @Test
     public void updateTest(){
-        Cat rio = catDaoImpl.getCatsByName(a.getName()).get(0);
-        String newName = "Rio";
-        rio.setName(newName);
-        catDaoImpl.update(rio);
+        Cat kite = catService.getCatsByName(a.getName()).get(0);
+        String newName = "Jane";
+        kite.setName(newName);
+        catService.update(kite);
 
-        assertEquals(rio.getName(), newName);
+        assertEquals(kite.getName(), newName);
     }
 
     @Test
     public void deleteTest(){
-        int expectedOfNum = catDaoImpl.delete(a.getId());
+        int expectedOfNum = catService.delete(a.getId());
 
         assertEquals(1,expectedOfNum);
     }
 
     @Test
     public void getCatsTest(){
-        List<Cat> all = catDaoImpl.getCats();
-        int expectedOfNumber = 4;
+        List<Cat> all = catService.getCats();
+        int expectedOfNumber = 3;
 
         assertEquals(all.size(),expectedOfNumber);
     }
 
     @Test
     public void getCatByNameTest(){
-        String testName = "Leave";
-        Cat test = null;
-        if(catDaoImpl.getCatsByName("Leave")!=null) {
-            test = catDaoImpl.getCatsByName("Leave").get(0);
-        }
+        String testName = "Jane";
+        Cat test = catService.getCatsByName("Jane").get(0);
 
         assertEquals(testName, test.getName());
     }
+
+
 }

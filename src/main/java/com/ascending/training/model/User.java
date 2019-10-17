@@ -5,10 +5,7 @@ import com.fasterxml.jackson.annotation.JsonView;
 import org.apache.commons.codec.digest.DigestUtils;
 
 import javax.persistence.*;
-import java.util.Date;
-import java.util.List;
-import java.util.Objects;
-import java.util.Set;
+import java.util.*;
 
 @Entity
 @Table(name = "users")
@@ -154,4 +151,5 @@ public class User {
     public String toString() {
         return id + "," + fullName + "," + email + "," + petNum;
     }
+//    Set<User> us = new HashSet<>();
 }
