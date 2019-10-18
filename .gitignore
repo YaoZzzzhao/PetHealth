@@ -9,3 +9,5 @@ target/
 **/temp
 .eclipse
 .DS_Store
+CICD/
+*.war
