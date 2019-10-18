@@ -4,6 +4,7 @@ import com.amazonaws.services.s3.model.Bucket;
 import com.amazonaws.services.s3.model.S3Object;
 import com.ascending.training.init.AppInitializer;
 import org.junit.Assert;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.slf4j.Logger;
@@ -33,6 +34,7 @@ public class FileServiceTest {
         Assert.assertEquals(size,l.size());
     }
 
+    @Ignore
     @Test
     public void getObjectTest(){
         String bucketName = "com.xiao.soccerproject";

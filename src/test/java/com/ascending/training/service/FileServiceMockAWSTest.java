@@ -84,7 +84,6 @@ public class FileServiceMockAWSTest {
         verify(amazonS3, times(1)).generatePresignedUrl(any());
     }
 
-    @Ignore
     @Test
     public void getObjectTest(){
         S3Object obj = fileService.getObject(bucketName,fileName);
