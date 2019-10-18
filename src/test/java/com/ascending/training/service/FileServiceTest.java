@@ -35,8 +35,8 @@ public class FileServiceTest {
 
     @Test
     public void getObjectTest(){
-        String bucketName = "practice-of-project";
-        String S3key = "Algorithm.java";
+        String bucketName = "com.xiao.soccerproject";
+        String S3key = "fileServiceTest.txt";
 //        fileService.getObject(bucketName,S3key);
 
         S3Object test = fileService.getObject(bucketName,S3key);

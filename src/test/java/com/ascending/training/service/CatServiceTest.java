@@ -91,7 +91,7 @@ public class CatServiceTest {
     @Test
     public void getCatsTest(){
         List<Cat> all = catService.getCats();
-        int expectedOfNumber = 3;
+        int expectedOfNumber = 21;
 
         assertEquals(all.size(),expectedOfNumber);
     }
