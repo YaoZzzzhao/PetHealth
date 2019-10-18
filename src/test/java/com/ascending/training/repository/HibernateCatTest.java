@@ -5,6 +5,7 @@ import com.ascending.training.model.Cat;
 import com.ascending.training.model.Pet;
 import org.junit.After;
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.slf4j.Logger;
@@ -90,6 +91,7 @@ public class HibernateCatTest {
         assertEquals(1,expectedOfNum);
     }
 
+    @Ignore
     @Test
     public void getCatsTest(){
         List<Cat> all = catDaoImpl.getCats();

@@ -5,10 +5,7 @@ import com.amazonaws.services.s3.AmazonS3;
 import com.amazonaws.services.s3.model.S3Object;
 import com.amazonaws.util.IOUtils;
 import com.ascending.training.init.AppInitializer;
-import org.junit.After;
-import org.junit.Assert;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.*;
 import org.junit.runner.RunWith;
 import org.mockito.*;
 import org.slf4j.Logger;
@@ -87,6 +84,7 @@ public class FileServiceMockAWSTest {
         verify(amazonS3, times(1)).generatePresignedUrl(any());
     }
 
+    @Ignore
     @Test
     public void getObjectTest(){
         S3Object obj = fileService.getObject(bucketName,fileName);
