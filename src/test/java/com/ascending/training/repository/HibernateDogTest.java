@@ -96,7 +96,7 @@ public class HibernateDogTest {
     @Test
     public void getDogsTest(){
         List<Dog> all = dogDaoImpl.getDogs();
-        int expectedOfNumber = 8;
+        int expectedOfNumber = 3;
 
         assertEquals(all.size(),expectedOfNumber);
     }

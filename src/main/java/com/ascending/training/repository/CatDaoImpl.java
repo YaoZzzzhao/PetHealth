@@ -49,7 +49,8 @@ public class CatDaoImpl implements CatDao{
         boolean isSuccess = true;
         Transaction transaction = null;
 
-        try(Session session = HibernateUtil.getSessionFactory().openSession()){
+        try{
+            Session session = HibernateUtil.getSessionFactory().getCurrentSession();
             transaction = session.beginTransaction();
             Pet pet = petDaoImpl.catGetPetById(id);
             cat.setPet(pet);
@@ -101,7 +102,8 @@ public class CatDaoImpl implements CatDao{
         int deleteCount = 0;
         Transaction transaction = null;
 
-        try(Session session = HibernateUtil.getSessionFactory().openSession()){
+        try{
+            Session session = HibernateUtil.getSessionFactory().getCurrentSession();
             Query<Cat> query = session.createQuery(hql);
             query.setParameter("id",id);
             transaction = session.beginTransaction();

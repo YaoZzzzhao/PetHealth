@@ -36,7 +36,7 @@ public class HibernateCatTest {
 
     @Before
     public void init(){
-        long owner_id = 12;
+        long owner_id = 14;
 
         a = new Cat();
         Pet pet = petDaoImpl.getPetsByName("Shy").get(0);
