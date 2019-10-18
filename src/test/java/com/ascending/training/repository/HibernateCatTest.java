@@ -39,7 +39,7 @@ public class HibernateCatTest {
         long owner_id = 12;
 
         a = new Cat();
-        Pet pet = petDaoImpl.getPetsByName("Yveltal").get(0);
+        Pet pet = petDaoImpl.getPetsByName("Shy").get(0);
 //        a.setId(30);
         a.setCalici('Y');
 //        a.setOwnerid(owner_id);
