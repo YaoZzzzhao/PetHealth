@@ -40,8 +40,8 @@ public class FileServiceMockAWSTest {
     @InjectMocks
     private FileService fileService;
 
-    private String bucketName = "practice-of-project";
-    private String fileName = "test.txt";
+    private String bucketName = "com.xiao.soccerproject";
+    private String fileName = "fileServiceTest.txt";
     private URL fakeFileUrl;
     private MultipartFile multipartFile;
     private String path;
