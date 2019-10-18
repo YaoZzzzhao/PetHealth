@@ -21,7 +21,9 @@ public class CatDaoImpl implements CatDao{
     @Autowired
     private Logger logger;
 
-    private PetDaoImpl petDaoImpl = new PetDaoImpl();
+    @Autowired
+    private PetDaoImpl petDaoImpl;
+//    = new PetDaoImpl();
 
     @Override
     public boolean save(Cat cat){
@@ -60,7 +62,7 @@ public class CatDaoImpl implements CatDao{
         catch(Exception e){
             isSuccess = false;
             if(transaction != null ) transaction.rollback();
-            logger.error(e.getMessage());
+            logger.error(e.getMessage(),e);
         }
 
         if(isSuccess==true) logger.debug(String.format("The pet %s was saved!",cat.toString()));
@@ -102,8 +104,8 @@ public class CatDaoImpl implements CatDao{
         int deleteCount = 0;
         Transaction transaction = null;
 
-        try{
-            Session session = HibernateUtil.getSessionFactory().getCurrentSession();
+        try(Session session = HibernateUtil.getSessionFactory().openSession()){
+//            Session session = HibernateUtil.getSessionFactory().getCurrentSession();
             Query<Cat> query = session.createQuery(hql);
             query.setParameter("id",id);
             transaction = session.beginTransaction();

@@ -52,7 +52,7 @@ public class FileServiceMockAWSTest {
         logger.info(">>>>>>>> Start Testing......");
         MockitoAnnotations.initMocks(this);
         fakeFileUrl = new URL("http://www.fakeQueueUrl.com/aaa/aaa");
-        File file = new File("./CICD/Thinking in Java/think-in-java.pdf");
+        File file = new File("./CICD/think-in-java.pdf");
         FileInputStream input = new FileInputStream(file);
         multipartFile = new MockMultipartFile("file", file.getName(),"text/plain", IOUtils.toByteArray(input));
         path = System.getProperty("user.dir") + File.separator + "temp";

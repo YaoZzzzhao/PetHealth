@@ -49,7 +49,8 @@ public class DogDaoImpl implements DogDao{
         boolean isSuccess = true;
         Transaction transaction = null;
 
-        try(Session session = HibernateUtil.getSessionFactory().openSession()){
+        try{
+            Session session = HibernateUtil.getSessionFactory().getCurrentSession();
             transaction = session.beginTransaction();
             Pet pet = petDaoImpl.dogGetPetById(id);
             dog.setPet(pet);
