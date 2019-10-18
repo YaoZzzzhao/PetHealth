@@ -93,7 +93,7 @@ public class HibernateCatTest {
     @Test
     public void getCatsTest(){
         List<Cat> all = catDaoImpl.getCats();
-        int expectedOfNumber = ;
+        int expectedOfNumber = 21;
 
         assertEquals(all.size(),expectedOfNumber);
     }
