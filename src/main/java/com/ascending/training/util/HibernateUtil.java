@@ -37,7 +37,7 @@ public class HibernateUtil {
 
                 Configuration configuration = new Configuration();
                 Properties settings = new Properties();
-                settings.put (Environment.DRIVER, dbDriver);
+                settings.put(Environment.DRIVER, dbDriver);
                 settings.put(Environment.DIALECT, dbDialect);
                 settings.put(Environment.URL, dbUrl);
                 settings.put(Environment.USER, dbUser);
@@ -69,3 +69,4 @@ public class HibernateUtil {
         -Ddatabase.user=admin \
         -Ddatabase.password=Training123!
 */
+
