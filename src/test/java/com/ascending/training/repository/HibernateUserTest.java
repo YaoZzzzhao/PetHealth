@@ -96,7 +96,7 @@ public class HibernateUserTest {
     @Test
     public void getUsersTest(){
         List<User> all = userDaoImpl.getUsers();
-        int expectedOfNumber = 9;
+        int expectedOfNumber = 7;
 
         assertEquals(all.size(),expectedOfNumber);
     }

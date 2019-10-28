@@ -96,7 +96,7 @@ public class UserServiceTest {
     @Test
     public void getUsersTest(){
         List<User> all = userService.getUsers();
-        int expectedOfNumber = 9;
+        int expectedOfNumber = 7;
 
 
 //        for (User i : all){
@@ -106,12 +106,12 @@ public class UserServiceTest {
         Assert.assertEquals(all.size(),expectedOfNumber);
     }
 
-//    @Test
-//    public void getUserByNameTest(){
-//        String testName = "Hoan";
-//        User test = userService.getUsersByName(testName).get(0);
+    @Test
+    public void getUserByNameTest(){
+        String testName = "Hoan";
+        User test = userService.getUsersByName(testName).get(0);
 //        System.out.println(test.getPets());
-//
-//        assertEquals(testName, test.getFullName());
-//    }
+
+        assertEquals(testName, test.getFullName());
+    }
 }
