@@ -2,6 +2,7 @@ package com.ascending.training.repository;
 
 import com.ascending.training.model.Dog;
 import com.ascending.training.model.Pet;
+import org.hibernate.SessionFactory;
 import org.slf4j.Logger;
 import com.ascending.training.util.HibernateUtil;
 import org.hibernate.Session;
@@ -23,12 +24,15 @@ public class DogDaoImpl implements DogDao{
     @Autowired
     private PetDaoImpl petDaoImpl;
 
+    @Autowired
+    private SessionFactory sessionFactory;
+
     @Override
     public boolean save(Dog dog){
         boolean isSuccess = true;
         Transaction transaction = null;
 
-        try(Session session = HibernateUtil.getSessionFactory().openSession()){
+        try(Session session = sessionFactory.openSession()){
             transaction = session.beginTransaction();
             session.save(dog);
             transaction.commit();
@@ -50,7 +54,7 @@ public class DogDaoImpl implements DogDao{
         Transaction transaction = null;
 
         try{
-            Session session = HibernateUtil.getSessionFactory().getCurrentSession();
+            Session session = sessionFactory.getCurrentSession();
             transaction = session.beginTransaction();
             Pet pet = petDaoImpl.dogGetPetById(id);
             dog.setPet(pet);
@@ -78,7 +82,7 @@ public class DogDaoImpl implements DogDao{
         int count = 0;
 
         try{
-            Session session = HibernateUtil.getSessionFactory().getCurrentSession();
+            Session session = sessionFactory.getCurrentSession();
             transaction = session.beginTransaction();
             Pet p = petDaoImpl.dogGetPetById(dog.getPet().getId());
             dog.setPet(p);
@@ -106,7 +110,7 @@ public class DogDaoImpl implements DogDao{
         int deleteCount = 0;
         Transaction transaction = null;
 
-        try(Session session = HibernateUtil.getSessionFactory().openSession()){
+        try(Session session = sessionFactory.openSession()){
             Query<Dog> query = session.createQuery(hql);
             query.setParameter("id",id);
             transaction = session.beginTransaction();
@@ -128,7 +132,7 @@ public class DogDaoImpl implements DogDao{
     public List<Dog> getDogs(){
         String sql = "From Dog";
 
-        try(Session session = HibernateUtil.getSessionFactory().openSession()){
+        try(Session session = sessionFactory.openSession()){
             Query <Dog> query = session.createQuery(sql);
 
             return query.list();
@@ -144,7 +148,7 @@ public class DogDaoImpl implements DogDao{
 
         String sql = "From Dog dog where name = :name";
 
-        try(Session session = HibernateUtil.getSessionFactory().openSession()){
+        try(Session session = sessionFactory.openSession()){
             Query<Dog> query = session.createQuery(sql);
             query.setParameter("name",dogName);
 

@@ -47,7 +47,7 @@ comment on column pets.age is 'in year';
 
 create table cats(
 	id					    BIGSERIAL not null PRIMARY KEY,
-	owner_id				bigint not null,
+	pet_id			    	bigint not null,
 	name				    varchar(30) not null,
 	Spay_neuter				char(1),
 	Deworm					char(1),
@@ -64,7 +64,7 @@ ALTER TABLE cats
 
 create table dogs(
 	id					    BIGSERIAL not null PRIMARY KEY,
-	owner_id				bigint not null,
+	pet_id			    	bigint not null,
 	name				    varchar(30) not null,
 	Spay_neuter				char(1),
 	Rabies					char(1),

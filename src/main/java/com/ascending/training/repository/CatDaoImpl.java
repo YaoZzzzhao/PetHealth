@@ -2,6 +2,7 @@ package com.ascending.training.repository;
 
 import com.ascending.training.model.Cat;
 import com.ascending.training.model.Pet;
+import org.hibernate.SessionFactory;
 import org.slf4j.Logger;
 import com.ascending.training.util.HibernateUtil;
 import org.hibernate.Session;
@@ -24,13 +25,15 @@ public class CatDaoImpl implements CatDao{
     @Autowired
     private PetDaoImpl petDaoImpl;
 //    = new PetDaoImpl();
+    @Autowired
+    private SessionFactory sessionFactory;
 
     @Override
     public boolean save(Cat cat){
         boolean isSuccess = true;
         Transaction transaction = null;
 
-        try(Session session = HibernateUtil.getSessionFactory().openSession()){
+        try(Session session = sessionFactory.openSession()){
             transaction = session.beginTransaction();
             session.save(cat);
             transaction.commit();
@@ -52,7 +55,7 @@ public class CatDaoImpl implements CatDao{
         Transaction transaction = null;
 
         try{
-            Session session = HibernateUtil.getSessionFactory().getCurrentSession();
+            Session session = sessionFactory.getCurrentSession();
             transaction = session.beginTransaction();
             Pet pet = petDaoImpl.catGetPetById(id);
             cat.setPet(pet);
@@ -78,7 +81,7 @@ public class CatDaoImpl implements CatDao{
         Transaction transaction = null;
         int count = 0;
 
-        try(Session session = HibernateUtil.getSessionFactory().openSession()){
+        try(Session session = sessionFactory.openSession()){
             transaction = session.beginTransaction();
             session.saveOrUpdate(cat);
             transaction.commit();
@@ -104,7 +107,7 @@ public class CatDaoImpl implements CatDao{
         int deleteCount = 0;
         Transaction transaction = null;
 
-        try(Session session = HibernateUtil.getSessionFactory().openSession()){
+        try(Session session = sessionFactory.openSession()){
 //            Session session = HibernateUtil.getSessionFactory().getCurrentSession();
             Query<Cat> query = session.createQuery(hql);
             query.setParameter("id",id);
@@ -128,7 +131,7 @@ public class CatDaoImpl implements CatDao{
     public List<Cat> getCats(){
         String sql = "From Cat";
 
-        try(Session session = HibernateUtil.getSessionFactory().openSession()){
+        try(Session session = sessionFactory.openSession()){
             Query <Cat> query = session.createQuery(sql);
 
             return query.list();
@@ -148,7 +151,7 @@ public class CatDaoImpl implements CatDao{
 
         String sql = "From Cat cat where name = :name";
 
-        try(Session session = HibernateUtil.getSessionFactory().openSession()){
+        try(Session session = sessionFactory.openSession()){
             Query<Cat> query = session.createQuery(sql);
             query.setParameter("name",catName);
 

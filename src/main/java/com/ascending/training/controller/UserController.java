@@ -90,5 +90,10 @@ public class UserController {
 //        return body;
 //    }
 
+    @RequestMapping(value="/{text:[a-z-]+}.{number:[\\d]+}")
+    public String regex(@PathVariable String text, @PathVariable String number){
+        return "succcccc";
+    }
+
 
 }

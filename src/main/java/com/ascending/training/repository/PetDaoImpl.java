@@ -2,6 +2,7 @@ package com.ascending.training.repository;
 
 import com.ascending.training.model.Pet;
 import com.ascending.training.model.User;
+import org.hibernate.SessionFactory;
 import org.slf4j.Logger;
 import com.ascending.training.util.HibernateUtil;
 import org.hibernate.Session;
@@ -19,12 +20,15 @@ public class PetDaoImpl implements PetDao{
     @Autowired
     private Logger logger;
 
+    @Autowired
+    private SessionFactory sessionFactory;
+
     @Override
     public boolean save(Pet pet){
         boolean isSuccess = true;
         Transaction transaction = null;
 
-        try(Session session = HibernateUtil.getSessionFactory().openSession()){
+        try(Session session = sessionFactory.openSession()){
             transaction = session.beginTransaction();
             session.save(pet);
             transaction.commit();
@@ -45,7 +49,7 @@ public class PetDaoImpl implements PetDao{
         boolean isSuccess = true;
         Transaction transaction = null;
 
-        try(Session session = HibernateUtil.getSessionFactory().openSession()){
+        try(Session session = sessionFactory.openSession()){
             transaction = session.beginTransaction();
             pet.setUser(user);
             session.save(pet);
@@ -70,7 +74,7 @@ public class PetDaoImpl implements PetDao{
         Transaction transaction = null;
         int count = 0;
 
-        try(Session session = HibernateUtil.getSessionFactory().openSession()){
+        try(Session session = sessionFactory.openSession()){
             transaction = session.beginTransaction();
             session.saveOrUpdate(pet);
             transaction.commit();
@@ -96,7 +100,7 @@ public class PetDaoImpl implements PetDao{
         int deleteCount = 0;
         Transaction transaction = null;
 
-        try(Session session = HibernateUtil.getSessionFactory().openSession()){
+        try(Session session = sessionFactory.openSession()){
 //            Query<Pet> query = session.createQuery(hql);
 //            query.setParameter("id1",id);
             Pet pet = session.get(Pet.class, id);
@@ -126,7 +130,7 @@ public class PetDaoImpl implements PetDao{
 //        pet join fetch pet.cats p_c on pet.id = p_c.id join fetch pet.dogs p_d on pet.id = p_d.id
 
 
-        try(Session session = HibernateUtil.getSessionFactory().openSession()){
+        try(Session session = sessionFactory.openSession()){
             Query <Pet> query = session.createQuery(hql);
 
             return query.list();
@@ -142,7 +146,7 @@ public class PetDaoImpl implements PetDao{
 
         String hql = "From Pet pet where pet.name = :name";
 
-        try(Session session = HibernateUtil.getSessionFactory().openSession()){
+        try(Session session = sessionFactory.openSession()){
             Query<Pet> query = session.createQuery(hql);
             query.setParameter("name",petName);
 
@@ -162,7 +166,7 @@ public class PetDaoImpl implements PetDao{
 
         String hql = "From Pet as pet left join fetch pet.user where pet.id = :id1";
 
-        try(Session session = HibernateUtil.getSessionFactory().openSession()){
+        try(Session session = sessionFactory.openSession()){
             Query<Pet> query = session.createQuery(hql);
             query.setParameter("id1",id);
 
@@ -184,7 +188,7 @@ public class PetDaoImpl implements PetDao{
 //        pet join fetch pet.cats p_c on pet.id = p_c.id join fetch pet.dogs p_d on pet.id = p_d.id
 
 
-        try(Session session = HibernateUtil.getSessionFactory().openSession()){
+        try(Session session = sessionFactory.openSession()){
             Query <Pet> query = session.createQuery(hql);
             query.setParameter("id",id);
 
@@ -202,7 +206,7 @@ public class PetDaoImpl implements PetDao{
 //        pet join fetch pet.cats p_c on pet.id = p_c.id join fetch pet.dogs p_d on pet.id = p_d.id
 
 
-        try(Session session = HibernateUtil.getSessionFactory().openSession()){
+        try(Session session = sessionFactory.openSession()){
             Query <Pet> query = session.createQuery(hql);
             query.setParameter("id",id);
 

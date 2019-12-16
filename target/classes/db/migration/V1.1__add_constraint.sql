@@ -1,9 +1,0 @@
----ALTER TABLE users ADD COLUMN id serial PRIMARY KEY;
-
--- ALTER TABLE pets ADD COLUMN id serial PRIMARY KEY;
---
--- ALTER TABLE cats ADD COLUMN id serial PRIMARY KEY;
---
--- ALTER TABLE dogs ADD COLUMN id serial PRIMARY KEY;
-
-

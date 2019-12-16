@@ -3,6 +3,7 @@ package com.ascending.training.repository;
 import com.ascending.training.model.User;
 import com.ascending.training.util.HibernateUtil;
 import org.hibernate.Session;
+import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 import org.hibernate.query.Query;
 import org.slf4j.Logger;
@@ -15,12 +16,15 @@ public class UserDaoImpl implements UserDao {
     @Autowired
     private Logger logger;
 
+    @Autowired
+    private SessionFactory sessionFactory;
+
     @Override
     public boolean save(User user){
         Transaction transaction = null;
         boolean isSuccess = true;
 
-        try(Session session = HibernateUtil.getSessionFactory().openSession()){
+        try(Session session = sessionFactory.openSession()){
             transaction = session.beginTransaction();
             session.save(user);
             transaction.commit();
@@ -43,7 +47,7 @@ public class UserDaoImpl implements UserDao {
         boolean isSuccess = true;
         int updateCount = 0;
 
-        try(Session session = HibernateUtil.getSessionFactory().openSession()){
+        try(Session session = sessionFactory.openSession()){
 //            Query<User> query = session.createQuery(hql);
 
             transaction = session.beginTransaction();
@@ -77,7 +81,7 @@ public class UserDaoImpl implements UserDao {
         Transaction transaction = null;
 
         try{
-            Session session = HibernateUtil.getSessionFactory().getCurrentSession();
+            Session session = sessionFactory.getCurrentSession();
             transaction = session.beginTransaction();
 
             User user = session.get(User.class, userId);
@@ -108,7 +112,7 @@ public class UserDaoImpl implements UserDao {
         String hql = "select distinct user FROM User as user left join fetch user.pets as pet left join fetch pet.dogs left join fetch pet.cats order by user.id";
 //        String hql = "From User";
 
-        Session session = HibernateUtil.getSessionFactory().getCurrentSession();
+        Session session = sessionFactory.getCurrentSession();
         Transaction t = session.beginTransaction();
         Query<User> query = session.createQuery(hql);
         List<User> users = query.list();
@@ -124,7 +128,7 @@ public class UserDaoImpl implements UserDao {
         String hql = "FROM User as user where user.fullName = :name";
 //        left join fetch user.pets
 
-        try(Session session = HibernateUtil.getSessionFactory().openSession()) {
+        try(Session session = sessionFactory.openSession()) {
             Query<User> query = session.createQuery(hql);
             query.setParameter("name", name);
 
@@ -147,7 +151,7 @@ public class UserDaoImpl implements UserDao {
         String hql = "FROM User as user where user.id = :id";
 //        left join fetch user.pets
 
-        try(Session session = HibernateUtil.getSessionFactory().openSession()) {
+        try(Session session = sessionFactory.openSession()) {
             Query<User> query = session.createQuery(hql);
             query.setParameter("id", id);
 
@@ -165,8 +169,10 @@ public class UserDaoImpl implements UserDao {
 //    @Override
     public User getUserByCredentials(String email, String password) {
         String hql = "FROM User as u where lower(u.email) = :email and u.password = :password";
+
         logger.debug(String.format("User email: %s, password: %s", email, password));
-        try (Session session = HibernateUtil.getSessionFactory().openSession()) {
+
+        try (Session session = sessionFactory.openSession()) {
             Query<User> query = session.createQuery(hql);
             query.setParameter("email", email.toLowerCase().trim());
             query.setParameter("password", password);

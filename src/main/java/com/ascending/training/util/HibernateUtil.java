@@ -9,9 +9,12 @@ import org.hibernate.cfg.Environment;
 import org.hibernate.service.ServiceRegistry;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 
 
 public class HibernateUtil {
+
+    @Autowired
     private static SessionFactory sessionFactory;
     private static Logger logger = LoggerFactory.getLogger(HibernateUtil.class);
 
@@ -34,6 +37,7 @@ public class HibernateUtil {
                 String dbUrl = System.getProperty("database.url");
                 String dbUser = System.getProperty("database.user");
                 String dbPassword = System.getProperty("database.password");
+//                settings.put(Environment.HBM2DDL_AUTO, “validate”);
 
                 Configuration configuration = new Configuration();
                 Properties settings = new Properties();
